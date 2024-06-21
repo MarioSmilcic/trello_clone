@@ -1,7 +1,10 @@
+import Navigation from "./features/Navigation/Navigation";
+
 const App = () => {
   return (
     <>
-      <h1>Treelo Clone</h1>
+      <Navigation />
+      Body
     </>
   );
 };
