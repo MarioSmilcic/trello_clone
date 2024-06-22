@@ -1,0 +1,11 @@
+.card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: #22272b;
+  color: #b0bbc8;
+  border-radius: 8px;
+  padding: 8px 0;
+  text-indent: 8px;
+  cursor: pointer;
+}
