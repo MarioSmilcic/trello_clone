@@ -1,10 +1,11 @@
 import Navigation from "./features/Navigation/Navigation";
+import Board from "./features/Board/Board";
 
 const App = () => {
   return (
     <>
       <Navigation />
-      Body
+      <Board />
     </>
   );
 };

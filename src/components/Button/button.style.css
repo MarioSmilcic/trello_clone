@@ -1,0 +1,30 @@
+.button {
+  padding: 8px;
+  background: transparent;
+  color: #9fadbc;
+  cursor: pointer;
+  border: none;
+  /* text-align: left; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+  border-radius: 8px;
+  font-size: medium;
+}
+
+.button:hover {
+  background: #282f27;
+}
+
+.add_card {
+  background: #579dff;
+  width: 40%;
+  color: black;
+  font-size: medium;
+  justify-content: center;
+}
+.add_card:hover {
+  background: lightblue;
+  background: #85b8ff;
+}
