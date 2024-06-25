@@ -7,5 +7,8 @@
   border-radius: 8px;
   padding: 8px 0;
   text-indent: 8px;
+}
+.card:hover {
   cursor: pointer;
+  border: 1px solid #99c8ff;
 }
