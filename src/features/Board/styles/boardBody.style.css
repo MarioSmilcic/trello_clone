@@ -1,5 +1,34 @@
 .board-body {
   padding: 1em;
   display: flex;
+  align-items: start;
   gap: 1em;
+}
+.board-input {
+  width: 100%;
+  height: 2.5em;
+  background: #22272b;
+  border: 0.5px solid #738496;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #8c9caa;
+  text-indent: 1em;
+}
+.board-input::placeholder {
+  text-indent: 1em;
+  font-size: 14px;
+  font-weight: bold;
+  color: #8c9caa;
+}
+.add-listModal_buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.add-listModal_close {
+  cursor: pointer;
+  padding: 5px;
+}
+.add-listModal_close:hover {
+  background: #282f27;
 }
