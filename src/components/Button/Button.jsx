@@ -7,7 +7,15 @@ const Button = ({ text, handleClick }) => {
     case "Add card":
       color = "add_card";
       break;
-
+    case "+ Add a card":
+      color = "add_aCard";
+      break;
+    case "+ Add another list":
+      color = "add_list";
+      break;
+    case "Add list":
+      color = "add_card";
+      break;
     default:
       color = "button";
   }

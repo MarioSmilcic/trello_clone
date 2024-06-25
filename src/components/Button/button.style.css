@@ -4,17 +4,20 @@
   color: #9fadbc;
   cursor: pointer;
   border: none;
-  /* text-align: left; */
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 1em;
   border-radius: 8px;
   font-size: medium;
+  height: 40px;
 }
 
 .button:hover {
   background: #282f27;
+}
+.add_aCard {
+  width: 100%;
 }
 
 .add_card {
@@ -27,4 +30,13 @@
 .add_card:hover {
   background: lightblue;
   background: #85b8ff;
+}
+.add_list {
+  background: #4d7da3;
+  width: 17em;
+  color: white;
+  margin-top: 2px;
+}
+.add_list:hover {
+  background: #296795;
 }

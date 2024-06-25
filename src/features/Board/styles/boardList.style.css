@@ -1,22 +1,28 @@
 .board-list {
-  width: 18em;
-  background: black;
-  border-radius: 1em;
-  padding: 8px;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  /* gap: 8px; */
 }
+.list-title {
+  font-weight: bold;
+  color: #b5c2cf;
+  cursor: pointer;
+  padding: 8px;
+}
+
 .card-list {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 8px;
+}
+.modal-outer {
+  margin-top: 8px;
 }
 
 .add-modal {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 8px;
 }
 .add-modal_textarea {
   width: 100%;
