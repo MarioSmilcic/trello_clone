@@ -1,6 +1,8 @@
 .board {
   background: #075486;
-  width: 100%;
   height: 92vh;
-  box-sizing: border-box;
+  width: 100%;
+  overflow-x: auto;
+  /* display: flex;
+  flex-direction: column; */
 }
