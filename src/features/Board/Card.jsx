@@ -1,6 +1,6 @@
 import "./styles/card.style.css";
 
-const Card = ({ card }) => {
+const Card = ({ card, id }) => {
   return <div className="card">{card}</div>;
 };
 

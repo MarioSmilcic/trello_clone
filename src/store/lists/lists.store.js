@@ -1,7 +1,16 @@
 import { create } from "zustand";
+import { arrayMove } from "@dnd-kit/sortable";
 
 export const useListstore = create((set) => ({
   // lists: [],
+
+  lists: [
+    {
+      id: "",
+      title: "",
+      card: [{ id: "", card: "" }],
+    },
+  ],
 
   lists: [
     {
@@ -22,4 +31,21 @@ export const useListstore = create((set) => ({
         list.id === listId ? { ...list, cards: [...list.cards, newCard] } : list
       ),
     })),
+  moveList: (activeListId, overListId) =>
+    set((state) => {
+      const activeListIndex = state.lists.findIndex(
+        (list) => list.id === activeListId
+      );
+      const overListIndex = state.lists.findIndex(
+        (list) => list.id === overListId
+      );
+
+      if (activeListIndex !== -1 && overListIndex !== -1) {
+        return {
+          lists: arrayMove(state.lists, activeListIndex, overListIndex),
+        };
+      }
+
+      return state;
+    }),
 }));
