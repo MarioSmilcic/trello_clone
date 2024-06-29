@@ -6,7 +6,13 @@ import { useListstore } from "../../store/lists/lists.store";
 import CardWrapper from "./components/CardWrapper/CardWrapper";
 import Close from "../../components/icons/Close";
 import { useState } from "react";
-import { DndContext, DragOverlay } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
 
@@ -16,6 +22,14 @@ const BoardBody = () => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const { lists, addList, moveList } = useListstore();
   const [activeList, setActiveList] = useState(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    })
+  );
 
   const listsId = lists.map((list) => list.id);
 
@@ -69,7 +83,11 @@ const BoardBody = () => {
     }
   };
   return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <DndContext
+      sensors={sensors}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
       <div className="board-body">
         {/* <BoardList /> */}
         <SortableContext items={listsId}>
