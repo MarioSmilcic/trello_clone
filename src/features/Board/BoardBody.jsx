@@ -6,7 +6,17 @@ import { useListstore } from "../../store/lists/lists.store";
 import CardWrapper from "./components/CardWrapper/CardWrapper";
 import Close from "../../components/icons/Close";
 import { useState } from "react";
-import { DndContext, DragOverlay } from "@dnd-kit/core";
+import Card from "./Card";
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  MouseSensor,
+  useSensor,
+  useSensors,
+  closestCenter,
+  pointerWithin,
+} from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
 
@@ -14,8 +24,18 @@ const BoardBody = () => {
   const [showListModal, setShowListModal] = useState(false);
   const [showButton, setShowButton] = useState(true);
   const [enteredTitle, setEnteredTitle] = useState("");
-  const { lists, addList, moveList } = useListstore();
+  const { lists, addList, moveList, moveCard } = useListstore();
   const [activeList, setActiveList] = useState(null);
+  const [activeCard, setActiveCard] = useState(null);
+
+  const sensors = useSensors(
+    // useSensor(PointerSensor, {
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 3,
+      },
+    })
+  );
 
   const listsId = lists.map((list) => list.id);
 
@@ -27,12 +47,12 @@ const BoardBody = () => {
   const handleEnteredTitle = (e) => {
     setEnteredTitle(e.target.value);
   };
+
   const submitHandler = (e) => {
     e.preventDefault();
 
     const newList = {
       title: enteredTitle,
-      // id: Math.floor(Math.random() * 10000),
       id: lists.length + 1,
       cards: [],
     };
@@ -49,11 +69,10 @@ const BoardBody = () => {
   };
 
   const handleDragStart = (e) => {
-    // console.log("drag start", e);
-
     if (e.active.data.current?.type === "List") {
       setActiveList(e.active.data.current.list);
-      return;
+    } else if (e.active.data.current?.type === "Card") {
+      setActiveCard(e.active.data.current.card);
     }
   };
 
@@ -61,17 +80,75 @@ const BoardBody = () => {
     const { active, over } = e;
     if (!over) return;
 
-    const activeListId = active.id;
-    const overListId = over.id;
+    const activeData = active.data.current;
+    const overData = over.data.current;
 
-    if (activeListId !== overListId) {
-      moveList(activeListId, overListId);
+    if (
+      activeData?.type === "List" &&
+      overData?.type === "List" &&
+      active.id !== over.id
+    ) {
+      moveList(active.id, over.id);
+    } else if (activeData?.type === "Card") {
+      const { listId: activeListId, cardIndex: activeCardIndex } = activeData;
+
+      if (overData?.type === "Card") {
+        moveCard(
+          activeListId,
+          overData.listId,
+          activeCardIndex,
+          overData.cardIndex
+        );
+      } else if (overData?.type === "List") {
+        moveCard(activeListId, over.id, activeCardIndex, 0);
+      }
+    }
+
+    setActiveList(null);
+    setActiveCard(null);
+  };
+
+  const handleDragOver = (e) => {
+    const { active, over } = e;
+    if (!over) return;
+
+    const { id: activeId, data: activeData } = active;
+    const { id: overId, data: overData } = over;
+
+    const activeType = activeData.current?.type;
+    const overType = overData.current?.type;
+
+    if (activeType === "List" && overType === "List" && activeId !== overId) {
+      moveList(activeId, overId);
+      return;
+    }
+
+    if (activeType === "Card") {
+      const { listId: activeListId, cardIndex: activeCardIndex } =
+        activeData.current;
+
+      if (overType === "Card") {
+        const { listId: overListId, cardIndex: overCardIndex } =
+          overData.current;
+        if (activeListId !== overListId || activeCardIndex !== overCardIndex) {
+          moveCard(activeListId, overListId, activeCardIndex, overCardIndex);
+        }
+      } else if (overType === "List") {
+        moveCard(activeListId, overId, activeCardIndex, 0);
+      }
     }
   };
+
   return (
-    <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <DndContext
+      sensors={sensors}
+      onDragStart={handleDragStart}
+      collisionDetection={closestCenter}
+      // collisionDetection={pointerWithin}
+      onDragEnd={handleDragEnd}
+      onDragOver={handleDragOver}
+    >
       <div className="board-body">
-        {/* <BoardList /> */}
         <SortableContext items={listsId}>
           {lists.map((list) => (
             <BoardList key={list.id} list={list} />
@@ -106,6 +183,13 @@ const BoardBody = () => {
       {createPortal(
         <DragOverlay>
           {activeList && <BoardList list={activeList} />}
+          {activeCard && (
+            <Card
+              card={activeCard}
+              listId={activeCard.listId}
+              cardIndex={activeCard.cardIndex}
+            />
+          )}
         </DragOverlay>,
         document.body
       )}
