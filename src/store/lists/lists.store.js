@@ -22,8 +22,10 @@ export const useListstore = create((set) => ({
       ],
     },
   ],
-
+  // Function to add a new list
   addList: (newList) => set((state) => ({ lists: [...state.lists, newList] })),
+
+  // Function to add a new card
   addCard: (listId, newCard) =>
     set((state) => ({
       lists: state.lists.map((list) =>
@@ -31,6 +33,7 @@ export const useListstore = create((set) => ({
       ),
     })),
 
+  // Function to move a list from one position to another
   moveList: (activeListId, overListId) =>
     set((state) => {
       const activeListIndex = state.lists.findIndex(
@@ -45,14 +48,16 @@ export const useListstore = create((set) => ({
         : state;
     }),
 
+  // Function to move a card from one list to another, or within the same list
   moveCard: (activeListId, overListId, activeCardIndex, overCardIndex) =>
     set((state) => {
       const activeList = state.lists.find((list) => list.id === activeListId);
       const overList = state.lists.find((list) => list.id === overListId);
 
       if (!activeList || !overList) return state;
-
+      // Remove the card from the active list
       const [movedCard] = activeList.cards.splice(activeCardIndex, 1);
+      // Insert the card into the new position in the target list
       overList.cards.splice(overCardIndex, 0, movedCard);
 
       return {
