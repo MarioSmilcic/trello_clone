@@ -2,24 +2,23 @@ import { create } from "zustand";
 import { arrayMove } from "@dnd-kit/sortable";
 
 export const useListstore = create((set) => ({
-  // lists: [],
-
-  lists: [
-    {
-      id: "",
-      title: "",
-      card: [{ id: "", card: "" }],
-    },
-  ],
-
   lists: [
     {
       id: "1",
       title: "List1",
       cards: [
-        { id: "1", card: "Card 1" },
-        { id: "2", card: "Card 2" },
-        { id: "3", card: "Card 3" },
+        {
+          id: Math.floor(Math.random() * 1000000),
+          card: "Card 1",
+        },
+        {
+          id: Math.floor(Math.random() * 1000000),
+          card: "Card 2",
+        },
+        {
+          id: Math.floor(Math.random() * 1000000),
+          card: "Card 3",
+        },
       ],
     },
   ],
@@ -31,21 +30,37 @@ export const useListstore = create((set) => ({
         list.id === listId ? { ...list, cards: [...list.cards, newCard] } : list
       ),
     })),
+
   moveList: (activeListId, overListId) =>
     set((state) => {
       const activeListIndex = state.lists.findIndex(
-        (list) => list.id === activeListId
+        ({ id }) => id === activeListId
       );
       const overListIndex = state.lists.findIndex(
-        (list) => list.id === overListId
+        ({ id }) => id === overListId
       );
 
-      if (activeListIndex !== -1 && overListIndex !== -1) {
-        return {
-          lists: arrayMove(state.lists, activeListIndex, overListIndex),
-        };
-      }
+      return activeListIndex !== -1 && overListIndex !== -1
+        ? { lists: arrayMove(state.lists, activeListIndex, overListIndex) }
+        : state;
+    }),
 
-      return state;
+  moveCard: (activeListId, overListId, activeCardIndex, overCardIndex) =>
+    set((state) => {
+      const activeList = state.lists.find((list) => list.id === activeListId);
+      const overList = state.lists.find((list) => list.id === overListId);
+
+      if (!activeList || !overList) return state;
+
+      const [movedCard] = activeList.cards.splice(activeCardIndex, 1);
+      overList.cards.splice(overCardIndex, 0, movedCard);
+
+      return {
+        lists: state.lists.map((list) => {
+          if (list.id === activeListId) return activeList;
+          if (list.id === overListId) return overList;
+          return list;
+        }),
+      };
     }),
 }));

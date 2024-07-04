@@ -1,19 +1,17 @@
+import { useState } from "react";
 import "./styles/boardList.style.css";
 import Card from "./Card";
 import { useListstore } from "../../store/lists/lists.store";
 import Button from "../../components/Button/Button";
-// import AddCardModal from "./components/AddCardModal/AddCardModal";
-import { useState } from "react";
 import Close from "../../components/icons/Close";
 import CardWrapper from "./components/CardWrapper/CardWrapper";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
+import { SortableContext, useSortable } from "@dnd-kit/sortable";
 
 const BoardList = ({ list }) => {
   const [showCardModal, setShowCardModal] = useState(false);
   const [showButton, setShowButton] = useState(true);
   const [enteredCard, setEnteredCard] = useState("");
-  const { addCard } = useListstore();
+  const { addCard, lists } = useListstore();
 
   const {
     setNodeRef,
@@ -36,7 +34,6 @@ const BoardList = ({ list }) => {
     transform: isDragging
       ? `translate3d(${transform}px, ${transform}px, 0)`
       : "none",
-    transformOrigin: "0 0",
   };
 
   const handleCardModal = () => {
@@ -53,7 +50,7 @@ const BoardList = ({ list }) => {
 
     const newCard = {
       card: enteredCard,
-      id: Math.floor(Math.random() * 10000),
+      id: Math.floor(Math.random() * 1000000),
     };
 
     if (enteredCard.length > 0) {
@@ -67,27 +64,33 @@ const BoardList = ({ list }) => {
     }
   };
 
+  // const cardsIds = list.cards.length
+  //   ? list.cards.map((card) => card.id)
+  //   : [list.id]; // Use list id to allow dropping in empty list
+  const cardsIds = [list.id];
   return (
     <div ref={setNodeRef} style={style}>
       <CardWrapper>
-        <div
-          className="board-list"
-          //  ref={setNodeRef} style={style}
-        >
+        <div className="board-list">
           <div className="list-title" {...attributes} {...listeners}>
             {list.title}
           </div>
-          <div className="card-list">
-            {list.cards &&
-              list.cards.map((card) => (
-                <Card key={card.id} card={card.card} id={card.id} />
+          <SortableContext items={cardsIds}>
+            <div className="card-list">
+              {list.cards.map((card, index) => (
+                <Card
+                  key={card.id}
+                  card={card}
+                  listId={list.id}
+                  cardIndex={index}
+                />
               ))}
-          </div>
+            </div>
+          </SortableContext>
           <div className="modal-outer">
             {showButton && (
               <Button text="+ Add a card" handleClick={handleCardModal} />
             )}
-            {/* {showCardModal && AddCardModal} */}
             {showCardModal && (
               <div className="add-modal">
                 <textarea
