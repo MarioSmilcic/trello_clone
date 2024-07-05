@@ -1,0 +1,17 @@
+.edit-form {
+  z-index: 500;
+}
+
+.edit-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.modal_input {
+  display: flex;
+  width: 20em;
+  height: 10em;
+  border-radius: 8px;
+  padding: 8px;
+}

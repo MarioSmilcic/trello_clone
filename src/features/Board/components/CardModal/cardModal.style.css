@@ -1,0 +1,13 @@
+.card-modal {
+  position: fixed;
+  width: 500px;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -250px;
+  z-index: 1000;
+  background: #075486;
+  border-radius: 1em;
+  overflow: hidden;
+}
