@@ -5,26 +5,21 @@
   width: 100%;
   background: #22272b;
   border-radius: 8px;
+  position: relative;
 }
+
 .card-outer:hover {
   cursor: pointer;
   border: 1px solid #99c8ff;
 }
 
 .card {
-  /* width: 100%; */
   display: flex;
   align-items: center;
-  /* background: #22272b; */
   color: #b0bbc8;
-  /* border-radius: 8px; */
-  padding: 8px 0;
-  text-indent: 8px;
+  padding: 8px;
+  overflow: hidden;
 }
-/* .card:hover {
-  cursor: pointer;
-  border: 1px solid #99c8ff;
-} */
 
 .card-dragging {
   width: 100%;
@@ -39,24 +34,25 @@
   opacity: 0.5;
 }
 
-/* .edit-icon {
-  padding: 4px 8px;
-}
-.edit-icon:hover {
-  border-radius: 50%;
-  background: #282e32;
-} */
-
 .card-icons {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 4px;
   margin: 4px;
+  position: absolute;
+  right: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
 }
+
+.card-outer:hover .card-icons {
+  opacity: 1;
+}
+
 .card-icon {
   padding: 4px 8px;
 }
+
 .card-icon:hover {
   border-radius: 50%;
   background: #282e32;

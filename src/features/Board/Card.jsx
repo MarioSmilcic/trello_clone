@@ -8,7 +8,6 @@ import EditCardModal from "./components/EditCardModal/EditCardModal";
 import DeleteCardModal from "./components/DeleteCardModal/DeleteCardModal";
 
 const Card = ({ card, listId, cardIndex }) => {
-  const [isEditShown, setIsEditShown] = useState(false);
   const [backdrop, setBackdrop] = useState(null);
   const [editModal, setEditModal] = useState(null);
   const [deleteModal, setDeleteModal] = useState(null);
@@ -59,50 +58,26 @@ const Card = ({ card, listId, cardIndex }) => {
     setDeleteModal(false);
   };
 
-  const handleMouseEnter = () => {
-    setIsEditShown(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsEditShown(false);
-  };
-
   const editCard = { listId, cardId: card.id, card: card.card };
   return (
     <>
       <div
         className="card-outer"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         ref={setNodeRef}
         style={style}
         {...attributes}
         {...listeners}
       >
-        <div
-          // ref={setNodeRef}
-          // style={style}
-          // {...attributes}
-          // {...listeners}
-          className="card"
-        >
-          {card.card}
-        </div>
-        {/* {isEditShown && (
-          <span className="edit-icon">
+        <div className="card">{card.card}</div>
+
+        <div className="card-icons">
+          <span className="card-icon">
             <EditIcon onEdit={handleModal} />
           </span>
-        )} */}
-        {isEditShown && (
-          <span className="card-icons">
-            <span className="card-icon">
-              <EditIcon onEdit={handleModal} />
-            </span>
-            <span className="card-icon">
-              <TrashIcon onDelete={handleDeleteModal} />
-            </span>
+          <span className="card-icon">
+            <TrashIcon onDelete={handleDeleteModal} />
           </span>
-        )}
+        </div>
       </div>
       {backdrop && <Backdrop onCancel={handleCloseModal} />}
       {editModal && (
