@@ -29,8 +29,8 @@ const BoardBody = () => {
   const [activeCard, setActiveCard] = useState(null);
 
   const sensors = useSensors(
-    // useSensor(PointerSensor, {
-    useSensor(MouseSensor, {
+    useSensor(PointerSensor, {
+      // useSensor(MouseSensor, {
       activationConstraint: {
         distance: 3,
       },

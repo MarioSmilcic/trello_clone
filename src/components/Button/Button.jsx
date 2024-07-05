@@ -16,6 +16,15 @@ const Button = ({ text, handleClick }) => {
     case "Add list":
       color = "add_card";
       break;
+    case "Save":
+      color = "add_card";
+      break;
+    case "Confirm":
+      color = "button-delete";
+      break;
+    case "Dismiss":
+      color = "button-delete";
+      break;
     default:
       color = "button";
   }
