@@ -40,3 +40,16 @@
 .add_list:hover {
   background: #296795;
 }
+
+.button-delete {
+  background: #579dff;
+  width: 10em;
+  color: black;
+  font-size: medium;
+  justify-content: center;
+  font-weight: 700;
+}
+.button-delete:hover {
+  background: lightblue;
+  background: #85b8ff;
+}

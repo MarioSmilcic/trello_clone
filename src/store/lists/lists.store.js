@@ -68,4 +68,31 @@ export const useListstore = create((set) => ({
         }),
       };
     }),
+
+  // Function to update a card
+  updateCard: (listId, cardId, updatedCard) =>
+    set((state) => ({
+      lists: state.lists.map((list) =>
+        list.id === listId
+          ? {
+              ...list,
+              cards: list.cards.map((card) =>
+                card.id === cardId ? { ...card, card: updatedCard.card } : card
+              ),
+            }
+          : list
+      ),
+    })),
+  // Function to remove a card
+  removeCard: (listId, cardId) =>
+    set((state) => ({
+      lists: state.lists.map((list) =>
+        list.id === listId
+          ? {
+              ...list,
+              cards: list.cards.filter((card) => card.id !== cardId),
+            }
+          : list
+      ),
+    })),
 }));
