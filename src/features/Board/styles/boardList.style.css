@@ -20,7 +20,7 @@
   margin-top: 8px;
 }
 
-.add-modal {
+/* .add-modal {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -54,17 +54,4 @@
 }
 .add-cardModal_close:hover {
   background: #282f27;
-}
-
-/* .board-list_active {
-  width: 18em;
-  height: 18em;
-  background: black;
-  border-radius: 1em;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex-shrink: 0;
-  opacity: 0.2;
 } */

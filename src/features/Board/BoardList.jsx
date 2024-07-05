@@ -6,9 +6,13 @@ import Button from "../../components/Button/Button";
 import Close from "../../components/icons/Close";
 import CardWrapper from "./components/CardWrapper/CardWrapper";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
+import AddCardModal from "./components/AddCardModal/AddCardModal";
+import Backdrop from "./components/Backdrop/Backdrop";
 
 const BoardList = ({ list }) => {
   const [showCardModal, setShowCardModal] = useState(false);
+  const [backdrop, setBackdrop] = useState(null);
+
   const [showButton, setShowButton] = useState(true);
   const [enteredCard, setEnteredCard] = useState("");
   const { addCard, lists } = useListstore();
@@ -38,6 +42,13 @@ const BoardList = ({ list }) => {
 
   const handleCardModal = () => {
     setShowCardModal(!showCardModal);
+    setShowButton(!showButton);
+    setBackdrop(true);
+  };
+
+  const handleCloseModal = () => {
+    setBackdrop(false);
+    setShowCardModal(false);
     setShowButton(!showButton);
   };
 
@@ -91,7 +102,7 @@ const BoardList = ({ list }) => {
             {showButton && (
               <Button text="+ Add a card" handleClick={handleCardModal} />
             )}
-            {showCardModal && (
+            {/* {showCardModal && (
               <div className="add-modal">
                 <textarea
                   name="addCardModal"
@@ -108,7 +119,9 @@ const BoardList = ({ list }) => {
                   </div>
                 </div>
               </div>
-            )}
+            )} */}
+            {backdrop && <Backdrop onCancel={handleCloseModal} />}
+            {showCardModal && <AddCardModal />}
           </div>
         </div>
       </CardWrapper>
