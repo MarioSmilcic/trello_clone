@@ -23,6 +23,13 @@ const EditCardModal = ({ card, onClose }) => {
       onClose();
     }
   };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleUpdate(e);
+    }
+  };
   return (
     <form onSubmit={handleUpdate} className="edit-form">
       <div className="edit-card">
@@ -33,6 +40,7 @@ const EditCardModal = ({ card, onClose }) => {
           value={enteredCard}
           onChange={handleEnteredCard}
           autoFocus
+          onKeyDown={handleKeyPress}
         />
         <Button text="Save" />
       </div>
