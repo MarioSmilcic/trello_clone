@@ -1,9 +1,7 @@
 import { useState } from "react";
 import "./styles/boardList.style.css";
 import Card from "./Card";
-import { useListstore } from "../../store/lists/lists.store";
 import Button from "../../components/Button/Button";
-import Close from "../../components/icons/Close";
 import CardWrapper from "./components/CardWrapper/CardWrapper";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import AddCardModal from "./components/AddCardModal/AddCardModal";
@@ -12,10 +10,7 @@ import Backdrop from "./components/Backdrop/Backdrop";
 const BoardList = ({ list }) => {
   const [showCardModal, setShowCardModal] = useState(false);
   const [backdrop, setBackdrop] = useState(null);
-
   const [showButton, setShowButton] = useState(true);
-  const [enteredCard, setEnteredCard] = useState("");
-  const { addCard, lists } = useListstore();
 
   const {
     setNodeRef,
@@ -52,29 +47,6 @@ const BoardList = ({ list }) => {
     setShowButton(!showButton);
   };
 
-  const handleEnteredCard = (e) => {
-    setEnteredCard(e.target.value);
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    const newCard = {
-      card: enteredCard,
-      id: Math.floor(Math.random() * 1000000),
-    };
-
-    if (enteredCard.length > 0) {
-      addCard(list.id, newCard);
-      setEnteredCard("");
-      setShowCardModal(!showCardModal);
-      setShowButton(!showButton);
-    } else {
-      setShowCardModal(!showCardModal);
-      setShowButton(!showButton);
-    }
-  };
-
   // const cardsIds = list.cards.length
   //   ? list.cards.map((card) => card.id)
   //   : [list.id]; // Use list id to allow dropping in empty list
@@ -102,26 +74,14 @@ const BoardList = ({ list }) => {
             {showButton && (
               <Button text="+ Add a card" handleClick={handleCardModal} />
             )}
-            {/* {showCardModal && (
-              <div className="add-modal">
-                <textarea
-                  name="addCardModal"
-                  value={enteredCard}
-                  onChange={handleEnteredCard}
-                  placeholder="Enter a title for this card..."
-                  autoFocus
-                  className="add-modal_textarea"
-                ></textarea>
-                <div className="add-cardModal_buttons">
-                  <Button text="Add card" handleClick={submitHandler} />
-                  <div className="add-cardModal_close">
-                    <Close onClose={handleCardModal} />
-                  </div>
-                </div>
-              </div>
-            )} */}
+
             {backdrop && <Backdrop onCancel={handleCloseModal} />}
-            {showCardModal && <AddCardModal />}
+            {showCardModal && (
+              <AddCardModal
+                handleCloseModal={handleCloseModal}
+                listId={list.id}
+              />
+            )}
           </div>
         </div>
       </CardWrapper>
