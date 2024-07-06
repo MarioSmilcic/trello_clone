@@ -20,14 +20,14 @@
   width: 100%;
 }
 
-.add_card {
+.add_modal {
   background: #579dff;
   width: 40%;
   color: black;
   font-size: medium;
   justify-content: center;
 }
-.add_card:hover {
+.add_modal:hover {
   background: lightblue;
   background: #85b8ff;
 }
@@ -41,7 +41,7 @@
   background: #296795;
 }
 
-.button-delete {
+.button-modal {
   background: #579dff;
   width: 10em;
   color: black;
@@ -49,7 +49,7 @@
   justify-content: center;
   font-weight: 700;
 }
-.button-delete:hover {
+.button-modal:hover {
   background: lightblue;
   background: #85b8ff;
 }

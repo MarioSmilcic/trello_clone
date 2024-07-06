@@ -5,25 +5,28 @@ const Button = ({ text, handleClick }) => {
 
   switch (text) {
     case "Add card":
-      color = "add_card";
+      color = "add_modal";
       break;
     case "+ Add a card":
       color = "add_aCard";
       break;
     case "+ Add another list":
       color = "add_list";
+
       break;
     case "Add list":
-      color = "add_card";
+      color = "add_modal";
+
       break;
     case "Save":
-      color = "add_card";
+      color = "add_modal";
+
       break;
     case "Confirm":
-      color = "button-delete";
+      color = "button-modal";
       break;
     case "Dismiss":
-      color = "button-delete";
+      color = "button-modal";
       break;
     default:
       color = "button";

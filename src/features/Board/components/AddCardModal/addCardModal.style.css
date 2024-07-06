@@ -1,8 +1,11 @@
-/* .add-modal {
+.add-modal {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  position: relative;
+  z-index: 500;
 }
+
 .add-modal_textarea {
   width: 100%;
   height: 6em;
@@ -32,4 +35,4 @@
 }
 .add-cardModal_close:hover {
   background: #282f27;
-} */
+}
