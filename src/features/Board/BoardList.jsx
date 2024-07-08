@@ -38,13 +38,7 @@ const BoardList = ({ list }) => {
   const handleCardModal = () => {
     setShowCardModal(!showCardModal);
     setShowButton(!showButton);
-    setBackdrop(true);
-  };
-
-  const handleCloseModal = () => {
-    setBackdrop(false);
-    setShowCardModal(false);
-    setShowButton(!showButton);
+    setBackdrop(!backdrop);
   };
 
   // const cardsIds = list.cards.length
@@ -75,10 +69,10 @@ const BoardList = ({ list }) => {
               <Button text="+ Add a card" handleClick={handleCardModal} />
             )}
 
-            {backdrop && <Backdrop onCancel={handleCloseModal} />}
+            {backdrop && <Backdrop onCancel={handleCardModal} />}
             {showCardModal && (
               <AddCardModal
-                handleCloseModal={handleCloseModal}
+                handleCloseModal={handleCardModal}
                 listId={list.id}
               />
             )}
