@@ -5,10 +5,10 @@ import Button from "../../../../components/Button/Button";
 import CardModal from "../CardModal/CardModal";
 
 const ListActions = ({
-  handleListActions,
   handleCardModal,
   handleCloseModal,
   handleDeleteList,
+  handleEditModal,
 }) => {
   return (
     <div className="listActions">
@@ -19,10 +19,8 @@ const ListActions = ({
         </span>
       </div>
       <Button text="Add new card" handleClick={handleCardModal} />
-      {/* <Button text="Add new card" /> */}
-      {/* <Button text="Delete list" handleClick={handleDeleteModal} /> */}
       <Button text="Delete list" handleClick={handleDeleteList} />
-      <Button text="Edit list" />
+      <Button text="Edit list" handleClick={handleEditModal} />
     </div>
   );
 };

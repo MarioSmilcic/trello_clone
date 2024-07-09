@@ -9,6 +9,8 @@ import Backdrop from "./components/Backdrop/Backdrop";
 import ListActions from "./components/ListActions/ListActions";
 import Dots from "../../components/icons/Dots";
 import CardModal from "./components/CardModal/CardModal";
+// import EditModal from "./components/EditListModal/EditListModal";
+import EditListModal from "./components/EditListModal/EditListModal";
 
 const BoardList = ({ list }) => {
   const [showCardModal, setShowCardModal] = useState(false);
@@ -16,6 +18,7 @@ const BoardList = ({ list }) => {
   const [showButton, setShowButton] = useState(true);
   const [listActions, setListActions] = useState(false);
   const [deleteList, setDeleteList] = useState(false);
+  const [editModal, setEditModal] = useState(false);
 
   const {
     setNodeRef,
@@ -41,9 +44,6 @@ const BoardList = ({ list }) => {
   };
 
   const handleCardModal = () => {
-    // setShowCardModal(!showCardModal);
-    // setShowButton(!showButton);
-    // setBackdrop(!backdrop);
     setShowCardModal(true);
     setShowButton(true);
     setBackdrop(true);
@@ -56,6 +56,7 @@ const BoardList = ({ list }) => {
     setBackdrop(false);
     setListActions(false);
     setDeleteList(false);
+    setEditModal(false);
   };
 
   const handleListActions = () => {
@@ -66,6 +67,12 @@ const BoardList = ({ list }) => {
   const handleDeleteList = () => {
     setDeleteList(true);
     setBackdrop(true);
+    setListActions(false);
+  };
+
+  const handleEditModal = () => {
+    setEditModal(true);
+    setListActions(false);
   };
 
   // const cardsIds = list.cards.length
@@ -75,6 +82,14 @@ const BoardList = ({ list }) => {
   return (
     <div ref={setNodeRef} style={style}>
       <CardWrapper>
+        {editModal && (
+          <EditListModal
+            onClose={handleCloseModal}
+            listId={list.id}
+            listTitle={list.title}
+          />
+        )}
+
         <div className="board-list">
           <div className="list-title" {...attributes} {...listeners}>
             {list.title}
@@ -99,11 +114,9 @@ const BoardList = ({ list }) => {
               <Button text="+ Add a card" handleClick={handleCardModal} />
             )}
 
-            {/* {backdrop && <Backdrop onCancel={handleCardModal} />} */}
             {backdrop && <Backdrop onCancel={handleCloseModal} />}
             {showCardModal && (
               <AddCardModal
-                // handleCloseModal={handleCardModal}
                 handleCloseModal={handleCloseModal}
                 listId={list.id}
               />
@@ -117,6 +130,7 @@ const BoardList = ({ list }) => {
           handleCardModal={handleCardModal}
           handleCloseModal={handleCloseModal}
           handleDeleteList={handleDeleteList}
+          handleEditModal={handleEditModal}
         />
       )}
       {deleteList && (
@@ -127,6 +141,7 @@ const BoardList = ({ list }) => {
           listId={list.id}
         />
       )}
+      {/* {editModal && <EditModal onClose={handleCloseModal} />} */}
     </div>
   );
 };
