@@ -53,3 +53,6 @@
   background: lightblue;
   background: #85b8ff;
 }
+.button-listActions:hover {
+  background: #3c474f;
+}

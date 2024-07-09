@@ -7,6 +7,7 @@ import { useState } from "react";
 import Card from "./Card";
 import AddListModal from "./components/AddListModal/AddListModal";
 import Backdrop from "./components/Backdrop/Backdrop";
+
 import {
   DndContext,
   DragOverlay,
@@ -47,8 +48,10 @@ const BoardBody = () => {
   const handleDragStart = (e) => {
     if (e.active.data.current?.type === "List") {
       setActiveList(e.active.data.current.list);
+      setActiveCard(null);
     } else if (e.active.data.current?.type === "Card") {
       setActiveCard(e.active.data.current.card);
+      setActiveList(null);
     }
   };
 
@@ -119,8 +122,8 @@ const BoardBody = () => {
     <DndContext
       sensors={sensors}
       onDragStart={handleDragStart}
-      collisionDetection={closestCenter}
-      // collisionDetection={pointerWithin}
+      // collisionDetection={closestCenter}
+      collisionDetection={pointerWithin}
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
     >

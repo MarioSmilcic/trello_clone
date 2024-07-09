@@ -10,19 +10,23 @@ const DeleteCardModal = ({ card, onClose }) => {
   const handleDelete = () => {
     removeCard(card.listId, card.cardId);
   };
+
   return (
-    <CardModal>
-      <div className="modal">
-        <h3 className="modal_title">Delete Card</h3>
-        <h3 className="modal_question">
-          Are you sure you want to delete {card.card}?
-        </h3>
-        <div className="buttons">
-          <Button text="Confirm" handleClick={handleDelete} />
-          <Button text="Dismiss" handleClick={() => onClose()} />
-        </div>
-      </div>
-    </CardModal>
+    // <CardModal>
+    //   <div className="modal">
+    //     <h3 className="modal_title">Delete Card</h3>
+    //     <h3 className="modal_question">
+    //       Are you sure you want to delete {card.card}?
+    //     </h3>
+    //     <div className="buttons">
+    //       <Button text="Confirm" handleClick={handleDelete} />
+    //       <Button text="Dismiss" handleClick={() => onClose()} />
+    //     </div>
+    //   </div>
+    // </CardModal>
+
+    // <CardModal title="Delete Card" item={card.card} />
+    <div></div>
   );
 };
 

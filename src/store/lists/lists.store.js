@@ -95,4 +95,9 @@ export const useListstore = create((set) => ({
           : list
       ),
     })),
+  // Function to remove a list
+  removeList: (listId) =>
+    set((state) => ({
+      lists: state.lists.filter((list) => list.id !== listId),
+    })),
 }));
