@@ -5,12 +5,13 @@ import TrashIcon from "../../components/icons/TrashIcon";
 import { useState } from "react";
 import Backdrop from "./components/Backdrop/Backdrop";
 import EditCardModal from "./components/EditCardModal/EditCardModal";
-import DeleteCardModal from "./components/DeleteCardModal/DeleteCardModal";
+import CardModal from "./components/CardModal/CardModal";
 
 const Card = ({ card, listId, cardIndex }) => {
   const [backdrop, setBackdrop] = useState(null);
   const [editModal, setEditModal] = useState(null);
   const [deleteModal, setDeleteModal] = useState(null);
+
   const {
     setNodeRef,
     attributes,
@@ -84,7 +85,12 @@ const Card = ({ card, listId, cardIndex }) => {
         <EditCardModal card={editCard} onClose={handleCloseModal} />
       )}
       {deleteModal && (
-        <DeleteCardModal onClose={handleCloseModal} card={editCard} />
+        <CardModal
+          onClose={handleCloseModal}
+          card={editCard}
+          title="Delete Card"
+          item={card.card}
+        />
       )}
     </>
   );

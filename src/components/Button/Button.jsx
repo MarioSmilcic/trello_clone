@@ -28,6 +28,15 @@ const Button = ({ text, handleClick }) => {
     case "Dismiss":
       color = "button-modal";
       break;
+    case "Edit list":
+      color = "button-listActions";
+      break;
+    case "Delete list":
+      color = "button-listActions";
+      break;
+    case "Add new card":
+      color = "button-listActions";
+      break;
     default:
       color = "button";
   }

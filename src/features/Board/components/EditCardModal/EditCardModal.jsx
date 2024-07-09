@@ -2,6 +2,7 @@ import "./editCardModal.style.css";
 import Button from "../../../../components/Button/Button";
 import { useListstore } from "../../../../store/lists/lists.store";
 import { useState } from "react";
+import Close from "../../../../components/icons/Close";
 
 const EditCardModal = ({ card, onClose }) => {
   const [enteredCard, setEnteredCard] = useState(card.card);
@@ -42,7 +43,12 @@ const EditCardModal = ({ card, onClose }) => {
           autoFocus
           onKeyDown={handleKeyPress}
         />
-        <Button text="Save" />
+        <div className="edit-cardModal_buttons">
+          <Button text="Save" />
+          <div className="edit-cardModal_close">
+            <Close onClose={onClose} />
+          </div>
+        </div>
       </div>
     </form>
   );

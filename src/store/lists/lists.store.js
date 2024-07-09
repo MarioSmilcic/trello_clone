@@ -95,4 +95,16 @@ export const useListstore = create((set) => ({
           : list
       ),
     })),
+  // Function to remove a list
+  removeList: (listId) =>
+    set((state) => ({
+      lists: state.lists.filter((list) => list.id !== listId),
+    })),
+  // Function to update the title of a list
+  updateListTitle: (listId, updatedTitle) =>
+    set((state) => ({
+      lists: state.lists.map((list) =>
+        list.id === listId ? { ...list, title: updatedTitle } : list
+      ),
+    })),
 }));
