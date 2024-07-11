@@ -3,8 +3,62 @@
   top: 0;
   left: 0;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1em;
   background: #1d2125;
   width: 100%;
-  z-index: 1000;
+  z-index: 10000;
+  /* max-height: 56px; */
+  height: 65px;
+}
+.logo {
+  display: flex;
+}
+
+.links {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation a {
+  position: relative;
+  color: #2c3d50;
+  font-weight: light;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.navigation a:hover,
+.navigation a.active {
+  color: gray;
+}
+
+a:after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  bottom: -3px;
+  left: 0;
+  background-color: #fff;
+
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+a:hover:after {
+  width: 100%;
+  transform: scaleX(1);
+  /* transform-origin: bottom left; */
+  transform-origin: center;
+}
+
+@media (max-width: 768px) {
+  .links {
+    display: none;
+  }
 }
