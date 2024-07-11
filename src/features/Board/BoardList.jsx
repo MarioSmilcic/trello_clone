@@ -9,7 +9,6 @@ import Backdrop from "./components/Backdrop/Backdrop";
 import ListActions from "./components/ListActions/ListActions";
 import Dots from "../../components/icons/Dots";
 import CardModal from "./components/CardModal/CardModal";
-// import EditModal from "./components/EditListModal/EditListModal";
 import EditListModal from "./components/EditListModal/EditListModal";
 
 const BoardList = ({ list }) => {
@@ -45,7 +44,7 @@ const BoardList = ({ list }) => {
 
   const handleCardModal = () => {
     setShowCardModal(true);
-    setShowButton(true);
+    setShowButton(false);
     setBackdrop(true);
     setListActions(false);
   };
@@ -141,7 +140,6 @@ const BoardList = ({ list }) => {
           listId={list.id}
         />
       )}
-      {/* {editModal && <EditModal onClose={handleCloseModal} />} */}
     </div>
   );
 };
