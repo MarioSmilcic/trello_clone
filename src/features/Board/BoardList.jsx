@@ -88,7 +88,15 @@ const BoardList = ({ list }) => {
             listTitle={list.title}
           />
         )}
-
+        {listActions && (
+          <ListActions
+            handleListActions={handleListActions}
+            handleCardModal={handleCardModal}
+            handleCloseModal={handleCloseModal}
+            handleDeleteList={handleDeleteList}
+            handleEditModal={handleEditModal}
+          />
+        )}
         <div className="board-list">
           <div className="list-title" {...attributes} {...listeners}>
             {list.title}
@@ -123,7 +131,7 @@ const BoardList = ({ list }) => {
           </div>
         </div>
       </CardWrapper>
-      {listActions && (
+      {/* {listActions && (
         <ListActions
           handleListActions={handleListActions}
           handleCardModal={handleCardModal}
@@ -131,7 +139,7 @@ const BoardList = ({ list }) => {
           handleDeleteList={handleDeleteList}
           handleEditModal={handleEditModal}
         />
-      )}
+      )} */}
       {deleteList && (
         <CardModal
           title="Delete List"
