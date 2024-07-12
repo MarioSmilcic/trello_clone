@@ -83,6 +83,20 @@
   border: 1px solid gray;
 }
 
+.button-submit {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ff8c00;
+  color: white;
+}
+.button-submit:hover {
+  cursor: pointer;
+  background: white;
+  color: gray;
+}
+
 @media (max-width: 575px) {
   .button-try_trelloClone {
     display: none;

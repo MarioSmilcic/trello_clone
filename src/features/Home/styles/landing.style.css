@@ -43,9 +43,6 @@
   }
   .landing-left {
     display: flex;
-    /* align-items: start; */
-    /* padding-left: 6em;
-    padding-left: 65px; */
 
     width: 100%;
     max-height: 50%;
