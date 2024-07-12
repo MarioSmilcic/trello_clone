@@ -63,7 +63,8 @@
 }
 
 .collapsed {
-  width: 70px;
+  /* width: 70px; */
+  width: 65px;
   transition: width 0.3s ease;
 }
 @media (max-width: 768px) {

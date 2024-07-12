@@ -131,15 +131,6 @@ const BoardList = ({ list }) => {
           </div>
         </div>
       </CardWrapper>
-      {/* {listActions && (
-        <ListActions
-          handleListActions={handleListActions}
-          handleCardModal={handleCardModal}
-          handleCloseModal={handleCloseModal}
-          handleDeleteList={handleDeleteList}
-          handleEditModal={handleEditModal}
-        />
-      )} */}
       {deleteList && (
         <CardModal
           title="Delete List"

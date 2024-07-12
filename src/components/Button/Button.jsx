@@ -37,6 +37,12 @@ const Button = ({ text, handleClick }) => {
     case "Add new card":
       color = "button-listActions";
       break;
+    case "Try":
+      color = "button-try";
+      break;
+    case "Try TrelloClone":
+      color = "button-try_trelloClone";
+      break;
     default:
       color = "button";
   }
