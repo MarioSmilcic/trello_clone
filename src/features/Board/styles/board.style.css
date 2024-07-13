@@ -1,9 +1,6 @@
 .board {
   background: #075486;
-  /* height: 92vh; */
-  height: 748px;
-  /* height: 757px; */
-  /* height: 740px; */
+  height: calc(100vh - 65px);
   width: 100%;
   overflow-x: auto;
 }
