@@ -56,3 +56,53 @@
 .button-listActions:hover {
   background: #3c474f;
 }
+
+.button-try_trelloClone {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #ff8c00;
+  color: white;
+}
+.button-try {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  background: #ff8c00;
+  color: white;
+}
+
+.button-try:hover,
+.button-try_trelloClone:hover {
+  cursor: pointer;
+  background: white;
+  color: gray;
+  border: 1px solid gray;
+}
+
+.button-submit {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ff8c00;
+  color: white;
+}
+.button-submit:hover {
+  cursor: pointer;
+  background: white;
+  color: gray;
+}
+
+@media (max-width: 575px) {
+  .button-try_trelloClone {
+    display: none;
+    width: 3em;
+  }
+  .button-try {
+    display: flex;
+  }
+}

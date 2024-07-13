@@ -1,11 +1,9 @@
 .listActions {
-  /* position: relative;
-
-  top: -250px;
-  left: 240px; */
-
+  position: absolute;
+  margin-top: 45px;
   z-index: 500;
-  width: 18em;
+  /* width: 18em; */
+  width: 17em;
   border-radius: 8px;
   padding: 8px;
   display: flex;
@@ -14,13 +12,6 @@
   gap: 8px;
   background: #282e32;
   color: #9fadbc;
-
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -100px;
-  margin-left: -250px;
-  margin-left: -150px;
 }
 
 .listActions-header {

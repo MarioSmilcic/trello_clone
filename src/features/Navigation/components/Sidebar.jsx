@@ -44,6 +44,7 @@ const Sidebar = () => {
   const handleCollapsedSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
+
   return (
     <>
       <div className={`sidebar ${isCollapsed && "collapsed"}`}>

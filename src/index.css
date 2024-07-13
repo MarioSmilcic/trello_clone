@@ -2,6 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scrollbar-color: #888 #094872;
+  scrollbar-color: #7392ab #094872;
 }
 body,
 html {
@@ -27,6 +29,18 @@ html {
 }
 
 h1 {
-  font-size: 3.2em;
+  /* font-size: 3.2em; */
+  font-size: 2.5rem;
   line-height: 1.1;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 575px) {
+  h1 {
+    font-size: 1.4rem;
+  }
 }
