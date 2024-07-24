@@ -1,8 +1,7 @@
 .listActions {
   position: absolute;
-  margin-top: 45px;
+  margin-top: 42px;
   z-index: 500;
-  /* width: 18em; */
   width: 17em;
   border-radius: 8px;
   padding: 8px;
