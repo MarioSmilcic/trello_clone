@@ -4,6 +4,8 @@
   gap: 1em;
   position: relative;
   z-index: 500;
+
+  /* top: -30px; */
 }
 
 .add-modal_textarea {

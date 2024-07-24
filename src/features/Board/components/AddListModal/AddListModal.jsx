@@ -5,10 +5,12 @@ import { useListstore } from "../../../../store/lists/lists.store";
 import Button from "../../../../components/Button/Button";
 import Close from "../../../../components/icons/Close";
 import "./addListModal.style.css";
+import { useModalsStore } from "../../../../store/modals/modals.store";
 
-const AddListModal = ({ handleListModal }) => {
+const AddListModal = () => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const { lists, addList } = useListstore();
+  const { closeModals } = useModalsStore();
 
   const handleEnteredTitle = (e) => {
     setEnteredTitle(e.target.value);
@@ -26,9 +28,9 @@ const AddListModal = ({ handleListModal }) => {
     if (enteredTitle.length > 0) {
       addList(newList);
       setEnteredTitle("");
-      handleListModal();
+      closeModals();
     } else {
-      handleListModal();
+      closeModals();
     }
   };
 
@@ -56,7 +58,7 @@ const AddListModal = ({ handleListModal }) => {
           <div className="add-listModal_buttons">
             <Button text="Add list" handleClick={submitHandler} />
             <div className="add-listModal_close">
-              <Close onClose={handleListModal} />
+              <Close onClose={closeModals} />
             </div>
           </div>
         </div>
