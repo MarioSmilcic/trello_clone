@@ -3,10 +3,13 @@ import "./addCardModal.style.css";
 import Close from "../../../../components/icons/Close";
 import { useState } from "react";
 import { useListstore } from "../../../../store/lists/lists.store";
+import { useModalsStore } from "../../../../store/modals/modals.store";
 
-const AddCardModal = ({ listId, handleCloseModal }) => {
+// const AddCardModal = ({ listId, handleCloseModal }) => {
+const AddCardModal = ({ listId }) => {
   const [enteredCard, setEnteredCard] = useState("");
   const { addCard } = useListstore();
+  const { closeModals } = useModalsStore();
 
   const handleEnteredCard = (e) => {
     setEnteredCard(e.target.value);
@@ -23,9 +26,11 @@ const AddCardModal = ({ listId, handleCloseModal }) => {
     if (enteredCard.length > 0) {
       addCard(listId, newCard);
       setEnteredCard("");
-      handleCloseModal();
+      // handleCloseModal();
+      closeModals();
     } else {
-      handleCloseModal();
+      // handleCloseModal();
+      closeModals();
     }
   };
 
@@ -52,7 +57,8 @@ const AddCardModal = ({ listId, handleCloseModal }) => {
         <div className="add-cardModal_buttons">
           <Button text="Add card" />
           <div className="add-cardModal_close">
-            <Close onClose={handleCloseModal} />
+            {/* <Close onClose={handleCloseModal} /> */}
+            <Close onClose={closeModals} />
           </div>
         </div>
       </div>

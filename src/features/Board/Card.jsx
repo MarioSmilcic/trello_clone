@@ -2,15 +2,18 @@ import "./styles/card.style.css";
 import { useSortable } from "@dnd-kit/sortable";
 import EditIcon from "../../components/icons/EditIcon";
 import TrashIcon from "../../components/icons/TrashIcon";
-import { useState } from "react";
-import Backdrop from "./components/Backdrop/Backdrop";
 import EditCardModal from "./components/EditCardModal/EditCardModal";
-import CardModal from "./components/CardModal/CardModal";
+import DeleteModal from "./components/DeleteModal/DeleteModal";
+import { useModalsStore } from "../../store/modals/modals.store";
 
 const Card = ({ card, listId, cardIndex }) => {
-  const [backdrop, setBackdrop] = useState(null);
-  const [editModal, setEditModal] = useState(null);
-  const [deleteModal, setDeleteModal] = useState(null);
+  const {
+    isEditCard,
+    isDeleteCard,
+    toggleEditCardModal,
+    toggleDeleteCardModal,
+    cardId,
+  } = useModalsStore();
 
   const {
     setNodeRef,
@@ -45,20 +48,6 @@ const Card = ({ card, listId, cardIndex }) => {
     );
   }
 
-  const handleModal = () => {
-    setBackdrop(true);
-    setEditModal(true);
-  };
-  const handleDeleteModal = () => {
-    setBackdrop(true);
-    setDeleteModal(true);
-  };
-  const handleCloseModal = () => {
-    setBackdrop(false);
-    setEditModal(false);
-    setDeleteModal(false);
-  };
-
   const editCard = { listId, cardId: card.id, card: card.card };
   return (
     <>
@@ -73,24 +62,18 @@ const Card = ({ card, listId, cardIndex }) => {
 
         <div className="card-icons">
           <span className="card-icon">
-            <EditIcon onEdit={handleModal} />
+            <EditIcon onEdit={() => toggleEditCardModal(card.id, listId)} />
           </span>
           <span className="card-icon">
-            <TrashIcon onDelete={handleDeleteModal} />
+            <TrashIcon
+              onDelete={() => toggleDeleteCardModal(card.id, listId)}
+            />
           </span>
         </div>
       </div>
-      {backdrop && <Backdrop onCancel={handleCloseModal} />}
-      {editModal && (
-        <EditCardModal card={editCard} onClose={handleCloseModal} />
-      )}
-      {deleteModal && (
-        <CardModal
-          onClose={handleCloseModal}
-          card={editCard}
-          title="Delete Card"
-          item={card.card}
-        />
+      {isEditCard && cardId === card.id && <EditCardModal card={editCard} />}
+      {isDeleteCard && cardId === card.id && (
+        <DeleteModal card={editCard} title="Delete Card" item={card.card} />
       )}
     </>
   );

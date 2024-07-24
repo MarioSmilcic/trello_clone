@@ -6,7 +6,6 @@ import { useListstore } from "../../store/lists/lists.store";
 import { useState } from "react";
 import Card from "./Card";
 import AddListModal from "./components/AddListModal/AddListModal";
-import Backdrop from "./components/Backdrop/Backdrop";
 
 import {
   DndContext,
@@ -14,16 +13,15 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-  closestCenter,
   pointerWithin,
 } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
+import { useModalsStore } from "../../store/modals/modals.store";
 
 const BoardBody = () => {
-  const [showListModal, setShowListModal] = useState(false);
-  const [showButton, setShowButton] = useState(true);
-  const [backdrop, setBackdrop] = useState(null);
+  const { isListModal, toggleListModal, isListButton, listId } =
+    useModalsStore();
 
   const { lists, moveList, moveCard } = useListstore();
   const [activeList, setActiveList] = useState(null);
@@ -38,12 +36,6 @@ const BoardBody = () => {
   );
 
   const listsId = lists.map((list) => list.id);
-
-  const handleListModal = () => {
-    setShowListModal(!showListModal);
-    setShowButton(!showButton);
-    setBackdrop(!backdrop);
-  };
 
   const handleDragStart = (e) => {
     if (e.active.data.current?.type === "List") {
@@ -122,7 +114,6 @@ const BoardBody = () => {
     <DndContext
       sensors={sensors}
       onDragStart={handleDragStart}
-      // collisionDetection={closestCenter}
       collisionDetection={pointerWithin}
       onDragEnd={handleDragEnd}
       onDragOver={handleDragOver}
@@ -134,12 +125,13 @@ const BoardBody = () => {
           ))}
         </SortableContext>
         <div>
-          {showButton && (
-            <Button text="+ Add another list" handleClick={handleListModal} />
+          {isListButton && (
+            <Button
+              text="+ Add another list"
+              handleClick={() => toggleListModal(null)}
+            />
           )}
-          {backdrop && <Backdrop onCancel={handleListModal} />}
-
-          {showListModal && <AddListModal handleListModal={handleListModal} />}
+          {isListModal && listId === null && <AddListModal />}
         </div>
       </div>
 

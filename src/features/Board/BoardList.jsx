@@ -1,23 +1,25 @@
-import { useState } from "react";
 import "./styles/boardList.style.css";
 import Card from "./Card";
 import Button from "../../components/Button/Button";
 import CardWrapper from "./components/CardWrapper/CardWrapper";
 import { SortableContext, useSortable } from "@dnd-kit/sortable";
 import AddCardModal from "./components/AddCardModal/AddCardModal";
-import Backdrop from "./components/Backdrop/Backdrop";
 import ListActions from "./components/ListActions/ListActions";
 import Dots from "../../components/icons/Dots";
-import CardModal from "./components/CardModal/CardModal";
+import DeleteModal from "./components/DeleteModal/DeleteModal";
 import EditListModal from "./components/EditListModal/EditListModal";
+import { useModalsStore } from "../../store/modals/modals.store";
 
 const BoardList = ({ list }) => {
-  const [showCardModal, setShowCardModal] = useState(false);
-  const [backdrop, setBackdrop] = useState(null);
-  const [showButton, setShowButton] = useState(true);
-  const [listActions, setListActions] = useState(false);
-  const [deleteList, setDeleteList] = useState(false);
-  const [editModal, setEditModal] = useState(false);
+  const {
+    isCardModal,
+    isListActions,
+    isDeleteList,
+    toggleCardModal,
+    toggleListActions,
+    isEditList,
+    listId,
+  } = useModalsStore();
 
   const {
     setNodeRef,
@@ -42,66 +44,21 @@ const BoardList = ({ list }) => {
       : "none",
   };
 
-  const handleCardModal = () => {
-    setShowCardModal(true);
-    setShowButton(false);
-    setBackdrop(true);
-    setListActions(false);
-  };
-
-  const handleCloseModal = () => {
-    setShowCardModal(false);
-    setShowButton(true);
-    setBackdrop(false);
-    setListActions(false);
-    setDeleteList(false);
-    setEditModal(false);
-  };
-
-  const handleListActions = () => {
-    setListActions(true);
-    setBackdrop(true);
-  };
-
-  const handleDeleteList = () => {
-    setDeleteList(true);
-    setBackdrop(true);
-    setListActions(false);
-  };
-
-  const handleEditModal = () => {
-    setEditModal(true);
-    setListActions(false);
-  };
-
-  // const cardsIds = list.cards.length
-  //   ? list.cards.map((card) => card.id)
-  //   : [list.id]; // Use list id to allow dropping in empty list
   const cardsIds = [list.id];
+  const isCardButtonVisible = !(isCardModal && listId === list.id);
+
   return (
     <div ref={setNodeRef} style={style}>
       <CardWrapper>
-        {editModal && (
-          <EditListModal
-            onClose={handleCloseModal}
-            listId={list.id}
-            listTitle={list.title}
-          />
+        {isEditList && listId === list.id && (
+          <EditListModal listId={list.id} listTitle={list.title} />
         )}
-        {listActions && (
-          <ListActions
-            handleListActions={handleListActions}
-            handleCardModal={handleCardModal}
-            handleCloseModal={handleCloseModal}
-            handleDeleteList={handleDeleteList}
-            handleEditModal={handleEditModal}
-          />
-        )}
+        {isListActions && listId === list.id && <ListActions />}
         <div className="board-list">
           <div className="list-title" {...attributes} {...listeners}>
             {list.title}
             <span className="list-dots">
-              <Dots handleClick={handleListActions} />
+              <Dots handleClick={() => toggleListActions(list.id)} />
             </span>
           </div>
           <SortableContext items={cardsIds}>
@@ -117,27 +74,20 @@ const BoardList = ({ list }) => {
             </div>
           </SortableContext>
           <div className="modal-outer">
-            {showButton && (
-              <Button text="+ Add a card" handleClick={handleCardModal} />
-            )}
-
-            {backdrop && <Backdrop onCancel={handleCloseModal} />}
-            {showCardModal && (
-              <AddCardModal
-                handleCloseModal={handleCloseModal}
-                listId={list.id}
+            {isCardButtonVisible && (
+              <Button
+                text="+ Add a card"
+                handleClick={() => toggleCardModal(list.id)}
               />
+            )}
+            {isCardModal && listId === list.id && (
+              <AddCardModal listId={list.id} />
             )}
           </div>
         </div>
       </CardWrapper>
-      {deleteList && (
-        <CardModal
-          title="Delete List"
-          item={list.title}
-          onClose={handleCloseModal}
-          listId={list.id}
-        />
+      {isDeleteList && listId === list.id && (
+        <DeleteModal title="Delete List" item={list.title} listId={list.id} />
       )}
     </div>
   );

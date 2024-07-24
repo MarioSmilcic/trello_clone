@@ -3,10 +3,12 @@ import Button from "../../../../components/Button/Button";
 import { useListstore } from "../../../../store/lists/lists.store";
 import { useState } from "react";
 import Close from "../../../../components/icons/Close";
+import { useModalsStore } from "../../../../store/modals/modals.store";
 
-const EditListModal = ({ onClose, listId, listTitle }) => {
+const EditListModal = ({ listId, listTitle }) => {
   const [enteredTitle, setEnteredTitle] = useState(listTitle);
   const { updateListTitle } = useListstore();
+  const { closeModals } = useModalsStore();
 
   const handleEnteredTitle = (e) => {
     setEnteredTitle(e.target.value);
@@ -16,7 +18,7 @@ const EditListModal = ({ onClose, listId, listTitle }) => {
     e.preventDefault();
     if (enteredTitle.length > 0) {
       updateListTitle(listId, enteredTitle);
-      onClose();
+      closeModals();
     }
   };
 
@@ -42,7 +44,7 @@ const EditListModal = ({ onClose, listId, listTitle }) => {
         <div className="add-listModal_buttons">
           <Button text="Save" />
           <div className="edit-listModal_close">
-            <Close onClose={onClose} />
+            <Close onClose={closeModals} />
           </div>
         </div>
       </div>
