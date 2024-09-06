@@ -10,6 +10,27 @@ const About = () => {
         you organize and manage your tasks and projects efficiently.
       </p>
 
+      <h2>How It Works</h2>
+      <div className="about-list"></div>
+      <ul>
+        <li>
+          <span className="about-span">Creating Lists and Cards - </span>Start
+          by adding a list using the “Add another list” button. Once a list is
+          created, you can add tasks to it by clicking the “Add a card” button
+          within the list.
+        </li>
+        <li>
+          <span className="about-span">Managing Tasks - </span>Drag and drop
+          cards between lists to prioritize tasks. Click on a card to edit its
+          details or delete it if it’s no longer needed.
+        </li>
+        <li>
+          <span className="about-span">Editing Lists - </span>Click on the three
+          dots next to a list title to access options for editing or deleting
+          the list.
+        </li>
+      </ul>
+
       <h2>Technologies Used:</h2>
       <div className="about-list">
         <ul>
