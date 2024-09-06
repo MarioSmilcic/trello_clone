@@ -43,15 +43,13 @@ const Button = ({ text, handleClick }) => {
     case "Try TrelloClone":
       color = "button-try_trelloClone";
       break;
-    case "Submit your request":
-      color = "button-submit";
-      break;
+
     default:
       color = "button";
   }
 
   return (
-    <button onClick={handleClick} className={`button ${color}`}>
+    <button onClick={handleClick} className={`button ${color}`} type="submit">
       {text}
     </button>
   );

@@ -3,4 +3,6 @@
   height: calc(100vh - 65px);
   width: 100%;
   overflow-x: auto;
+  scrollbar-color: #888 #094872;
+  scrollbar-color: #7392ab #094872;
 }

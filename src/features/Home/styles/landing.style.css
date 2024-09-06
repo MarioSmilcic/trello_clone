@@ -1,7 +1,7 @@
 .landing {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 65px);
 }
 .landing-left {
   background: white;
@@ -18,7 +18,12 @@
   text-align: center;
 }
 .landing-right {
-  background: #075486;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(8, 64, 102, 1) 50%
+  );
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -39,19 +44,11 @@
 @media (max-width: 768px) {
   .landing {
     flex-direction: column;
-    padding-left: 65px;
   }
   .landing-left {
     display: flex;
 
     width: 100%;
-    max-height: 50%;
-  }
-  .landing-left__title {
-    /* text-align: start; */
-  }
-  .landing-right__logo {
-    /* padding-left: 65px; */
   }
 
   .landing-right {

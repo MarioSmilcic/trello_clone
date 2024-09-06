@@ -2,8 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scrollbar-color: #888 #094872;
-  scrollbar-color: #7392ab #094872;
+  /* scrollbar-color: #888 #094872;
+  scrollbar-color: #7392ab #094872; */
 }
 body,
 html {
@@ -20,7 +20,14 @@ html {
   color-scheme: light dark;
   /* color: rgba(255, 255, 255, 0.87); */
   /* background-color: #242424; */
-  background-color: #075486;
+  /* background-color: #075486; */
+
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(8, 64, 102, 1) 50%
+  );
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
