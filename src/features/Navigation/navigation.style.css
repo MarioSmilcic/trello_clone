@@ -9,7 +9,6 @@
   background: #1d2125;
   width: 100%;
   z-index: 10000;
-  /* max-height: 56px; */
   height: 65px;
 }
 .logo {
@@ -44,7 +43,6 @@ a:after {
   bottom: -3px;
   left: 0;
   background-color: #fff;
-
   transform: scaleX(0);
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
@@ -53,12 +51,30 @@ a:after {
 a:hover:after {
   width: 100%;
   transform: scaleX(1);
-  /* transform-origin: bottom left; */
   transform-origin: center;
+}
+.hamburger {
+  cursor: pointer;
+  display: none;
+  transition: transform 0.5s ease-out;
+}
+.hamburger__show {
+  transform: rotate(-90deg);
+}
+
+.nav__logo {
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.nav__logo--hidden {
+  opacity: 0;
 }
 
 @media (max-width: 768px) {
   .links {
     display: none;
+  }
+  .hamburger {
+    display: flex;
   }
 }

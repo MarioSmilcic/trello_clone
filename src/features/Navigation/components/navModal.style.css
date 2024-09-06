@@ -1,0 +1,47 @@
+.navModal {
+  position: fixed;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  background: #1d2125;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+
+.navModal__visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.navModal__links {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10em;
+  text-align: center;
+}
+
+.navModal a {
+  position: relative;
+  color: #2c3d50;
+  font-weight: light;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.navModal a:hover,
+.navModal a.active {
+  color: gray;
+}
+@media (min-width: 768px) {
+  .navModal {
+    display: none;
+  }
+}
