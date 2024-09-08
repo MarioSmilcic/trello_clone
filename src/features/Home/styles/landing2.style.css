@@ -1,0 +1,70 @@
+.landing2__container {
+  background: white;
+  width: 100%;
+  height: calc(100vh - 65px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6em;
+  color: black;
+  padding: 16px;
+  text-align: center;
+}
+
+.landing2 {
+  background: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.landing2__left {
+  width: 50%;
+  height: 100%;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1em;
+  text-align: center;
+}
+.landing2__left--text {
+  text-align: justify;
+}
+.landing2__right {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  padding: 2em;
+  text-align: center;
+}
+
+.trelloTeaser-img {
+  max-width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+@media (max-width: 768px) {
+  .landing2__container {
+    gap: 3em;
+  }
+
+  .landing2 {
+    flex-direction: column;
+  }
+  .landing2__left {
+    width: 100%;
+  }
+  .landing2__right {
+    width: 100%;
+  }
+}
