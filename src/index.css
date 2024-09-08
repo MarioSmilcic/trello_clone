@@ -2,8 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* scrollbar-color: #888 #094872;
-  scrollbar-color: #7392ab #094872; */
 }
 body,
 html {
@@ -19,8 +17,6 @@ html {
 
   color-scheme: light dark;
   /* color: rgba(255, 255, 255, 0.87); */
-  /* background-color: #242424; */
-  /* background-color: #075486; */
 
   background: rgb(0, 0, 0);
   background: linear-gradient(
@@ -36,7 +32,6 @@ html {
 }
 
 h1 {
-  /* font-size: 3.2em; */
   font-size: 2.5rem;
   line-height: 1.1;
 }
