@@ -109,21 +109,23 @@
   cursor: pointer;
   border: none;
   border-radius: 8px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1em;
   font-size: medium;
+  font-weight: bold;
   height: 40px;
   width: 100%;
 
-  background: #05edee;
-  color: black;
+  background: #05b6a1;
 }
 .contact__submit--btn:hover {
   background: white;
-  color: gray;
+  border: 1px solid #05b6a1;
+  color: #05b6a1;
 }
 .contact__submit--btn:disabled {
   background-color: #ccc;

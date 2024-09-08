@@ -43,6 +43,12 @@ const Button = ({ text, handleClick }) => {
     case "Try TrelloClone":
       color = "button-try_trelloClone";
       break;
+    case "Get started":
+      color = "button-getStarted";
+      break;
+    case "Contact us":
+      color = "button-getStarted";
+      break;
 
     default:
       color = "button";

@@ -36,6 +36,7 @@
   width: 17em;
   color: white;
   margin-top: 2px;
+  /* margin-right: 16px; */
 }
 .add_list:hover {
   background: #296795;
@@ -57,14 +58,40 @@
   background: #3c474f;
 }
 
+.button-getStarted {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #05b6a1;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: white;
+  font-weight: 900;
+}
+.button-getStarted:hover {
+  cursor: pointer;
+  background: white;
+  color: gray;
+  color: #05b6a1;
+  color: #05b6a1;
+  border: 1px solid #05b6a1;
+}
 .button-try_trelloClone {
   display: flex;
   width: 50%;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: #ff8c00;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(8, 64, 102, 1) 50%
+  );
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   color: white;
+  font-weight: 900;
 }
 .button-try {
   display: none;
@@ -73,17 +100,23 @@
   width: 50%;
   background: #ff8c00;
   color: white;
+  font-weight: 900;
 }
 
 .button-try:hover,
 .button-try_trelloClone:hover {
   cursor: pointer;
   background: white;
-  color: gray;
-  border: 1px solid gray;
+  color: #084066;
+  border: 1px solid #084066;
+}
+@media (max-width: 576px) {
+  .button-try_trelloClone {
+    width: 100%;
+  }
 }
 
-@media (max-width: 575px) {
+/* @media (max-width: 575px) {
   .button-try_trelloClone {
     display: none;
     width: 3em;
@@ -91,4 +124,4 @@
   .button-try {
     display: flex;
   }
-}
+} */

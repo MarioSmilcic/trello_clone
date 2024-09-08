@@ -1,0 +1,48 @@
+.landing3 {
+  padding: 16px;
+  padding-top: 6em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 6em;
+  height: calc(100vh - 65px);
+  color: white;
+  text-align: center;
+}
+.landing3__benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+.landing3__benefits--title {
+  color: lightgreen;
+}
+
+.landing3__benefits--list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 3em;
+  text-align: start;
+  list-style: none;
+}
+.landing3__benefits--list li:before {
+  content: "✓";
+  color: green;
+  margin-right: 8px;
+}
+
+@media (max-width: 576px) {
+  .landing3 {
+    gap: 3em;
+    padding-top: 4em;
+  }
+  .landing3__benefits {
+    align-items: start;
+    gap: 0;
+  }
+  .landing3__benefits--list {
+    grid-template-columns: 1fr;
+    padding-top: 3em;
+  }
+}

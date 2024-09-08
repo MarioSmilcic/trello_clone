@@ -3,4 +3,8 @@
   display: flex;
   align-items: start;
   gap: 1em;
+  overflow-x: auto;
+  scrollbar-color: #888 #094872;
+  scrollbar-color: #7392ab #094872;
+  height: calc(100vh - 121px);
 }

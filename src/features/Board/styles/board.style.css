@@ -1,8 +1,8 @@
 .board {
   background: #075486;
-  height: calc(100vh - 65px);
-  width: 100%;
-  overflow-x: auto;
+  /* width: 100%; */
+  /* height: calc(100vh - 65px); */
+  /* overflow-x: auto;
   scrollbar-color: #888 #094872;
-  scrollbar-color: #7392ab #094872;
+  scrollbar-color: #7392ab #094872; */
 }
