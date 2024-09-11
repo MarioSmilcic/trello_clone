@@ -36,6 +36,7 @@
   background: #363f47;
   border: 1px solid #80838e;
   border-radius: 4px;
+  color: rgba(255, 255, 255, 0.87);
 }
 .contact__input::placeholder {
   color: #787c86;
@@ -45,9 +46,8 @@
   height: 12em;
   width: 40em;
   padding: 8px;
-  background: #3d4347;
-  background: #aaadb2;
   background: #363f47;
+  color: rgba(255, 255, 255, 0.87);
 
   border: 1px solid #80838e;
   border-radius: 4px;
