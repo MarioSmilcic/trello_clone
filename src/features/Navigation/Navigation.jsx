@@ -1,12 +1,15 @@
 import "./navigation.style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Hamburger from "../../components/icons/Hamburger";
 import CloseMenu from "../../components/icons/CloseMenu";
 import NavModal from "./components/NavModal";
 import { useState } from "react";
+import Logo from "../../assets/Logo_trello-clone.png";
 
 const Navigation = () => {
   const [showModal, setShowModal] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleModal = () => {
     setShowModal(!showModal);
@@ -17,7 +20,7 @@ const Navigation = () => {
       <div className="navigation">
         <div className="logo">
           <h4 className={`nav__logo ${showModal && "nav__logo--hidden"}`}>
-            TrelloClone
+            <img src={Logo} alt="logo" onClick={() => navigate("/")} />
           </h4>
         </div>
         <div className="links">
@@ -27,7 +30,6 @@ const Navigation = () => {
           <Link to={{ pathname: "/contact" }}>Contact</Link>
         </div>
 
-        {/* <div className="hamburger"> */}
         <div className={`hamburger ${showModal && " hamburger__show"}`}>
           {!showModal && <Hamburger onModal={handleModal} />}
           {showModal && <CloseMenu onModal={handleModal} />}

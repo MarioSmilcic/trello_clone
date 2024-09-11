@@ -32,6 +32,7 @@
 .landing4__card--title {
   color: lightgreen;
 }
+
 @media (max-width: 768px) {
   .landing4 {
     height: 100%;

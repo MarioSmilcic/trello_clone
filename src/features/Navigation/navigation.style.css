@@ -13,6 +13,10 @@
 }
 .logo {
   display: flex;
+  cursor: pointer;
+}
+.logo img {
+  width: 150px;
 }
 
 .links {

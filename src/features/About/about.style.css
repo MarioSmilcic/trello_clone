@@ -57,19 +57,10 @@
   background-color: #05b6a0;
   color: white;
 }
-/* .about-list {
-  padding: 0;
-  margin: 0;
-  text-align: left;
-}
-.about-span {
-  font-weight: bold;
-} */
 
 @media (max-width: 768px) {
   .about {
     flex-direction: column;
-    /* padding-left: 100px; */
   }
   .about__info {
     flex-direction: column;
