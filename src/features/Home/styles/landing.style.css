@@ -39,7 +39,9 @@
   line-height: 1.5;
   text-align: center;
 }
-.landing-right__logo {
+
+.landing-right__logo--img {
+  width: 50%;
 }
 @media (max-width: 768px) {
   .landing {
