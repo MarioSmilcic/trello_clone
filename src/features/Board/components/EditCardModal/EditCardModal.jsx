@@ -4,6 +4,7 @@ import { useListstore } from "../../../../store/lists/lists.store";
 import { useState } from "react";
 import Close from "../../../../components/icons/Close";
 import { useModalsStore } from "../../../../store/modals/modals.store";
+import { handleKeyPress, updateCardHandler } from "../../helpers/helper";
 
 const EditCardModal = ({ card }) => {
   const [enteredCard, setEnteredCard] = useState(card.card);
@@ -15,22 +16,19 @@ const EditCardModal = ({ card }) => {
   };
 
   const handleUpdate = (e) => {
-    e.preventDefault();
-
-    const updatedCard = {
-      card: enteredCard,
-    };
-    if ((enteredCard.length > 0) & (card.card !== enteredCard)) {
-      updateCard(card.listId, card.cardId, updatedCard);
-      closeModals();
-    }
+    updateCardHandler(
+      e,
+      enteredCard,
+      card.card,
+      card.listId,
+      card.cardId,
+      updateCard,
+      closeModals
+    );
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleUpdate(e);
-    }
+  const onKeypressHandler = (e) => {
+    handleKeyPress(e, handleUpdate);
   };
   return (
     <form onSubmit={handleUpdate} className="edit-form">
@@ -42,7 +40,7 @@ const EditCardModal = ({ card }) => {
           value={enteredCard}
           onChange={handleEnteredCard}
           autoFocus
-          onKeyDown={handleKeyPress}
+          onKeyDown={onKeypressHandler}
         />
         <div className="edit-cardModal_buttons">
           <Button text="Save" />

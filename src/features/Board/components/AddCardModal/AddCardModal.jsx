@@ -4,8 +4,8 @@ import Close from "../../../../components/icons/Close";
 import { useState } from "react";
 import { useListstore } from "../../../../store/lists/lists.store";
 import { useModalsStore } from "../../../../store/modals/modals.store";
+import { submitCardHandler, handleKeyPress } from "../../helpers/helper";
 
-// const AddCardModal = ({ listId, handleCloseModal }) => {
 const AddCardModal = ({ listId }) => {
   const [enteredCard, setEnteredCard] = useState("");
   const { addCard } = useListstore();
@@ -15,34 +15,23 @@ const AddCardModal = ({ listId }) => {
     setEnteredCard(e.target.value);
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    const newCard = {
-      card: enteredCard,
-      id: Math.floor(Math.random() * 1000000),
-    };
-
-    if (enteredCard.length > 0) {
-      addCard(listId, newCard);
-      setEnteredCard("");
-      // handleCloseModal();
-      closeModals();
-    } else {
-      // handleCloseModal();
-      closeModals();
-    }
+  const handleSubmit = (e) => {
+    submitCardHandler(
+      e,
+      enteredCard,
+      listId,
+      addCard,
+      setEnteredCard,
+      closeModals
+    );
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      submitHandler(e);
-    }
+  const onKeypressHandler = (e) => {
+    handleKeyPress(e, handleSubmit);
   };
 
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={handleSubmit}>
       <div className="add-modal">
         <textarea
           name="addCardModal"
@@ -52,12 +41,11 @@ const AddCardModal = ({ listId }) => {
           className="add-modal_textarea"
           value={enteredCard}
           onChange={handleEnteredCard}
-          onKeyDown={handleKeyPress}
+          onKeyDown={onKeypressHandler}
         />
         <div className="add-cardModal_buttons">
           <Button text="Add card" />
           <div className="add-cardModal_close">
-            {/* <Close onClose={handleCloseModal} /> */}
             <Close onClose={closeModals} />
           </div>
         </div>
