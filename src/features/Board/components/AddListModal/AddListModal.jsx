@@ -6,39 +6,26 @@ import Button from "../../../../components/Button/Button";
 import Close from "../../../../components/icons/Close";
 import "./addListModal.style.css";
 import { useModalsStore } from "../../../../store/modals/modals.store";
+import { handleKeyPress, submitListHandler } from "../../helpers/helper";
 
 const AddListModal = () => {
   const [enteredTitle, setEnteredTitle] = useState("");
-  const { lists, addList } = useListstore();
+  const { addList } = useListstore();
   const { closeModals } = useModalsStore();
 
   const handleEnteredTitle = (e) => {
     setEnteredTitle(e.target.value);
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    const newList = {
-      title: enteredTitle,
-      id: lists.length + 1,
-      cards: [],
-    };
-
-    if (enteredTitle.length > 0) {
-      addList(newList);
-      setEnteredTitle("");
-      closeModals();
-    } else {
-      closeModals();
-    }
+  const handleSubmit = (e) => {
+    submitListHandler(
+      { enteredTitle, addList, setEnteredTitle, closeModals },
+      e
+    );
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      submitHandler(e);
-    }
+  const onKeypressHandler = (e) => {
+    handleKeyPress(e, handleSubmit);
   };
 
   return (
@@ -53,10 +40,10 @@ const AddListModal = () => {
             name="list title"
             value={enteredTitle}
             onChange={handleEnteredTitle}
-            onKeyDown={handleKeyPress}
+            onKeyDown={onKeypressHandler}
           />
           <div className="add-listModal_buttons">
-            <Button text="Add list" handleClick={submitHandler} />
+            <Button text="Add list" handleClick={handleSubmit} />
             <div className="add-listModal_close">
               <Close onClose={closeModals} />
             </div>

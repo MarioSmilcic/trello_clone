@@ -14,6 +14,8 @@
   height: 10em;
   border-radius: 8px;
   padding: 8px;
+  background: #22272b;
+  color: white;
 }
 
 .edit-cardModal_buttons {

@@ -26,7 +26,7 @@ const Card = ({ card, listId, cardIndex }) => {
     id: card.id,
     data: {
       type: "Card",
-      card,
+      cardId: card.id,
       listId,
       cardIndex,
     },
