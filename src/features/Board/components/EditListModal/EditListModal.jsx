@@ -4,6 +4,7 @@ import { useListstore } from "../../../../store/lists/lists.store";
 import { useState } from "react";
 import Close from "../../../../components/icons/Close";
 import { useModalsStore } from "../../../../store/modals/modals.store";
+import { handleKeyPress, updateListHandler } from "../../helpers/helper";
 
 const EditListModal = ({ listId, listTitle }) => {
   const [enteredTitle, setEnteredTitle] = useState(listTitle);
@@ -15,18 +16,10 @@ const EditListModal = ({ listId, listTitle }) => {
   };
 
   const handleUpdateList = (e) => {
-    e.preventDefault();
-    if (enteredTitle.length > 0) {
-      updateListTitle(listId, enteredTitle);
-      closeModals();
-    }
+    updateListHandler(e, enteredTitle, listId, updateListTitle, closeModals);
   };
-
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleUpdateList(e);
-    }
+  const onKeypressHandler = (e) => {
+    handleKeyPress(e, handleUpdateList);
   };
   return (
     <form onSubmit={handleUpdateList} className="editList-form">
@@ -38,7 +31,7 @@ const EditListModal = ({ listId, listTitle }) => {
           value={enteredTitle}
           onChange={handleEnteredTitle}
           autoFocus
-          onKeyDown={handleKeyPress}
+          onKeyDown={onKeypressHandler}
         />
 
         <div className="add-listModal_buttons">

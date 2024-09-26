@@ -1,27 +1,28 @@
 import { create } from "zustand";
-import { arrayMove } from "@dnd-kit/sortable";
+import { nanoid } from "nanoid";
 
 export const useListstore = create((set) => ({
   lists: [
     {
-      id: "1",
+      id: nanoid(),
       title: "List1",
       cards: [
         {
-          id: Math.floor(Math.random() * 1000000),
+          id: nanoid(),
           card: "Card 1",
         },
         {
-          id: Math.floor(Math.random() * 1000000),
+          id: nanoid(),
           card: "Card 2",
         },
         {
-          id: Math.floor(Math.random() * 1000000),
+          id: nanoid(),
           card: "Card 3",
         },
       ],
     },
   ],
+
   // Function to add a new list
   addList: (newList) => set((state) => ({ lists: [...state.lists, newList] })),
 
@@ -33,40 +34,42 @@ export const useListstore = create((set) => ({
       ),
     })),
 
-  // Function to move a list from one position to another
+  // function to move list from one position to another
   moveList: (activeListId, overListId) =>
     set((state) => {
-      const activeListIndex = state.lists.findIndex(
-        ({ id }) => id === activeListId
-      );
-      const overListIndex = state.lists.findIndex(
-        ({ id }) => id === overListId
-      );
+      const lists = [...state.lists];
+      const activeIndex = lists.findIndex(({ id }) => id === activeListId);
+      const overIndex = lists.findIndex(({ id }) => id === overListId);
 
-      return activeListIndex !== -1 && overListIndex !== -1
-        ? { lists: arrayMove(state.lists, activeListIndex, overListIndex) }
-        : state;
+      if (activeIndex === -1 || overIndex === -1) {
+        return state;
+      }
+
+      const [movedList] = lists.splice(activeIndex, 1);
+      lists.splice(overIndex, 0, movedList);
+
+      return { lists };
     }),
 
-  // Function to move a card from one list to another, or within the same list
+  // function to move card from one list to another, or within the same list
   moveCard: (activeListId, overListId, activeCardIndex, overCardIndex) =>
     set((state) => {
-      const activeList = state.lists.find((list) => list.id === activeListId);
-      const overList = state.lists.find((list) => list.id === overListId);
+      const lists = state.lists.map((list) => ({
+        ...list,
+        cards: [...list.cards],
+      }));
 
-      if (!activeList || !overList) return state;
-      // Remove the card from the active list
-      const [movedCard] = activeList.cards.splice(activeCardIndex, 1);
-      // Insert the card into the new position in the target list
-      overList.cards.splice(overCardIndex, 0, movedCard);
+      const sourceList = lists.find((list) => list.id === activeListId);
+      const destinationList = lists.find((list) => list.id === overListId);
 
-      return {
-        lists: state.lists.map((list) => {
-          if (list.id === activeListId) return activeList;
-          if (list.id === overListId) return overList;
-          return list;
-        }),
-      };
+      if (!sourceList || !destinationList) {
+        return state;
+      }
+
+      const [movedCard] = sourceList.cards.splice(activeCardIndex, 1);
+      destinationList.cards.splice(overCardIndex, 0, movedCard);
+
+      return { lists };
     }),
 
   // Function to update a card
@@ -83,6 +86,7 @@ export const useListstore = create((set) => ({
           : list
       ),
     })),
+
   // Function to remove a card
   removeCard: (listId, cardId) =>
     set((state) => ({
@@ -95,11 +99,13 @@ export const useListstore = create((set) => ({
           : list
       ),
     })),
+
   // Function to remove a list
   removeList: (listId) =>
     set((state) => ({
       lists: state.lists.filter((list) => list.id !== listId),
     })),
+
   // Function to update the title of a list
   updateListTitle: (listId, updatedTitle) =>
     set((state) => ({

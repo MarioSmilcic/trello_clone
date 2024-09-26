@@ -36,6 +36,14 @@ const Contact = () => {
     );
   };
 
+  // const validationSchema = Yup.shape({
+  //   name: Yup.string().required("Required"),
+  //   email: Yup.string().match(emailRegex)
+  //     .email("Invalid email address")
+  //     .required("Required"),
+  //   message: Yup.num().required("Required"),
+  // });
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
