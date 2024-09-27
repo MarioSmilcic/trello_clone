@@ -5,10 +5,10 @@ import Backdrop from "./components/Backdrop/Backdrop";
 import { useModalsStore } from "../../store/modals/modals.store";
 
 const Board = () => {
-  const { isBackdrop } = useModalsStore();
+  const { modal } = useModalsStore();
   return (
     <div className="board">
-      {isBackdrop && <Backdrop />}
+      {modal && <Backdrop />}
       <BoardHeader />
       <BoardBody />
     </div>

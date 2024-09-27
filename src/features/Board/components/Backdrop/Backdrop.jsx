@@ -2,9 +2,9 @@ import "./backdrop.style.css";
 import { useModalsStore } from "../../../../store/modals/modals.store";
 
 const Backdrop = () => {
-  const { closeModals } = useModalsStore();
+  const { closeModal } = useModalsStore();
 
-  return <div className="backdrop" onClick={closeModals}></div>;
+  return <div className="backdrop" onClick={closeModal}></div>;
 };
 
 export default Backdrop;

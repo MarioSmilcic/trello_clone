@@ -12,38 +12,27 @@ import { useModalsStore } from "../../store/modals/modals.store";
 import { useSortableItem } from "./hooks/useSortableItem";
 
 const BoardList = ({ list }) => {
-  const {
-    isCardModal,
-    isListActions,
-    isDeleteList,
-    isEditList,
-    toggleCardModal,
-    toggleListActions,
-    listId,
-  } = useModalsStore();
+  const { modal, openModal } = useModalsStore();
 
   const { setNodeRef, attributes, listeners, style } = useSortableItem(list);
 
-  const isCurrentList = listId === list.id;
+  const isCurrentList = modal?.props?.listId === list.id;
+  const isAddCardModalOpen = modal?.type === "addCard" && isCurrentList;
 
-  const showEditListModal = isEditList && isCurrentList;
-  const showListActions = isListActions && isCurrentList;
-  const showAddCardModal = isCardModal && isCurrentList;
-  const showDeleteModal = isDeleteList && isCurrentList;
-  const isCardButtonVisible = !showAddCardModal;
-
-  const handleDotsClick = () => toggleListActions(list.id);
-  const handleAddCardClick = () => toggleCardModal(list.id);
+  const handleDotsClick = () => openModal("listActions", { listId: list.id });
+  const handleAddCardClick = () => openModal("addCard", { listId: list.id });
 
   const cardIds = list.cards.map((card) => card.id);
 
   return (
     <div ref={setNodeRef} style={style}>
       <CardWrapper>
-        {showEditListModal && (
+        {modal?.type === "editList" && isCurrentList && (
           <EditListModal listId={list.id} listTitle={list.title} />
         )}
-        {showListActions && <ListActions />}
+        {modal?.type === "listActions" && isCurrentList && (
+          <ListActions listId={list.id} />
+        )}
         <div className="board-list">
           <div className="list-title" {...attributes} {...listeners}>
             {list.title}
@@ -64,14 +53,14 @@ const BoardList = ({ list }) => {
             </div>
           </SortableContext>
           <div className="modal-outer">
-            {isCardButtonVisible && (
+            {!isAddCardModalOpen && (
               <Button text="+ Add a card" handleClick={handleAddCardClick} />
             )}
-            {showAddCardModal && <AddCardModal listId={list.id} />}
+            {isAddCardModalOpen && <AddCardModal listId={list.id} />}
           </div>
         </div>
       </CardWrapper>
-      {showDeleteModal && (
+      {modal?.type === "deleteList" && isCurrentList && (
         <DeleteModal title="Delete List" item={list.title} listId={list.id} />
       )}
     </div>

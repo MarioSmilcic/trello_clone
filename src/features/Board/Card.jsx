@@ -7,13 +7,7 @@ import DeleteModal from "./components/DeleteModal/DeleteModal";
 import { useModalsStore } from "../../store/modals/modals.store";
 
 const Card = ({ card, listId, cardIndex }) => {
-  const {
-    isEditCard,
-    isDeleteCard,
-    toggleEditCardModal,
-    toggleDeleteCardModal,
-    cardId,
-  } = useModalsStore();
+  const { modal, openModal } = useModalsStore();
 
   const {
     setNodeRef,
@@ -40,6 +34,8 @@ const Card = ({ card, listId, cardIndex }) => {
       : "none",
   };
 
+  const isCurrentCard = modal?.props?.cardId === card.id;
+
   if (isDragging) {
     return (
       <div ref={setNodeRef} style={style} className="card-dragging">
@@ -48,7 +44,13 @@ const Card = ({ card, listId, cardIndex }) => {
     );
   }
 
+  const handleEditClick = () =>
+    openModal("editCard", { cardId: card.id, listId });
+  const handleDeleteClick = () =>
+    openModal("deleteCard", { cardId: card.id, listId });
+
   const editCard = { listId, cardId: card.id, card: card.card };
+
   return (
     <>
       <div
@@ -62,17 +64,17 @@ const Card = ({ card, listId, cardIndex }) => {
 
         <div className="card-icons">
           <span className="card-icon">
-            <EditIcon onEdit={() => toggleEditCardModal(card.id, listId)} />
+            <EditIcon onEdit={handleEditClick} />
           </span>
           <span className="card-icon">
-            <TrashIcon
-              onDelete={() => toggleDeleteCardModal(card.id, listId)}
-            />
+            <TrashIcon onDelete={handleDeleteClick} />
           </span>
         </div>
       </div>
-      {isEditCard && cardId === card.id && <EditCardModal card={editCard} />}
-      {isDeleteCard && cardId === card.id && (
+      {modal?.type === "editCard" && isCurrentCard && (
+        <EditCardModal card={editCard} />
+      )}
+      {modal?.type === "deleteCard" && isCurrentCard && (
         <DeleteModal card={editCard} title="Delete Card" item={card.card} />
       )}
     </>
