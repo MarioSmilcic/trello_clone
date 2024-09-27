@@ -22,8 +22,7 @@ import {
 } from "../Board/helpers/dragAndDropHandlers";
 
 const BoardBody = () => {
-  const { isListModal, toggleListModal, isListButton, listId } =
-    useModalsStore();
+  const { modal, openModal } = useModalsStore();
   const { lists } = useListstore();
   const [activeList, setActiveList] = useState(null);
   const [activeCard, setActiveCard] = useState(null);
@@ -35,6 +34,8 @@ const BoardBody = () => {
   );
 
   const listsId = lists.map((list) => list.id);
+
+  const handleAddListClick = () => openModal("addList");
 
   return (
     <DndContext
@@ -51,13 +52,13 @@ const BoardBody = () => {
           ))}
         </SortableContext>
         <div>
-          {isListButton && (
+          {modal?.type !== "addList" && (
             <Button
               text="+ Add another list"
-              handleClick={() => toggleListModal(null)}
+              handleClick={handleAddListClick}
             />
           )}
-          {isListModal && listId === null && <AddListModal />}
+          {modal?.type === "addList" && <AddListModal />}
         </div>
       </div>
 
