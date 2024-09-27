@@ -6,7 +6,7 @@ export const submitCardHandler = (
   listId,
   addCard,
   setEnteredCard,
-  closeModals
+  closeModal
 ) => {
   e.preventDefault();
 
@@ -18,14 +18,14 @@ export const submitCardHandler = (
   if (enteredCard.length > 0) {
     addCard(listId, newCard);
     setEnteredCard("");
-    closeModals();
+    closeModal();
   } else {
-    closeModals();
+    closeModal();
   }
 };
 
 export const submitListHandler = (
-  { enteredTitle, addList, setEnteredTitle, closeModals },
+  { enteredTitle, addList, setEnteredTitle, closeModal },
   event
 ) => {
   event.preventDefault();
@@ -41,7 +41,7 @@ export const submitListHandler = (
     setEnteredTitle("");
   }
 
-  closeModals();
+  closeModal();
 };
 
 export const updateCardHandler = (
@@ -51,7 +51,7 @@ export const updateCardHandler = (
   listId,
   cardId,
   updateCard,
-  closeModals
+  closeModal
 ) => {
   e.preventDefault();
 
@@ -61,7 +61,7 @@ export const updateCardHandler = (
 
   if (enteredCard.length > 0 && originalCard !== enteredCard) {
     updateCard(listId, cardId, updatedCard);
-    closeModals();
+    closeModal();
   }
 };
 
@@ -70,13 +70,13 @@ export const updateListHandler = (
   enteredTitle,
   listId,
   updateListTitle,
-  closeModals
+  closeModal
 ) => {
   e.preventDefault();
 
   if (enteredTitle.length > 0) {
     updateListTitle(listId, enteredTitle);
-    closeModals();
+    closeModal();
   }
 };
 
@@ -86,14 +86,14 @@ export const handleRemove = (
   listId,
   removeCard,
   removeList,
-  closeModals
+  closeModal
 ) => {
   if (title === "Delete Card") {
     removeCard(card.listId, card.cardId);
   } else if (title === "Delete List") {
     removeList(listId);
   }
-  closeModals();
+  closeModal();
 };
 
 export const handleKeyPress = (e, handleSubmit) => {

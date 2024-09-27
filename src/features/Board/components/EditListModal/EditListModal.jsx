@@ -9,18 +9,20 @@ import { handleKeyPress, updateListHandler } from "../../helpers/helper";
 const EditListModal = ({ listId, listTitle }) => {
   const [enteredTitle, setEnteredTitle] = useState(listTitle);
   const { updateListTitle } = useListstore();
-  const { closeModals } = useModalsStore();
+  const { closeModal } = useModalsStore();
 
   const handleEnteredTitle = (e) => {
     setEnteredTitle(e.target.value);
   };
 
   const handleUpdateList = (e) => {
-    updateListHandler(e, enteredTitle, listId, updateListTitle, closeModals);
+    updateListHandler(e, enteredTitle, listId, updateListTitle, closeModal);
   };
+
   const onKeypressHandler = (e) => {
     handleKeyPress(e, handleUpdateList);
   };
+
   return (
     <form onSubmit={handleUpdateList} className="editList-form">
       <div className="editList">
@@ -37,7 +39,7 @@ const EditListModal = ({ listId, listTitle }) => {
         <div className="add-listModal_buttons">
           <Button text="Save" />
           <div className="edit-listModal_close">
-            <Close onClose={closeModals} />
+            <Close onClose={closeModal} />
           </div>
         </div>
       </div>

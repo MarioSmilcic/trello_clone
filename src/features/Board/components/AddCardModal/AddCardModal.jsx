@@ -9,7 +9,7 @@ import { submitCardHandler, handleKeyPress } from "../../helpers/helper";
 const AddCardModal = ({ listId }) => {
   const [enteredCard, setEnteredCard] = useState("");
   const { addCard } = useListstore();
-  const { closeModals } = useModalsStore();
+  const { closeModal } = useModalsStore();
 
   const handleEnteredCard = (e) => {
     setEnteredCard(e.target.value);
@@ -22,7 +22,7 @@ const AddCardModal = ({ listId }) => {
       listId,
       addCard,
       setEnteredCard,
-      closeModals
+      closeModal
     );
   };
 
@@ -35,7 +35,6 @@ const AddCardModal = ({ listId }) => {
       <div className="add-modal">
         <textarea
           name="addCardModal"
-          id=""
           placeholder="Enter a title for this card..."
           autoFocus
           className="add-modal_textarea"
@@ -46,7 +45,7 @@ const AddCardModal = ({ listId }) => {
         <div className="add-cardModal_buttons">
           <Button text="Add card" />
           <div className="add-cardModal_close">
-            <Close onClose={closeModals} />
+            <Close onClose={closeModal} />
           </div>
         </div>
       </div>

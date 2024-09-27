@@ -8,7 +8,7 @@ import { handleKeyPress, updateCardHandler } from "../../helpers/helper";
 
 const EditCardModal = ({ card }) => {
   const [enteredCard, setEnteredCard] = useState(card.card);
-  const { closeModals } = useModalsStore();
+  const { closeModal } = useModalsStore();
   const { updateCard } = useListstore();
 
   const handleEnteredCard = (e) => {
@@ -23,13 +23,14 @@ const EditCardModal = ({ card }) => {
       card.listId,
       card.cardId,
       updateCard,
-      closeModals
+      closeModal
     );
   };
 
   const onKeypressHandler = (e) => {
     handleKeyPress(e, handleUpdate);
   };
+
   return (
     <form onSubmit={handleUpdate} className="edit-form">
       <div className="edit-card">
@@ -45,7 +46,7 @@ const EditCardModal = ({ card }) => {
         <div className="edit-cardModal_buttons">
           <Button text="Save" />
           <div className="edit-cardModal_close">
-            <Close onClose={closeModals} />
+            <Close onClose={closeModal} />
           </div>
         </div>
       </div>

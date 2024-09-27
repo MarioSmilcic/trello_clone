@@ -11,7 +11,7 @@ import { handleKeyPress, submitListHandler } from "../../helpers/helper";
 const AddListModal = () => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const { addList } = useListstore();
-  const { closeModals } = useModalsStore();
+  const { closeModal } = useModalsStore();
 
   const handleEnteredTitle = (e) => {
     setEnteredTitle(e.target.value);
@@ -19,7 +19,7 @@ const AddListModal = () => {
 
   const handleSubmit = (e) => {
     submitListHandler(
-      { enteredTitle, addList, setEnteredTitle, closeModals },
+      { enteredTitle, addList, setEnteredTitle, closeModal },
       e
     );
   };
@@ -45,7 +45,7 @@ const AddListModal = () => {
           <div className="add-listModal_buttons">
             <Button text="Add list" handleClick={handleSubmit} />
             <div className="add-listModal_close">
-              <Close onClose={closeModals} />
+              <Close onClose={closeModal} />
             </div>
           </div>
         </div>

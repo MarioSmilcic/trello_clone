@@ -6,10 +6,10 @@ import { handleRemove } from "../../helpers/helper";
 
 const DeleteModal = ({ card, title, item, listId }) => {
   const { removeCard, removeList } = useListstore();
-  const { closeModals } = useModalsStore();
+  const { closeModal } = useModalsStore();
 
   const handleDelete = () => {
-    handleRemove(title, card, listId, removeCard, removeList, closeModals);
+    handleRemove(title, card, listId, removeCard, removeList, closeModal);
   };
 
   return (
@@ -21,7 +21,7 @@ const DeleteModal = ({ card, title, item, listId }) => {
         </h3>
         <div className="buttons">
           <Button text="Confirm" handleClick={handleDelete} />
-          <Button text="Dismiss" handleClick={() => closeModals()} />
+          <Button text="Dismiss" handleClick={closeModal} />
         </div>
       </div>
     </div>
