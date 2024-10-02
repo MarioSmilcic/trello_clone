@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { nanoid } from "nanoid";
+import { arrayMove } from "@dnd-kit/sortable";
 
 export const useListstore = create((set) => ({
   lists: [
@@ -7,26 +8,15 @@ export const useListstore = create((set) => ({
       id: nanoid(),
       title: "List1",
       cards: [
-        {
-          id: nanoid(),
-          card: "Card 1",
-        },
-        {
-          id: nanoid(),
-          card: "Card 2",
-        },
-        {
-          id: nanoid(),
-          card: "Card 3",
-        },
+        { id: nanoid(), card: "Card 1" },
+        { id: nanoid(), card: "Card 2" },
+        { id: nanoid(), card: "Card 3" },
       ],
     },
   ],
 
-  // Function to add a new list
   addList: (newList) => set((state) => ({ lists: [...state.lists, newList] })),
 
-  // Function to add a new card
   addCard: (listId, newCard) =>
     set((state) => ({
       lists: state.lists.map((list) =>
@@ -34,45 +24,44 @@ export const useListstore = create((set) => ({
       ),
     })),
 
-  // function to move list from one position to another
   moveList: (activeListId, overListId) =>
     set((state) => {
-      const lists = [...state.lists];
-      const activeIndex = lists.findIndex(({ id }) => id === activeListId);
-      const overIndex = lists.findIndex(({ id }) => id === overListId);
-
-      if (activeIndex === -1 || overIndex === -1) {
-        return state;
-      }
-
-      const [movedList] = lists.splice(activeIndex, 1);
-      lists.splice(overIndex, 0, movedList);
-
-      return { lists };
+      const oldIndex = state.lists.findIndex(
+        (list) => list.id === activeListId
+      );
+      const newIndex = state.lists.findIndex((list) => list.id === overListId);
+      return { lists: arrayMove(state.lists, oldIndex, newIndex) };
     }),
 
-  // function to move card from one list to another, or within the same list
-  moveCard: (activeListId, overListId, activeCardIndex, overCardIndex) =>
+  moveCard: (activeListId, overListId, activeIndex, overIndex) =>
     set((state) => {
-      const lists = state.lists.map((list) => ({
-        ...list,
-        cards: [...list.cards],
-      }));
+      const newLists = [...state.lists];
+      const activeListIndex = newLists.findIndex(
+        (list) => list.id === activeListId
+      );
+      const overListIndex = newLists.findIndex(
+        (list) => list.id === overListId
+      );
 
-      const sourceList = lists.find((list) => list.id === activeListId);
-      const destinationList = lists.find((list) => list.id === overListId);
-
-      if (!sourceList || !destinationList) {
-        return state;
+      if (activeListIndex === overListIndex) {
+        // Moving within the same list
+        newLists[activeListIndex].cards = arrayMove(
+          newLists[activeListIndex].cards,
+          activeIndex,
+          overIndex
+        );
+      } else {
+        // Moving between lists
+        const [movedCard] = newLists[activeListIndex].cards.splice(
+          activeIndex,
+          1
+        );
+        newLists[overListIndex].cards.splice(overIndex, 0, movedCard);
       }
 
-      const [movedCard] = sourceList.cards.splice(activeCardIndex, 1);
-      destinationList.cards.splice(overCardIndex, 0, movedCard);
-
-      return { lists };
+      return { lists: newLists };
     }),
 
-  // Function to update a card
   updateCard: (listId, cardId, updatedCard) =>
     set((state) => ({
       lists: state.lists.map((list) =>
@@ -87,7 +76,6 @@ export const useListstore = create((set) => ({
       ),
     })),
 
-  // Function to remove a card
   removeCard: (listId, cardId) =>
     set((state) => ({
       lists: state.lists.map((list) =>
@@ -100,13 +88,11 @@ export const useListstore = create((set) => ({
       ),
     })),
 
-  // Function to remove a list
   removeList: (listId) =>
     set((state) => ({
       lists: state.lists.filter((list) => list.id !== listId),
     })),
 
-  // Function to update the title of a list
   updateListTitle: (listId, updatedTitle) =>
     set((state) => ({
       lists: state.lists.map((list) =>

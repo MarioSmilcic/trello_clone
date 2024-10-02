@@ -1,5 +1,6 @@
 import "./styles/boardList.style.css";
-import { SortableContext } from "@dnd-kit/sortable";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import Card from "./Card";
 import Button from "../../components/Button/Button";
 import CardWrapper from "./components/CardWrapper/CardWrapper";
@@ -9,12 +10,34 @@ import DeleteModal from "./components/DeleteModal/DeleteModal";
 import EditListModal from "./components/EditListModal/EditListModal";
 import Dots from "../../components/icons/Dots";
 import { useModalsStore } from "../../store/modals/modals.store";
-import { useSortableItem } from "./hooks/useSortableItem";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
 const BoardList = ({ list }) => {
   const { modal, openModal } = useModalsStore();
 
-  const { setNodeRef, attributes, listeners, style } = useSortableItem(list);
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: list.id,
+    data: {
+      type: "List",
+      list,
+    },
+  });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
 
   const isCurrentList = modal?.props?.listId === list.id;
   const isAddCardModalOpen = modal?.type === "addCard" && isCurrentList;
@@ -25,7 +48,7 @@ const BoardList = ({ list }) => {
   const cardIds = list.cards.map((card) => card.id);
 
   return (
-    <div ref={setNodeRef} style={style}>
+    <div ref={setNodeRef} style={style} {...attributes}>
       <CardWrapper>
         {modal?.type === "editList" && isCurrentList && (
           <EditListModal listId={list.id} listTitle={list.title} />
@@ -34,20 +57,23 @@ const BoardList = ({ list }) => {
           <ListActions listId={list.id} />
         )}
         <div className="board-list">
-          <div className="list-title" {...attributes} {...listeners}>
+          <div className="list-title" {...listeners}>
             {list.title}
             <span className="list-dots">
               <Dots handleClick={handleDotsClick} />
             </span>
           </div>
-          <SortableContext items={cardIds}>
+          <SortableContext
+            items={cardIds}
+            strategy={verticalListSortingStrategy}
+          >
             <div className="card-list">
               {list.cards.map((card, index) => (
                 <Card
                   key={card.id}
                   card={card}
                   listId={list.id}
-                  cardIndex={index}
+                  index={index}
                 />
               ))}
             </div>
