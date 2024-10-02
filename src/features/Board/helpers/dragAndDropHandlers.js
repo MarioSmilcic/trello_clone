@@ -1,88 +1,44 @@
 import { useListstore } from "../../../store/lists/lists.store";
 
-export const handleDragStart = (e, setActiveList, setActiveCard) => {
-  const { lists } = useListstore.getState();
-  const activeType = e.active.data.current?.type;
+export const handleDragStart = (event, setActiveList, setActiveCard) => {
+  const { active } = event;
+  const { type, list, card } = active.data.current;
 
-  if (activeType === "List") {
-    const activeListId = e.active.data.current.listId;
-    const activeList = lists.find((list) => list.id === activeListId);
-    setActiveList(activeList);
+  if (type === "List") {
+    setActiveList(list);
     setActiveCard(null);
-  } else if (activeType === "Card") {
-    const activeListId = e.active.data.current.listId;
-    const activeCardId = e.active.data.current.cardId;
-    const activeCardIndex = e.active.data.current.cardIndex;
-
-    const activeList = lists.find((list) => list.id === activeListId);
-    const activeCard = activeList.cards.find(
-      (card) => card.id === activeCardId
-    );
-
-    setActiveCard({
-      ...activeCard,
-      listId: activeListId,
-      cardIndex: activeCardIndex,
-    });
+  } else if (type === "Card") {
+    setActiveCard(card);
     setActiveList(null);
   }
 };
 
-export const handleDragEnd = (e, setActiveList, setActiveCard) => {
-  const { active, over } = e;
+export const handleDragOver = (event) => {
+  const { active, over } = event;
   if (!over) return;
 
   const { moveList, moveCard } = useListstore.getState();
+  const activeType = active.data.current.type;
+  const overType = over.data.current.type;
 
-  const activeData = active.data.current;
-  const overData = over.data.current;
+  if (activeType === "List" && overType === "List" && active.id !== over.id) {
+    moveList(active.id, over.id);
+  } else if (activeType === "Card") {
+    const activeListId = active.data.current.list.id;
+    const overListId =
+      overType === "List" ? over.id : over.data.current.list.id;
+    const activeIndex = active.data.current.index;
+    const overIndex =
+      overType === "List"
+        ? over.data.current.list.cards.length
+        : over.data.current.index;
 
-  if (activeData?.type === "List" && overData?.type === "List") {
-    if (active.id !== over.id) {
-      moveList(active.id, over.id);
-    }
-  } else if (activeData?.type === "Card") {
-    const activeListId = activeData.listId;
-    const activeCardIndex = activeData.cardIndex;
-
-    if (overData?.type === "Card") {
-      const overListId = overData.listId;
-      const overCardIndex = overData.cardIndex;
-      moveCard(activeListId, overListId, activeCardIndex, overCardIndex);
-    } else if (overData?.type === "List") {
-      moveCard(activeListId, over.id, activeCardIndex, 0);
-    }
+    moveCard(activeListId, overListId, activeIndex, overIndex);
   }
-
-  setActiveList(null);
-  setActiveCard(null);
 };
 
-export const handleDragOver = (e) => {
-  const { active, over } = e;
-  if (!over) return;
-
-  const { moveList, moveCard } = useListstore.getState();
-
-  const activeData = active.data.current;
-  const overData = over.data.current;
-
-  if (activeData?.type === "List" && overData?.type === "List") {
-    if (active.id !== over.id) {
-      moveList(active.id, over.id);
-    }
-  } else if (activeData?.type === "Card") {
-    const activeListId = activeData.listId;
-    const activeCardIndex = activeData.cardIndex;
-
-    if (overData?.type === "Card") {
-      const overListId = overData.listId;
-      const overCardIndex = overData.cardIndex;
-      if (activeListId !== overListId || activeCardIndex !== overCardIndex) {
-        moveCard(activeListId, overListId, activeCardIndex, overCardIndex);
-      }
-    } else if (overData?.type === "List") {
-      moveCard(activeListId, over.id, activeCardIndex, 0);
-    }
-  }
+export const handleDragEnd = (event, setActiveList, setActiveCard) => {
+  handleDragOver(event);
+  setActiveList(null);
+  setActiveCard(null);
 };

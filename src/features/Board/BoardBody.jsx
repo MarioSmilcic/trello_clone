@@ -14,7 +14,10 @@ import {
   useSensors,
   pointerWithin,
 } from "@dnd-kit/core";
-import { SortableContext } from "@dnd-kit/sortable";
+import {
+  SortableContext,
+  horizontalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import {
   handleDragStart,
   handleDragEnd,
@@ -42,11 +45,14 @@ const BoardBody = () => {
       sensors={sensors}
       collisionDetection={pointerWithin}
       onDragStart={(e) => handleDragStart(e, setActiveList, setActiveCard)}
-      onDragEnd={(e) => handleDragEnd(e, setActiveList, setActiveCard)}
       onDragOver={handleDragOver}
+      onDragEnd={(e) => handleDragEnd(e, setActiveList, setActiveCard)}
     >
       <div className="board-body">
-        <SortableContext items={listsId}>
+        <SortableContext
+          items={listsId}
+          strategy={horizontalListSortingStrategy}
+        >
           {lists.map((list) => (
             <BoardList key={list.id} list={list} />
           ))}
@@ -68,7 +74,7 @@ const BoardBody = () => {
           <Card
             card={activeCard}
             listId={activeCard.listId}
-            cardIndex={activeCard.cardIndex}
+            cardIndex={activeCard.index}
           />
         )}
       </DragOverlay>
