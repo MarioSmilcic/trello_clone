@@ -18,6 +18,10 @@
   padding: 8px;
   background: #22272b;
   color: white;
+
+  resize: vertical;
+  max-height: 12.5em;
+  min-height: 3em;
 }
 
 .edit-listModal_buttons {

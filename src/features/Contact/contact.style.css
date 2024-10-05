@@ -51,6 +51,10 @@
 
   border: 1px solid #80838e;
   border-radius: 4px;
+
+  resize: vertical;
+  max-height: 30em;
+  min-height: 3em;
 }
 
 .contact__disclaimer {
@@ -136,6 +140,12 @@
   margin-top: -20px;
   color: yellow;
   text-align: center;
+}
+
+.contact__error {
+  color: #ff6b6b;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
 
 @media (max-width: 768px) {
