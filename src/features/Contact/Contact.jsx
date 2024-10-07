@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import "./contact.style.css";
 import { validationSchema } from "./helpers/validation";
+import { fields } from "./components/inputFields.js";
 
 const Contact = () => {
   const [messageSuccess, setMessageSuccess] = useState(false);
@@ -34,95 +35,24 @@ const Contact = () => {
       >
         {({ isValid, dirty }) => (
           <Form className="contact__form">
-            <div className="contact__field">
-              <label htmlFor="name">
-                Name <span className="contact__required">*</span>
-              </label>
-              <Field
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Enter your Name"
-                className="contact__input"
-                autoComplete="name"
-              />
-              <ErrorMessage
-                name="name"
-                component="div"
-                className="contact__error"
-              />
-            </div>
-            <div className="contact__field">
-              <label htmlFor="email">
-                Email <span className="contact__required">*</span>
-              </label>
-              <Field
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter your Email"
-                className="contact__input"
-                autoComplete="email"
-              />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className="contact__error"
-              />
-            </div>
-            <div className="contact__fields">
-              <div className="contact__field">
-                <label htmlFor="company">Company</label>
-                <Field
-                  id="company"
-                  name="company"
-                  type="text"
-                  placeholder="Company"
-                  className="contact__input"
-                  autoComplete="company"
-                />
-              </div>
-              <div className="contact__field">
-                <label htmlFor="job">Job Title</label>
-                <Field
-                  id="job"
-                  name="job"
-                  type="text"
-                  placeholder="Job Title"
-                  className="contact__input"
-                  autoComplete="job"
-                />
-              </div>
-            </div>
-            <div className="contact__field">
-              <label htmlFor="phone">Phone Number</label>
-              <Field
-                id="phone"
-                name="phone"
-                type="text"
-                placeholder="Enter your Phone Number"
-                className="contact__input"
-                autoComplete="phone"
-              />
-            </div>
-            <div className="contact__field">
-              <label htmlFor="message">
-                Message <span className="contact__required">*</span>
-              </label>
-              <Field
-                as="textarea"
-                id="message"
-                name="message"
-                placeholder="Enter your Message"
-                className="contact__textArea"
-                autoComplete="message"
-              />
-              <ErrorMessage
-                name="message"
-                component="div"
-                className="contact__error"
-              />
-            </div>
+            {fields.map((field) => {
+              if (field.group) {
+                return (
+                  <div className="contact__fields" key={field.id}>
+                    {field.fields.map((subField) => {
+                      const Component = subField.component;
+                      return (
+                        <Component key={subField.id} {...subField.props} />
+                      );
+                    })}
+                  </div>
+                );
+              } else {
+                const Component = field.component;
+                return <Component key={field.id} {...field.props} />;
+              }
+            })}
+
             <div className="contact__disclaimer">
               <button
                 type="button"
