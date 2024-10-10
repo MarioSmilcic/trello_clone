@@ -1,29 +1,21 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import "./contact.style.css";
-import { validationSchema } from "./helpers/validation";
-import { fields } from "./components/inputFields.js";
+import { useContactForm } from "./hooks/useContactForm";
+import ContactField from "./components/ContactField";
+import ContactTextArea from "./components/ContactTextArea";
+import ContactAgreement from "./components/ContactAgreement";
+import ContactSubmitButton from "./components/ContactSubmitButton";
+import ContactSuccessMessage from "./components/ContactSuccessMessage";
 
 const Contact = () => {
-  const [messageSuccess, setMessageSuccess] = useState(false);
-  const [toggled, setToggled] = useState(false);
-
-  const initialValues = {
-    name: "",
-    email: "",
-    company: "",
-    job: "",
-    phone: "",
-    message: "",
-  };
-
-  const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
-    setMessageSuccess(true);
-    resetForm();
-    setToggled(false);
-  };
+  const {
+    initialValues,
+    validationSchema,
+    handleSubmit,
+    messageSuccess,
+    toggled,
+    setToggled,
+  } = useContactForm();
 
   return (
     <div className="contact">
@@ -35,57 +27,49 @@ const Contact = () => {
       >
         {({ isValid, dirty }) => (
           <Form className="contact__form">
-            {fields.map((field) => {
-              if (field.group) {
-                return (
-                  <div className="contact__fields" key={field.id}>
-                    {field.fields.map((subField) => {
-                      const Component = subField.component;
-                      return (
-                        <Component key={subField.id} {...subField.props} />
-                      );
-                    })}
-                  </div>
-                );
-              } else {
-                const Component = field.component;
-                return <Component key={field.id} {...field.props} />;
-              }
-            })}
-
-            <div className="contact__disclaimer">
-              <button
-                type="button"
-                className={`contact__disclaimer--button ${
-                  toggled ? "toggled" : ""
-                }`}
-                onClick={() => setToggled(!toggled)}
-              >
-                <div className="contact__disclaimer--thumb"></div>
-              </button>
-              <div className="contact__disclaimer--text">
-                <p>
-                  By selecting this, you agree to our
-                  <Link to="/disclaimer" className="contact__link">
-                    Privacy Policy
-                  </Link>
-                  .
-                </p>
-              </div>
+            <ContactField
+              name="name"
+              label="Name"
+              required
+              placeholder="Enter your Name"
+            />
+            <ContactField
+              name="email"
+              label="Email"
+              required
+              placeholder="Enter your Email"
+              type="email"
+            />
+            <div className="contact__fields">
+              <ContactField
+                name="company"
+                label="Company"
+                placeholder="Company"
+              />
+              <ContactField
+                name="job"
+                label="Job Title"
+                placeholder="Job Title"
+              />
             </div>
-            <button
-              type="submit"
-              className="contact__submit--btn"
-              disabled={!(isValid && dirty && toggled)}
-            >
-              Submit your request
-            </button>
-            {messageSuccess && (
-              <p className="contact__message">
-                Thank you! Your message has been received and we'll be in touch
-                shortly.
-              </p>
-            )}
+            <ContactField
+              name="phone"
+              label="Phone Number"
+              placeholder="Enter your Phone Number"
+            />
+            <ContactTextArea
+              name="message"
+              label="Message"
+              required
+              placeholder="Enter your Message"
+            />
+            <ContactAgreement toggled={toggled} setToggled={setToggled} />
+            <ContactSubmitButton
+              isValid={isValid}
+              dirty={dirty}
+              toggled={toggled}
+            />
+            <ContactSuccessMessage show={messageSuccess} />
           </Form>
         )}
       </Formik>
