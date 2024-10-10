@@ -1,7 +1,7 @@
-import "./disclaimer.style.css";
-const DisclaimePage = () => {
+import "./agreement.style.css";
+const AgreementPage = () => {
   return (
-    <div className="disclaimer">
+    <div className="agreement">
       <h1>Privacy Policy</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum cum error
@@ -85,4 +85,4 @@ const DisclaimePage = () => {
   );
 };
 
-export default DisclaimePage;
+export default AgreementPage;
