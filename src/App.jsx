@@ -4,7 +4,7 @@ import Board from "./features/Board/Board";
 import Home from "./features/Home/Home";
 import About from "./features/About/About";
 import Contact from "./features/Contact/Contact";
-import DisclaimePage from "./features/DisclaimerPage/DisclaimePage";
+import AgreementPage from "./features/AgreementPage/AgreementPage";
 
 const App = () => {
   return (
@@ -16,7 +16,7 @@ const App = () => {
           <Route path="/board" element={<Board />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/disclaimer" element={<DisclaimePage />} />
+          <Route path="/agreement" element={<AgreementPage />} />
         </Routes>
       </BrowserRouter>
     </>
