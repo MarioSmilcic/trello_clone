@@ -18,18 +18,19 @@ const Landing = () => {
           Your Kanban <br />
           Solution
         </h1>
+
         <p>
-          Streamline your workflows with the simplicity of TrelloClone - The
-          Kanban board that brings efficiency to your fingertips.
+          Experience the perfect balance of power and simplicity with
+          TrelloClone. Start organizing your projects the smart way today.
         </p>
         <Button text="Try TrelloClone" handleClick={() => handleNavigate()} />
       </div>
       <div className="landing-right">
         <h1 className="landing-right__logo">TrelloClone</h1>
         <img src={Logo} alt="logo" className="landing-right__logo--img" />
+
         <p>
-          Effortlessly reorganize tasks with a simple drag and drop interface,
-          making project adjustments a breeze.
+          Transform the way you work with our powerful drag-and-drop interface.
         </p>
         <Button text="Try" handleClick={() => handleNavigate()} />
       </div>

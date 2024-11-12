@@ -1,0 +1,33 @@
+.contact__submit--btn {
+  padding: 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  font-size: 1rem;
+  font-weight: 600;
+  height: 3.5em;
+  width: 100%;
+  background: linear-gradient(45deg, #05b6a1, #84fab0);
+  color: white;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact__submit--btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+.contact__submit--btn:disabled {
+  background: rgba(204, 204, 204, 0.3);
+  color: rgba(153, 153, 153, 0.8);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

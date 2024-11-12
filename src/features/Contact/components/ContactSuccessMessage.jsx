@@ -1,4 +1,4 @@
-import React from "react";
+import "./styles/contactMessage.style.css";
 
 const ContactSuccessMessage = ({ show }) =>
   show && (
