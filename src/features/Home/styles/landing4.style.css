@@ -1,43 +1,186 @@
 .landing4 {
-  width: 100%;
-  height: calc(100vh - 65px);
+  min-height: calc(100vh - 65px);
+  padding: 6rem 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: start;
   align-items: center;
-  gap: 3em;
-  padding: 16px;
-  padding-top: 3em;
+  gap: 4rem;
 }
+
 .landing4__title {
-  color: #05b6a0;
+  color: #05b6a1;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  text-align: center;
+  position: relative;
 }
+
+.landing4__title:after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #05b6a1, #84fab0);
+  border-radius: 2px;
+}
+
 .landing4__cards {
   display: flex;
-  gap: 2em;
+  gap: 3rem;
+  max-width: 1200px;
+  width: 100%;
+  justify-content: center;
+  perspective: 1000px;
 }
+
 .landing4__card {
+  flex: 1;
+  max-width: 400px;
+  min-width: 280px;
+  height: auto;
+  min-height: 400px;
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  width: 20em;
-  height: 35em;
-  border: 1px solid black;
-  border-radius: 4px;
-  box-shadow: rgb(2, 21, 32) 0px 5px 15px;
-  padding: 1em;
+  gap: 2rem;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.landing4__card:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  z-index: -1;
+}
+
+.landing4__card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 20px 40px rgba(5, 182, 161, 0.2);
+  border-color: rgba(5, 182, 161, 0.5);
+}
+
+.landing4__card:nth-child(2) {
+  background: linear-gradient(
+    135deg,
+    rgba(5, 182, 161, 0.15) 0%,
+    rgba(132, 250, 176, 0.15) 100%
+  );
+  border: 2px solid #05b6a1;
+}
+
+.landing4__card--title {
+  color: #05b6a1;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.landing4__card p {
+  text-align: center;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.landing4__card--price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 1.5rem 0;
   text-align: center;
 }
-.landing4__card--title {
-  color: lightgreen;
+
+.landing4__card--price span {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.landing4__card--features {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.landing4__card--features li {
+  padding: 0.8rem 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.landing4__card--features li:before {
+  content: "→";
+  color: #05b6a1;
+  font-weight: bold;
+}
+
+.landing4__card .button {
+  width: 100% !important;
+  padding: 1rem !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 1px;
+  transition: all 0.3s ease !important;
+}
+
+@media (max-width: 1024px) {
+  .landing4__cards {
+    padding: 0 1rem;
+  }
 }
 
 @media (max-width: 768px) {
   .landing4 {
-    height: 100%;
+    padding: 4rem 1.5rem;
   }
+
   .landing4__cards {
     flex-direction: column;
+    align-items: center;
+  }
+
+  .landing4__card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing4 {
+    padding: 3rem 1rem;
+  }
+
+  .landing4__card {
+    padding: 2rem 1.5rem;
+  }
+
+  .landing4__card--title {
+    font-size: 1.75rem;
+  }
+
+  .landing4__card--price {
+    font-size: 2rem;
   }
 }

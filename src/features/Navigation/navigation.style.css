@@ -7,6 +7,7 @@
   align-items: center;
   padding: 1em;
   background: #1d2125;
+
   width: 100%;
   z-index: 10000;
   height: 65px;
@@ -29,15 +30,16 @@
 
 .navigation a {
   position: relative;
-  color: #2c3d50;
+  color: #9fadbc;
   font-weight: light;
+  font-weight: 500;
   font-size: 1.4rem;
   text-decoration: none;
 }
 
 .navigation a:hover,
 .navigation a.active {
-  color: gray;
+  color: white;
 }
 
 a:after {
@@ -70,9 +72,9 @@ a:hover:after {
   opacity: 1;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
-.nav__logo--hidden {
+/* .nav__logo--hidden {
   opacity: 0;
-}
+} */
 
 @media (max-width: 768px) {
   .links {

@@ -1,70 +1,79 @@
 .landing2__container {
-  background: white;
-  width: 100%;
-  height: calc(100vh - 65px);
+  min-height: calc(100vh - 65px);
+  padding: 4rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6em;
+  gap: 4rem;
+  background: white;
   color: black;
-  padding: 16px;
-  text-align: center;
 }
 
 .landing2 {
-  background: white;
-
   display: flex;
   align-items: center;
   justify-content: center;
-  color: black;
+  gap: 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
 .landing2__left {
-  width: 50%;
-  height: 100%;
-  padding: 2em;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  gap: 1em;
-  text-align: center;
+  flex: 1;
+  max-width: 600px;
 }
+
+.landing2__left h2 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  margin-bottom: 2rem;
+}
+
 .landing2__left--text {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.6;
+  color: #444;
   text-align: justify;
 }
+
 .landing2__right {
-  background: white;
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  width: 50%;
-  height: 100%;
-  padding: 2em;
-  text-align: center;
 }
 
 .trelloTeaser-img {
   max-width: 100%;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.trelloTeaser-img:hover {
+  transform: translateY(-10px);
 }
 
 @media (max-width: 768px) {
   .landing2__container {
-    gap: 3em;
+    padding: 3rem 1.5rem;
   }
 
   .landing2 {
     flex-direction: column;
+    text-align: center;
+    padding: 1rem;
   }
-  .landing2__left {
-    width: 100%;
-  }
+
+  .landing2__left,
   .landing2__right {
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing2__container {
+    padding: 2rem 1rem;
   }
 }

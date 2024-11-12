@@ -30,15 +30,15 @@
 
 .navModal a {
   position: relative;
-  color: #2c3d50;
-  font-weight: light;
+  color: #9fadbc;
+  font-weight: 500;
   font-size: 1.4rem;
   text-decoration: none;
 }
 
 .navModal a:hover,
 .navModal a.active {
-  color: gray;
+  color: white;
 }
 @media (min-width: 768px) {
   .navModal {

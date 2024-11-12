@@ -1,0 +1,16 @@
+export const buttonVariants = {
+  "Add card": "add_modal",
+  "+ Add a card": "add_aCard",
+  "+ Add another list": "add_list",
+  "Add list": "add_modal",
+  Save: "add_modal",
+  Confirm: "button-modal",
+  Dismiss: "button-modal",
+  "Edit list": "button-listActions",
+  "Delete list": "button-listActions",
+  "Add new card": "button-listActions",
+  Try: "button-try",
+  "Try TrelloClone": "button-try_trelloClone",
+  "Get started": "button-getStarted",
+  "Contact us": "button-getStarted",
+};

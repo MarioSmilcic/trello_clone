@@ -1,5 +1,5 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import "./styles/agreement.style.css";
 
 const ContactAgreement = ({ toggled, setToggled }) => (
   <div className="contact__agreement">

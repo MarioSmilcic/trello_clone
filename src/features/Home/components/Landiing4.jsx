@@ -7,27 +7,35 @@ const Landiing4 = () => {
 
   return (
     <div className="landing4">
-      <h1 className="landing4__title">Pricing</h1>
+      <h1 className="landing4__title">Choose Your Plan</h1>
       <div className="landing4__cards">
         <div className="landing4__card">
           <div>
             <h2 className="landing4__card--title">Individual</h2>
-            <p>For individuals working on their next big idea.</p>
+            <p>For individuals working on their personal projects</p>
+            <div className="landing4__card--price">
+              $0<span>/month</span>
+            </div>
+            <ul className="landing4__card--features">
+              <li>Create Multiple Lists</li>
+              <li>Drag & Drop Cards</li>
+              <li>Basic Task Management</li>
+            </ul>
           </div>
-          <h2>
-            $0/month <br />
-            forever
-          </h2>
           <Button text="Get started" handleClick={() => navigate("/board")} />
         </div>
+
         <div className="landing4__card">
           <div>
             <h2 className="landing4__card--title">Teams</h2>
-            <p>
-              For teams who want to get organized and prioritize their work.
-            </p>
+            <p>For teams who want to collaborate effectively</p>
+            <div className="landing4__card--price">Contact Us</div>
+            <ul className="landing4__card--features">
+              <li>All Individual Features</li>
+              <li>Team Collaboration</li>
+              <li>Priority Support</li>
+            </ul>
           </div>
-          <h2>Let's talk</h2>
           <Button text="Contact us" handleClick={() => navigate("/contact")} />
         </div>
       </div>

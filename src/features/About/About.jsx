@@ -1,59 +1,53 @@
 import "./about.style.css";
-
-const howTo = [
-  {
-    id: 1,
-    subtitle: "Creating Lists and Cards",
-    text: "Start by adding a list using the “Add another list” button. Once a list is created, you can add tasks to it by clicking the “Add a card” button within the list.",
-  },
-  {
-    id: 2,
-    subtitle: "Managing Tasks",
-    text: "Drag and drop cards between lists to prioritize tasks. Click on a card to edit its details or delete it if it’s no longer needed.",
-  },
-  {
-    id: 3,
-    subtitle: "Editing Lists",
-    text: "Click on the three dots next to a list title to access options for editing or deleting the list.",
-  },
-  {
-    id: 4,
-    subtitle: "Board Navigation",
-    text: "Use the navigation bar to switch between different sections of the app.",
-  },
-];
+import { technologies } from "./helpers/technologies";
 
 const About = () => {
   return (
     <div className="about">
-      <h1 className="about__title">About</h1>
-      <div className="about__info">
-        <img
-          className="about-img"
-          src="https://wac-cdn.atlassian.com/dam/jcr:61ffedf7-2fad-4068-820c-20051c3ad3ec/image5.png?cdnVersion=2217"
-          alt="kanban"
-        />
-        <div>
-          <p className="about__info--text">
-            Welcome to our task management app! This application is designed to
-            help you organize and manage your tasks and projects efficiently. We
-            hope this app helps you stay organized and enhances your
-            productivity. Thank you for using our task management tool! If you
-            have any questions or feedback, please feel free to contact us.
+      <div className="about__header">
+        <h1 className="about__title">About TrelloClone</h1>
+        <div className="about__description">
+          <p>
+            TrelloClone is a demo project showcasing modern React development
+            practices and implementation of a Kanban-style task management
+            system. This project serves as a practical demonstration of building
+            a complex, interactive web application using React and contemporary
+            front-end technologies.
+          </p>
+          <p className="about__demo-note">
+            Built for educational purposes, this clone demonstrates core
+            functionalities like drag-and-drop task management, state management
+            with Zustand, and responsive design principles. While inspired by
+            Trello, this is a simplified version focused on demonstrating
+            technical implementation rather than providing a full-featured
+            production service.
           </p>
         </div>
       </div>
-      <div>
-        <h2 className="about__title">Here’s how it works:</h2>
-        {howTo.map((how) => (
-          <div key={how.id} className="about__how">
-            <div className="about__how--title">
-              <span className="about__how--num">{how.id}</span>
-              <h3>{how.subtitle}</h3>
+
+      <div className="about__technologies">
+        <h2 className="about__subtitle">Technologies</h2>
+        <div className="about__tech-grid">
+          {technologies.map((category) => (
+            <div key={category.id} className="about__tech-category">
+              <h3 className="about__tech-category-title">
+                {category.category}
+              </h3>
+              <div className="about__tech-items">
+                {category.items.map((item) => (
+                  <div key={item.name} className="about__tech-item">
+                    <div className="about__tech-item-header">
+                      <span className="about__tech-name">{item.name}</span>
+                    </div>
+                    <p className="about__tech-description">
+                      {item.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <p>{how.text}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

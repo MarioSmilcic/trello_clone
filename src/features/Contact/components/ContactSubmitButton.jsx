@@ -1,4 +1,4 @@
-import React from "react";
+import "./styles/contactButton.style.css";
 
 const ContactSubmitButton = ({ isValid, dirty, toggled }) => (
   <button
