@@ -1,3 +1,17 @@
+import { nanoid } from "nanoid";
+
+export const lists_data = [
+  {
+    id: nanoid(),
+    title: "List1",
+    cards: [
+      { id: nanoid(), card: "Card 1" },
+      { id: nanoid(), card: "Card 2" },
+      { id: nanoid(), card: "Card 3" },
+    ],
+  },
+];
+
 export const technologies = [
   {
     id: 1,
@@ -54,4 +68,31 @@ export const technologies = [
       { name: "Yup", description: "Schema-based form validation" },
     ],
   },
+];
+
+export const benefits = [
+  {
+    id: 1,
+    text: "Better visibility",
+  },
+  {
+    id: 2,
+    text: "Improved efficiency",
+  },
+  {
+    id: 3,
+    text: "Increased productivity",
+  },
+  {
+    id: 4,
+    text: "Preventing team overburden",
+  },
+  { id: 5, text: "Increased team focus" },
+  { id: 6, text: "Reduced waste" },
+  { id: 7, text: "Flexibility" },
+  { id: 8, text: "Improved collaboration" },
+  { id: 9, text: "Improved company culture" },
+  { id: 10, text: "Cost savings" },
+  { id: 11, text: "Acts as a hub for information" },
+  { id: 12, text: "Fun to use!" },
 ];

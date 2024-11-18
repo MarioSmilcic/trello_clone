@@ -3,9 +3,7 @@ import BoardList from "./BoardList";
 import Button from "../../components/Button/Button";
 import Card from "./Card";
 import AddListModal from "./components/AddListModal/AddListModal";
-import { useListstore } from "../../store/lists/lists.store";
 import { useModalsStore } from "../../store/modals/modals.store";
-import { useState } from "react";
 import {
   DndContext,
   DragOverlay,
@@ -18,17 +16,12 @@ import {
   SortableContext,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import {
-  handleDragStart,
-  handleDragEnd,
-  handleDragOver,
-} from "../Board/helpers/dragAndDropHandlers";
+import { useDragDrop } from "./hooks/useDragDrop";
 
 const BoardBody = () => {
   const { modal, openModal } = useModalsStore();
-  const { lists } = useListstore();
-  const [activeList, setActiveList] = useState(null);
-  const [activeCard, setActiveCard] = useState(null);
+  const { lists, activeItem, handleDragStart, handleDragOver, handleDragEnd } =
+    useDragDrop();
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -37,16 +30,15 @@ const BoardBody = () => {
   );
 
   const listsId = lists.map((list) => list.id);
-
   const handleAddListClick = () => openModal("addList");
 
   return (
     <DndContext
       sensors={sensors}
       collisionDetection={pointerWithin}
-      onDragStart={(e) => handleDragStart(e, setActiveList, setActiveCard)}
+      onDragStart={handleDragStart}
       onDragOver={handleDragOver}
-      onDragEnd={(e) => handleDragEnd(e, setActiveList, setActiveCard)}
+      onDragEnd={handleDragEnd}
     >
       <div className="board-body">
         <SortableContext
@@ -57,6 +49,7 @@ const BoardBody = () => {
             <BoardList key={list.id} list={list} />
           ))}
         </SortableContext>
+
         <div>
           {modal?.type !== "addList" && (
             <Button
@@ -69,14 +62,16 @@ const BoardBody = () => {
       </div>
 
       <DragOverlay>
-        {activeList && <BoardList list={activeList} />}
-        {activeCard && (
-          <Card
-            card={activeCard}
-            listId={activeCard.listId}
-            cardIndex={activeCard.index}
-          />
-        )}
+        {activeItem &&
+          (activeItem.cards ? (
+            <BoardList list={activeItem} />
+          ) : (
+            <Card
+              card={activeItem}
+              listId={activeItem.listId}
+              cardIndex={activeItem.index}
+            />
+          ))}
       </DragOverlay>
     </DndContext>
   );
