@@ -1,5 +1,5 @@
 import "./about.style.css";
-import { technologies } from "./helpers/technologies";
+import { technologies } from "../../data/app-data";
 
 const About = () => {
   return (
