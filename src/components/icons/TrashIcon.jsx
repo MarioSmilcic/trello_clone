@@ -1,5 +1,3 @@
-import React from "react";
-
 const TrashIcon = ({ onDelete }) => {
   return (
     <div onClick={onDelete}>

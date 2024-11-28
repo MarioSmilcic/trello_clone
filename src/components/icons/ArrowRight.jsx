@@ -1,12 +1,8 @@
-import React from "react";
-
 const ArrowRight = ({ handleClick }) => {
   return (
     <div onClick={handleClick}>
       <svg
         fill="none"
-        // width="24px"
-        // height="24px"
         width="20px"
         height="20px"
         stroke="currentColor"

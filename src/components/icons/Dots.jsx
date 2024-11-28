@@ -1,5 +1,3 @@
-import React from "react";
-
 const Dots = ({ handleClick }) => {
   return (
     <div onClick={handleClick}>
