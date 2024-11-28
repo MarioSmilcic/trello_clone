@@ -1,5 +1,3 @@
-import React from "react";
-
 const ArrowLeft = ({ handleClick }) => {
   return (
     <div onClick={handleClick}>

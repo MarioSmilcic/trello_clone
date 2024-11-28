@@ -1,30 +1,32 @@
 import "./editListModal.style.css";
 import Button from "../../../../components/Button/Button";
-import { useListstore } from "../../../../store/lists/lists.store";
 import { useState } from "react";
 import Close from "../../../../components/icons/Close";
 import { useModalsStore } from "../../../../store/modals/modals.store";
-import { handleKeyPress, updateListHandler } from "../../helpers/helper";
+import { useLists } from "../../hooks/useLists";
+import { useKeyboard } from "../../hooks/useKeyboard";
 
 const EditListModal = ({ listId, listTitle }) => {
   const [enteredTitle, setEnteredTitle] = useState(listTitle);
-  const { updateListTitle } = useListstore();
   const { closeModal } = useModalsStore();
+  const { handleUpdateList } = useLists();
+  const { handleKeyPress } = useKeyboard();
 
   const handleEnteredTitle = (e) => {
     setEnteredTitle(e.target.value);
   };
 
-  const handleUpdateList = (e) => {
-    updateListHandler(e, enteredTitle, listId, updateListTitle, closeModal);
+  const handleUpdateListTitle = (e) => {
+    e.preventDefault();
+    handleUpdateList(enteredTitle, listId);
   };
 
   const onKeypressHandler = (e) => {
-    handleKeyPress(e, handleUpdateList);
+    handleKeyPress(e, handleUpdateListTitle);
   };
 
   return (
-    <form onSubmit={handleUpdateList} className="editList-form">
+    <form onSubmit={handleUpdateListTitle} className="editList-form">
       <div className="editList">
         <textarea
           name="edit-modal"

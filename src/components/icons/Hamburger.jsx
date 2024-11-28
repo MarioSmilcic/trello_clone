@@ -1,5 +1,3 @@
-import React from "react";
-
 const Hamburger = ({ onModal }) => {
   return (
     <div onClick={onModal}>

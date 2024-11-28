@@ -1,30 +1,24 @@
 import "./editCardModal.style.css";
 import Button from "../../../../components/Button/Button";
-import { useListstore } from "../../../../store/lists/lists.store";
 import { useState } from "react";
 import Close from "../../../../components/icons/Close";
 import { useModalsStore } from "../../../../store/modals/modals.store";
-import { handleKeyPress, updateCardHandler } from "../../helpers/helper";
+import { useCards } from "../../hooks/useCards";
+import { useKeyboard } from "../../hooks/useKeyboard";
 
 const EditCardModal = ({ card }) => {
   const [enteredCard, setEnteredCard] = useState(card.card);
   const { closeModal } = useModalsStore();
-  const { updateCard } = useListstore();
+  const { handleUpdateCard } = useCards();
+  const { handleKeyPress } = useKeyboard();
 
   const handleEnteredCard = (e) => {
     setEnteredCard(e.target.value);
   };
 
   const handleUpdate = (e) => {
-    updateCardHandler(
-      e,
-      enteredCard,
-      card.card,
-      card.listId,
-      card.cardId,
-      updateCard,
-      closeModal
-    );
+    e.preventDefault();
+    handleUpdateCard(enteredCard, card.card, card.listId, card.cardId);
   };
 
   const onKeypressHandler = (e) => {

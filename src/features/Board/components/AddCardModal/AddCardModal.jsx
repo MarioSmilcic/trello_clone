@@ -2,28 +2,23 @@ import Button from "../../../../components/Button/Button";
 import "./addCardModal.style.css";
 import Close from "../../../../components/icons/Close";
 import { useState } from "react";
-import { useListstore } from "../../../../store/lists/lists.store";
 import { useModalsStore } from "../../../../store/modals/modals.store";
-import { submitCardHandler, handleKeyPress } from "../../helpers/helper";
+import { useCards } from "../../hooks/useCards";
+import { useKeyboard } from "../../hooks/useKeyboard";
 
 const AddCardModal = ({ listId }) => {
   const [enteredCard, setEnteredCard] = useState("");
-  const { addCard } = useListstore();
   const { closeModal } = useModalsStore();
+  const { handleSubmitCard } = useCards();
+  const { handleKeyPress } = useKeyboard();
 
   const handleEnteredCard = (e) => {
     setEnteredCard(e.target.value);
   };
 
   const handleSubmit = (e) => {
-    submitCardHandler(
-      e,
-      enteredCard,
-      listId,
-      addCard,
-      setEnteredCard,
-      closeModal
-    );
+    e.preventDefault();
+    handleSubmitCard(enteredCard, listId, setEnteredCard);
   };
 
   const onKeypressHandler = (e) => {

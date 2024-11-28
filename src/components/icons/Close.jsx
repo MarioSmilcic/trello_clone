@@ -1,5 +1,3 @@
-import React from "react";
-
 const Close = ({ onClose }) => {
   return (
     <div onClick={onClose}>

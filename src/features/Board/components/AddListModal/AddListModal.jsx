@@ -1,27 +1,26 @@
 import React from "react";
 import CardWrapper from "../CardWrapper/CardWrapper";
 import { useState } from "react";
-import { useListstore } from "../../../../store/lists/lists.store";
 import Button from "../../../../components/Button/Button";
 import Close from "../../../../components/icons/Close";
 import "./addListModal.style.css";
 import { useModalsStore } from "../../../../store/modals/modals.store";
-import { handleKeyPress, submitListHandler } from "../../helpers/helper";
+import { useLists } from "../../hooks/useLists";
+import { useKeyboard } from "../../hooks/useKeyboard";
 
 const AddListModal = () => {
   const [enteredTitle, setEnteredTitle] = useState("");
-  const { addList } = useListstore();
   const { closeModal } = useModalsStore();
+  const { handleSubmitList } = useLists();
+  const { handleKeyPress } = useKeyboard();
 
   const handleEnteredTitle = (e) => {
     setEnteredTitle(e.target.value);
   };
 
   const handleSubmit = (e) => {
-    submitListHandler(
-      { enteredTitle, addList, setEnteredTitle, closeModal },
-      e
-    );
+    e.preventDefault();
+    handleSubmitList(enteredTitle, setEnteredTitle);
   };
 
   const onKeypressHandler = (e) => {
