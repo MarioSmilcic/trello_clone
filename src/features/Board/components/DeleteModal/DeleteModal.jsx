@@ -1,15 +1,20 @@
 import "./deleteModal.style.css";
 import Button from "../../../../components/Button/Button";
-import { useListstore } from "../../../../store/lists/lists.store";
 import { useModalsStore } from "../../../../store/modals/modals.store";
-import { handleRemove } from "../../helpers/helper";
+import { useCards } from "../../hooks/useCards";
+import { useLists } from "../../hooks/useLists";
 
 const DeleteModal = ({ card, title, item, listId }) => {
-  const { removeCard, removeList } = useListstore();
   const { closeModal } = useModalsStore();
+  const { handleRemoveCard } = useCards();
+  const { handleRemoveList } = useLists();
 
   const handleDelete = () => {
-    handleRemove(title, card, listId, removeCard, removeList, closeModal);
+    if (title === "Delete Card") {
+      handleRemoveCard(card.listId, card.cardId);
+    } else if (title === "Delete List") {
+      handleRemoveList(listId);
+    }
   };
 
   return (
