@@ -1,7 +1,7 @@
 import "./navigation.style.css";
 import { Link, useNavigate } from "react-router-dom";
-import Hamburger from "../../components/icons/Hamburger";
-import CloseMenu from "../../components/icons/CloseMenu";
+import { Hamburger } from "../../components/icons";
+import { CloseMenu } from "../../components/icons";
 import NavModal from "./components/NavModal";
 import { useState } from "react";
 import Logo from "../../assets/Logo_trello-clone.png";

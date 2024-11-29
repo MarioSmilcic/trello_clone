@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { validationSchema } from "../helpers/validation";
+import { contactSchema } from "../../../validations/contactSchema";
+import { useNotificationStore } from "../../../store/notifications/notifications.store";
 
 export const useContactForm = () => {
-  const [messageSuccess, setMessageSuccess] = useState(false);
   const [toggled, setToggled] = useState(false);
+  const { addNotification } = useNotificationStore();
 
   const initialValues = {
     name: "",
@@ -15,17 +16,21 @@ export const useContactForm = () => {
   };
 
   const handleSubmit = (values, { resetForm }) => {
-    // console.log(values);
-    setMessageSuccess(true);
+    addNotification({
+      type: "success",
+      message:
+        "Thank you! Your message has been received and we'll be in touch shortly.",
+      duration: 6000,
+    });
+
     resetForm();
     setToggled(false);
   };
 
   return {
     initialValues,
-    validationSchema,
+    contactSchema,
     handleSubmit,
-    messageSuccess,
     toggled,
     setToggled,
   };
