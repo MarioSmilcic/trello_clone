@@ -1,10 +1,10 @@
 import "./navigation.style.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Hamburger } from "../../components/icons";
-import { CloseMenu } from "../../components/icons";
+import { Hamburger, CloseMenu } from "@components/icons";
 import NavModal from "./components/NavModal";
 import { useState } from "react";
-import Logo from "../../assets/Logo_trello-clone.png";
+import Logo from "@/assets/Logo_trello-clone.png";
+import { navigationLinks } from "@/data/app-data";
 
 const Navigation = () => {
   const [showModal, setShowModal] = useState(false);
@@ -24,10 +24,11 @@ const Navigation = () => {
           </h4>
         </div>
         <div className="links">
-          <Link to={{ pathname: "/" }}> Home</Link>
-          <Link to={{ pathname: "/board" }}>Board</Link>
-          <Link to={{ pathname: "/about" }}>About</Link>
-          <Link to={{ pathname: "/contact" }}>Contact</Link>
+          {navigationLinks.map(({ id, path, label }) => (
+            <Link key={id} to={{ pathname: path }}>
+              {label}
+            </Link>
+          ))}
         </div>
 
         <div className={`hamburger ${showModal && " hamburger__show"}`}>
