@@ -1,0 +1,26 @@
+.contact__title {
+  font-weight: 300;
+  color: #05b6a1;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  text-align: center;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.contact__title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #05b6a1, #84fab0);
+  border-radius: 2px;
+}
+
+@media (max-width: 576px) {
+  .contact__title {
+    font-size: 1.75rem;
+  }
+}

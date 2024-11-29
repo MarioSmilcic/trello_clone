@@ -1,19 +1,17 @@
-import React from "react";
-import { Field, ErrorMessage } from "formik";
+import "../styles";
 
-const ContactField = ({ name, label, required, ...props }) => (
+const ContactField = ({ label, error, required, register, name, ...props }) => (
   <div className="contact__field">
     <label htmlFor={name}>
       {label} {required && <span className="contact__required">*</span>}
     </label>
-    <Field
-      id={name}
-      name={name}
+    <input
       className="contact__input"
-      autoComplete={name}
+      id={name}
+      {...register(name)}
       {...props}
     />
-    <ErrorMessage name={name} component="div" className="contact__error" />
+    {error && <div className="contact__error">{error.message}</div>}
   </div>
 );
 
