@@ -1,10 +1,10 @@
-import "./styles/contactButton.style.css";
+import "../styles";
 
-const ContactSubmitButton = ({ isValid, dirty, toggled }) => (
+const ContactSubmitButton = ({ isValid, isDirty, toggled }) => (
   <button
     type="submit"
     className="contact__submit--btn"
-    disabled={!(isValid && dirty && toggled)}
+    disabled={!(isValid && isDirty && toggled)}
   >
     Submit your request
   </button>

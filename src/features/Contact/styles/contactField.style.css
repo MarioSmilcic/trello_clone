@@ -1,0 +1,20 @@
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+}
+
+.contact__field label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.contact__required {
+  color: #05b6a1;
+  font-weight: bold;
+}

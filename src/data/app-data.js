@@ -71,7 +71,10 @@ export const technologies = [
     id: 6,
     category: "Form Management & Validation",
     items: [
-      { name: "Formik", description: "Powerful form management library" },
+      {
+        name: "React Hook Form",
+        description: "Performant form management with less code",
+      },
       { name: "Yup", description: "Schema-based form validation" },
     ],
   },

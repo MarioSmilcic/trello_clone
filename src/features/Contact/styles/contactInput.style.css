@@ -1,0 +1,29 @@
+.contact__input {
+  height: 3.5em;
+  width: 100%;
+  padding: 1rem;
+  background: rgba(54, 63, 71, 0.8);
+  border: 2px solid rgba(128, 131, 142, 0.3);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.87);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.contact__input:hover {
+  border-color: rgba(5, 182, 161, 0.5);
+  background: rgba(54, 63, 71, 0.9);
+}
+
+.contact__input:focus {
+  outline: none;
+  border-color: #05b6a1;
+  box-shadow: 0 0 0 2px rgba(5, 182, 161, 0.2);
+  background: rgba(54, 63, 71, 1);
+}
+
+.contact__input::placeholder {
+  color: rgba(120, 124, 134, 0.8);
+  font-weight: 400;
+  font-size: 0.9rem;
+}
