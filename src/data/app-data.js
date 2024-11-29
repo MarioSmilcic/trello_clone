@@ -1,5 +1,12 @@
 import { nanoid } from "nanoid";
 
+export const navigationLinks = [
+  { id: 1, path: "/", label: "Home" },
+  { id: 2, path: "/board", label: "Board" },
+  { id: 3, path: "/about", label: "About" },
+  { id: 4, path: "/contact", label: "Contact" },
+];
+
 export const lists_data = [
   {
     id: nanoid(),
