@@ -1,5 +1,6 @@
 import "./navModal.style.css";
 import { Link } from "react-router-dom";
+import { navigationLinks } from "@/data/app-data";
 
 const NavModal = ({ showModal, onNavModal }) => {
   return (
@@ -8,10 +9,11 @@ const NavModal = ({ showModal, onNavModal }) => {
       onClick={onNavModal}
     >
       <div className="navModal__links">
-        <Link to={{ pathname: "/" }}> Home</Link>
-        <Link to={{ pathname: "/board" }}>Board</Link>
-        <Link to={{ pathname: "/about" }}>About</Link>
-        <Link to={{ pathname: "/contact" }}>Contact</Link>
+        {navigationLinks.map(({ id, path, label }) => (
+          <Link key={id} to={{ pathname: path }}>
+            {label}
+          </Link>
+        ))}
       </div>
     </div>
   );
