@@ -8,7 +8,7 @@ import AddCardModal from "./components/AddCardModal/AddCardModal";
 import ListActions from "./components/ListActions/ListActions";
 import DeleteModal from "./components/DeleteModal/DeleteModal";
 import EditListModal from "./components/EditListModal/EditListModal";
-import Dots from "../../components/icons/Dots";
+import { Dots } from "../../components/icons";
 import { useModalsStore } from "../../store/modals/modals.store";
 import {
   SortableContext,
