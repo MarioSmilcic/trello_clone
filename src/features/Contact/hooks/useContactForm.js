@@ -1,21 +1,12 @@
 import { useState } from "react";
-import { contactSchema } from "../../../validations/contactSchema";
-import { useNotificationStore } from "../../../store/notifications/notifications.store";
+import { contactSchema } from "@/validations/contactSchema";
+import { useNotificationStore } from "@/store/notifications/notifications.store";
 
 export const useContactForm = () => {
   const [toggled, setToggled] = useState(false);
   const { addNotification } = useNotificationStore();
 
-  const initialValues = {
-    name: "",
-    email: "",
-    company: "",
-    job: "",
-    phone: "",
-    message: "",
-  };
-
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = (data) => {
     addNotification({
       type: "success",
       message:
@@ -23,12 +14,12 @@ export const useContactForm = () => {
       duration: 6000,
     });
 
-    resetForm();
     setToggled(false);
+    console.log("Form submitted:", data);
+    return data;
   };
 
   return {
-    initialValues,
     contactSchema,
     handleSubmit,
     toggled,
