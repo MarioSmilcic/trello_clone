@@ -5,6 +5,7 @@ import Home from "./features/Home/Home";
 import About from "./features/About/About";
 import Contact from "./features/Contact/Contact";
 import AgreementPage from "./features/AgreementPage/AgreementPage";
+import NotificationContainer from "./components/Notification/NotificationContainer";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/agreement" element={<AgreementPage />} />
         </Routes>
+        <NotificationContainer />
       </BrowserRouter>
     </>
   );

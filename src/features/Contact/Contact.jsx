@@ -5,24 +5,17 @@ import ContactField from "./components/ContactField";
 import ContactTextArea from "./components/ContactTextArea";
 import ContactAgreement from "./components/ContactAgreement";
 import ContactSubmitButton from "./components/ContactSubmitButton";
-import ContactSuccessMessage from "./components/ContactSuccessMessage";
 
 const Contact = () => {
-  const {
-    initialValues,
-    validationSchema,
-    handleSubmit,
-    messageSuccess,
-    toggled,
-    setToggled,
-  } = useContactForm();
+  const { initialValues, contactSchema, handleSubmit, toggled, setToggled } =
+    useContactForm();
 
   return (
     <div className="contact">
       <h1 className="contact__title">Get in touch</h1>
       <Formik
         initialValues={initialValues}
-        validationSchema={validationSchema}
+        validationSchema={contactSchema}
         onSubmit={handleSubmit}
       >
         {({ isValid, dirty }) => (
@@ -69,7 +62,6 @@ const Contact = () => {
               dirty={dirty}
               toggled={toggled}
             />
-            <ContactSuccessMessage show={messageSuccess} />
           </Form>
         )}
       </Formik>
