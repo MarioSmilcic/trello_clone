@@ -1,8 +1,8 @@
 import "./editListModal.style.css";
-import Button from "../../../../components/Button/Button";
+import Button from "@/components/Button/Button";
 import { useState } from "react";
-import Close from "../../../../components/icons/Close";
-import { useModalsStore } from "../../../../store/modals/modals.store";
+import { Close } from "@components/icons";
+import { useModalsStore } from "@/store/modals/modals.store";
 import { useLists } from "../../hooks/useLists";
 import { useKeyboard } from "../../hooks/useKeyboard";
 
