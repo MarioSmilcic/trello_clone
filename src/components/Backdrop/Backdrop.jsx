@@ -1,5 +1,5 @@
+import { useModalsStore } from "@store/modals/modals.store";
 import "./backdrop.style.css";
-import { useModalsStore } from "../../../../store/modals/modals.store";
 
 const Backdrop = () => {
   const { closeModal } = useModalsStore();

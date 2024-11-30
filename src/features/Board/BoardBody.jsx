@@ -1,9 +1,9 @@
 import "./styles/boardBody.style.css";
 import BoardList from "./BoardList";
-import Button from "../../components/Button/Button";
+import Button from "@components/Button/Button";
 import Card from "./Card";
 import AddListModal from "./components/AddListModal/AddListModal";
-import { useModalsStore } from "../../store/modals/modals.store";
+import { useModalsStore } from "@/store/modals/modals.store";
 import {
   DndContext,
   DragOverlay,

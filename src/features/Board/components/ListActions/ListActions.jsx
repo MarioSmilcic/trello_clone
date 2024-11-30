@@ -1,8 +1,8 @@
 import React from "react";
 import "./listActions.style.css";
-import Close from "../../../../components/icons/Close";
-import Button from "../../../../components/Button/Button";
-import { useModalsStore } from "../../../../store/modals/modals.store";
+import { Close } from "@components/icons";
+import Button from "@components/Button/Button";
+import { useModalsStore } from "@store/modals/modals.store";
 
 const ListActions = ({ listId }) => {
   const { closeModal, openModal } = useModalsStore();

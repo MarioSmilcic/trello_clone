@@ -1,10 +1,10 @@
 import React from "react";
-import CardWrapper from "../CardWrapper/CardWrapper";
+import CardWrapper from "@/components/CardWrapper/CardWrapper";
 import { useState } from "react";
-import Button from "../../../../components/Button/Button";
-import Close from "../../../../components/icons/Close";
+import Button from "@/components/Button/Button";
+import { Close } from "@components/icons";
 import "./addListModal.style.css";
-import { useModalsStore } from "../../../../store/modals/modals.store";
+import { useModalsStore } from "@/store/modals/modals.store";
 import { useLists } from "../../hooks/useLists";
 import { useKeyboard } from "../../hooks/useKeyboard";
 
