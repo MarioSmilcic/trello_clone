@@ -106,3 +106,53 @@ export const benefits = [
   { id: 11, text: "Acts as a hub for information" },
   { id: 12, text: "Fun to use!" },
 ];
+
+export const CONTACT_FIELDS = [
+  {
+    name: "name",
+    label: "Name",
+    required: true,
+    placeholder: "Enter your Name",
+    autoComplete: "name",
+    className: "contact__field--name",
+  },
+  {
+    name: "email",
+    label: "Email",
+    required: true,
+    type: "email",
+    placeholder: "Enter your Email",
+    autoComplete: "email",
+    className: "contact__field--email",
+  },
+  {
+    name: "company",
+    label: "Company",
+    placeholder: "Company",
+    autoComplete: "organization",
+    className: "contact__field--company",
+  },
+  {
+    name: "job",
+    label: "Job Title",
+    placeholder: "Job Title",
+    autoComplete: "job-title",
+    className: "contact__field--job",
+  },
+  {
+    name: "phone",
+    label: "Phone Number",
+    placeholder: "Enter your Phone Number",
+    autoComplete: "tel",
+    className: "contact__field--phone",
+  },
+  {
+    name: "message",
+    label: "Message",
+    required: true,
+    placeholder: "Enter your Message",
+    autoComplete: "off",
+    className: "contact__field--message",
+    fieldtype: "textarea",
+  },
+];

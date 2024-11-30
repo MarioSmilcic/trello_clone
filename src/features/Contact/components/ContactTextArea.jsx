@@ -1,13 +1,15 @@
 import "../styles";
+
 const ContactTextArea = ({
   label,
   error,
   required,
   register,
   name,
+  className,
   ...props
 }) => (
-  <div className="contact__field">
+  <div className={`contact__field ${className}`}>
     <label htmlFor={name}>
       {label} {required && <span className="contact__required">*</span>}
     </label>

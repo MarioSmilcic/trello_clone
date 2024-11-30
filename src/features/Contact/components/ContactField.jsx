@@ -1,7 +1,15 @@
 import "../styles";
 
-const ContactField = ({ label, error, required, register, name, ...props }) => (
-  <div className="contact__field">
+const ContactField = ({
+  label,
+  error,
+  required,
+  register,
+  name,
+  className,
+  ...props
+}) => (
+  <div className={`contact__field ${className}`}>
     <label htmlFor={name}>
       {label} {required && <span className="contact__required">*</span>}
     </label>
