@@ -15,7 +15,7 @@ export const useContactForm = () => {
     });
 
     setToggled(false);
-    console.log("Form submitted:", data);
+    // console.log("Form submitted:", data);
     return data;
   };
 

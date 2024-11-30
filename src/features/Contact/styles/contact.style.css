@@ -23,11 +23,34 @@
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
-.contact__fields {
-  display: flex;
-  gap: 1.5em;
+.contact__grid {
+  display: grid;
+  grid-template-areas:
+    "name email"
+    "company job"
+    "phone phone"
+    "message message";
+  gap: 2em;
+  width: 100%;
 }
 
+/* Field width adjustments */
+.contact__field--name,
+.contact__field--email,
+.contact__field--company,
+.contact__field--job {
+  width: 100%;
+}
+
+.contact__field--phone {
+  grid-area: phone;
+}
+
+.contact__field--message {
+  grid-area: message;
+}
+
+/* Media queries */
 @media (max-width: 768px) {
   .contact {
     padding: 2em 1.5em;
@@ -35,6 +58,16 @@
 
   .contact__form {
     padding: 1.5rem;
+  }
+
+  .contact__grid {
+    grid-template-areas:
+      "name"
+      "email"
+      "company"
+      "job"
+      "phone"
+      "message";
   }
 }
 
@@ -45,10 +78,5 @@
 
   .contact__form {
     padding: 1rem;
-  }
-
-  .contact__fields {
-    flex-direction: column;
-    gap: 1.5em;
   }
 }
