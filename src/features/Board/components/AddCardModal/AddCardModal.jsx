@@ -1,8 +1,8 @@
-import Button from "../../../../components/Button/Button";
+import Button from "@components/Button/Button";
 import "./addCardModal.style.css";
-import { Close } from "../../../../components/icons";
+import { Close } from "@components/icons";
 import { useState } from "react";
-import { useModalsStore } from "../../../../store/modals/modals.store";
+import { useModalsStore } from "@store/modals/modals.store";
 import { useCards } from "../../hooks/useCards";
 import { useKeyboard } from "../../hooks/useKeyboard";
 
