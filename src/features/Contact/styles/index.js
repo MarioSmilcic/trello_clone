@@ -6,3 +6,4 @@ import "./contactField.style.css";
 import "./contactInput.style.css";
 import "./contactTextarea.style.css";
 import "./contactTitle.style.css";
+import "./agreementPage.style.css";

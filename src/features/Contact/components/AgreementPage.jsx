@@ -1,4 +1,5 @@
-import "./agreement.style.css";
+import "../styles";
+
 const AgreementPage = () => {
   return (
     <div className="agreement">
