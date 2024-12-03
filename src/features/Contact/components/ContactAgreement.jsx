@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "../styles";
 
 const ContactAgreement = ({ toggled, setToggled }) => (
   <div className="contact__agreement">
