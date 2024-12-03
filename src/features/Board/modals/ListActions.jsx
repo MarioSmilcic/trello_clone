@@ -1,5 +1,3 @@
-import React from "react";
-import "./listActions.style.css";
 import { Close } from "@components/icons";
 import Button from "@components/Button/Button";
 import { useModalsStore } from "@store/modals/modals.store";

@@ -1,5 +1,3 @@
-import "./styles/boardHeader.style.css";
-
 const BoardHeader = () => {
   return (
     <div className="board-header">
