@@ -1,5 +1,3 @@
-import "../styles";
-
 const ContactTextArea = ({
   label,
   error,

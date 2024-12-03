@@ -1,5 +1,3 @@
-import "../styles";
-
 const ContactField = ({
   label,
   error,

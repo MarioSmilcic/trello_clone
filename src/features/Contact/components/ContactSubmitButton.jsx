@@ -1,5 +1,3 @@
-import "../styles";
-
 const ContactSubmitButton = ({ isValid, isDirty, toggled }) => (
   <button
     type="submit"
