@@ -1,13 +1,14 @@
-import "./styles/boardList.style.css";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import Card from "./Card";
 import Button from "@components/Button/Button";
 import CardWrapper from "@components/CardWrapper/CardWrapper";
-import AddCardModal from "./components/AddCardModal/AddCardModal";
-import ListActions from "./components/ListActions/ListActions";
-import DeleteModal from "./components/DeleteModal/DeleteModal";
-import EditListModal from "./components/EditListModal/EditListModal";
+import {
+  AddCardModal,
+  DeleteModal,
+  EditListModal,
+  ListActions,
+} from "../modals";
 import { Dots } from "@/components/icons";
 import { useModalsStore } from "@store/modals/modals.store";
 import {

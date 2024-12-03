@@ -1,10 +1,8 @@
-import "./editCardModal.style.css";
 import Button from "@/components/Button/Button";
 import { useState } from "react";
 import { Close } from "@components/icons";
 import { useModalsStore } from "@store/modals/modals.store";
-import { useCards } from "../../hooks/useCards";
-import { useKeyboard } from "../../hooks/useKeyboard";
+import { useKeyboard, useCards } from "../hooks";
 
 const EditCardModal = ({ card }) => {
   const [enteredCard, setEnteredCard] = useState(card.card);

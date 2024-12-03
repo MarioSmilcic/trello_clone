@@ -1,7 +1,6 @@
-import "./styles/board.style.css";
-import BoardHeader from "./BoardHeader";
-import BoardBody from "./BoardBody";
+import { BoardHeader, BoardBody } from "./components";
 import Backdrop from "@/components/Backdrop/Backdrop";
+import "./styles";
 
 const Board = () => {
   return (

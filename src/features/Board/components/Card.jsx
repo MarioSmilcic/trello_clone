@@ -1,9 +1,7 @@
-import "./styles/card.style.css";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { EditIcon, TrashIcon } from "@/components/icons";
-import EditCardModal from "./components/EditCardModal/EditCardModal";
-import DeleteModal from "./components/DeleteModal/DeleteModal";
+import { EditCardModal, DeleteModal } from "../modals";
 import { useModalsStore } from "@store/modals/modals.store";
 
 const Card = ({ card, listId, index }) => {
