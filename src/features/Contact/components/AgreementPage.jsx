@@ -1,8 +1,6 @@
-import "../styles";
-
 const AgreementPage = () => {
   return (
-    <div className="agreement">
+    <div className="agreementPage">
       <h1>Privacy Policy</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum cum error

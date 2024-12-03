@@ -6,7 +6,6 @@ import ContactAgreement from "./ContactAgreement";
 import ContactSubmitButton from "./ContactSubmitButton";
 import { CONTACT_FIELDS } from "@/data/app-data";
 import { DEFAULT_VALUES } from "../helpers/helpers";
-import "../styles";
 
 const ContactForm = ({ contactSchema, onSubmit, toggled, setToggled }) => {
   const {

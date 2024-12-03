@@ -7,7 +7,7 @@ export const useCards = () => {
   const { closeModal } = useModalsStore();
 
   const handleSubmitCard = (enteredCard, listId, setEnteredCard) => {
-    if (enteredCard.length === 0) {
+    if (enteredCard.trim().length === 0) {
       closeModal();
       return;
     }

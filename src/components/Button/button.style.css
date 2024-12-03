@@ -110,6 +110,33 @@
   color: #084066;
   border: 1px solid #084066;
 }
+
+.button-listActions:hover {
+  background: #3c474f;
+}
+
+.button-modal.confirm {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: white;
+}
+
+.button-modal.confirm:hover {
+  background: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.button-modal.dismiss {
+  background: #084066;
+  border-color: #084066;
+  color: white;
+}
+
+.button-modal.dismiss:hover {
+  background: #075486;
+  border-color: #075486;
+}
+
 @media (max-width: 576px) {
   .button-try_trelloClone {
     width: 100%;
