@@ -1,8 +1,6 @@
-import "./styles/boardBody.style.css";
-import BoardList from "./BoardList";
+import { BoardList, Card } from ".";
 import Button from "@components/Button/Button";
-import Card from "./Card";
-import AddListModal from "./components/AddListModal/AddListModal";
+import AddListModal from "../modals/AddListModal";
 import { useModalsStore } from "@/store/modals/modals.store";
 import {
   DndContext,
@@ -16,7 +14,7 @@ import {
   SortableContext,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useDragDrop } from "./hooks/useDragDrop";
+import { useDragDrop } from "../hooks/useDragDrop";
 
 const BoardBody = () => {
   const { modal, openModal } = useModalsStore();

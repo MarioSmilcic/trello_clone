@@ -1,8 +1,6 @@
-import "./deleteModal.style.css";
 import Button from "@components/Button/Button";
 import { useModalsStore } from "@store/modals/modals.store";
-import { useCards } from "../../hooks/useCards";
-import { useLists } from "../../hooks/useLists";
+import { useCards, useLists } from "../hooks";
 
 const DeleteModal = ({ card, title, item, listId }) => {
   const { closeModal } = useModalsStore();

@@ -1,10 +1,8 @@
 import Button from "@components/Button/Button";
-import "./addCardModal.style.css";
 import { Close } from "@components/icons";
 import { useState } from "react";
 import { useModalsStore } from "@store/modals/modals.store";
-import { useCards } from "../../hooks/useCards";
-import { useKeyboard } from "../../hooks/useKeyboard";
+import { useCards, useKeyboard } from "../hooks";
 
 const AddCardModal = ({ listId }) => {
   const [enteredCard, setEnteredCard] = useState("");
