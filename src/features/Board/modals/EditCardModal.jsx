@@ -1,43 +1,33 @@
-import Button from "@/components/Button/Button";
 import { useState } from "react";
+import { BoardTextArea } from "../ui";
+import Button from "@components/Button/Button";
 import { Close } from "@components/icons";
 import { useModalsStore } from "@store/modals/modals.store";
-import { useKeyboard, useCards } from "../hooks";
+import { useCards } from "../hooks";
 
 const EditCardModal = ({ card }) => {
   const [enteredCard, setEnteredCard] = useState(card.card);
   const { closeModal } = useModalsStore();
   const { handleUpdateCard } = useCards();
-  const { handleKeyPress } = useKeyboard();
 
-  const handleEnteredCard = (e) => {
-    setEnteredCard(e.target.value);
-  };
-
-  const handleUpdate = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     handleUpdateCard(enteredCard, card.card, card.listId, card.cardId);
   };
 
-  const onKeypressHandler = (e) => {
-    handleKeyPress(e, handleUpdate);
-  };
-
   return (
-    <form onSubmit={handleUpdate} className="edit-form">
-      <div className="edit-card">
-        <textarea
-          name="edit-modal"
-          id={card.id}
-          className="modal_input"
+    <form onSubmit={handleSubmit} className="edit-form">
+      <div className="edit-modal">
+        <BoardTextArea
           value={enteredCard}
-          onChange={handleEnteredCard}
-          autoFocus
-          onKeyDown={onKeypressHandler}
+          onChange={(e) => setEnteredCard(e.target.value)}
+          onSubmit={handleSubmit}
+          placeholder="Edit card text..."
+          name="editCardContent"
         />
-        <div className="edit-cardModal_buttons">
+        <div className="button-container">
           <Button text="Save" />
-          <div className="edit-cardModal_close">
+          <div className="close-button">
             <Close onClose={closeModal} />
           </div>
         </div>

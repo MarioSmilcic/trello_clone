@@ -1,43 +1,33 @@
+import { useState } from "react";
+import { BoardTextArea } from "../ui";
 import Button from "@components/Button/Button";
 import { Close } from "@components/icons";
-import { useState } from "react";
 import { useModalsStore } from "@store/modals/modals.store";
-import { useCards, useKeyboard } from "../hooks";
+import { useCards } from "../hooks";
 
 const AddCardModal = ({ listId }) => {
   const [enteredCard, setEnteredCard] = useState("");
   const { closeModal } = useModalsStore();
   const { handleSubmitCard } = useCards();
-  const { handleKeyPress } = useKeyboard();
-
-  const handleEnteredCard = (e) => {
-    setEnteredCard(e.target.value);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleSubmitCard(enteredCard, listId, setEnteredCard);
   };
 
-  const onKeypressHandler = (e) => {
-    handleKeyPress(e, handleSubmit);
-  };
-
   return (
     <form onSubmit={handleSubmit}>
       <div className="add-modal">
-        <textarea
-          name="addCardModal"
-          placeholder="Enter a title for this card..."
-          autoFocus
-          className="add-modal_textarea"
+        <BoardTextArea
           value={enteredCard}
-          onChange={handleEnteredCard}
-          onKeyDown={onKeypressHandler}
+          onChange={(e) => setEnteredCard(e.target.value)}
+          onSubmit={handleSubmit}
+          placeholder="Enter a title for this card..."
+          name="cardContent"
         />
-        <div className="add-cardModal_buttons">
+        <div className="button-container">
           <Button text="Add card" />
-          <div className="add-cardModal_close">
+          <div className="close-button">
             <Close onClose={closeModal} />
           </div>
         </div>
