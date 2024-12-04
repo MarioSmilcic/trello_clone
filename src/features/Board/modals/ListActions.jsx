@@ -1,25 +1,27 @@
 import { Close } from "@components/icons";
 import Button from "@components/Button/Button";
 import { useModalsStore } from "@store/modals/modals.store";
+import { LIST_ACTIONS } from "../constants/board.constants";
 
 const ListActions = ({ listId }) => {
   const { closeModal, openModal } = useModalsStore();
 
-  const handleAddCard = () => openModal("addCard", { listId });
-  const handleDeleteList = () => openModal("deleteList", { listId });
-  const handleEditList = () => openModal("editList", { listId });
+  const handleAction = (actionFn) => () => {
+    actionFn(openModal, listId);
+  };
 
   return (
     <div className="listActions">
       <div className="listActions-header">
         <p>List Actions</p>
-        <span className="listActions-close">
+        <span className="close-button">
           <Close onClose={closeModal} />
         </span>
       </div>
-      <Button text="Add new card" handleClick={handleAddCard} />
-      <Button text="Delete list" handleClick={handleDeleteList} />
-      <Button text="Edit list" handleClick={handleEditList} />
+
+      {LIST_ACTIONS.map(({ id, text, action }) => (
+        <Button key={id} text={text} handleClick={handleAction(action)} />
+      ))}
     </div>
   );
 };

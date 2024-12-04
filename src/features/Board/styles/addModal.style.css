@@ -1,0 +1,7 @@
+.add-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  position: relative;
+  z-index: 500;
+}

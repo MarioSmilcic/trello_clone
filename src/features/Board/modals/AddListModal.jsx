@@ -1,46 +1,35 @@
-import CardWrapper from "@/components/CardWrapper/CardWrapper";
 import { useState } from "react";
-import Button from "@/components/Button/Button";
+import { BoardInput } from "../ui";
+import CardWrapper from "@components/CardWrapper/CardWrapper";
+import Button from "@components/Button/Button";
 import { Close } from "@components/icons";
-import { useModalsStore } from "@/store/modals/modals.store";
-import { useLists, useKeyboard } from "../hooks";
+import { useModalsStore } from "@store/modals/modals.store";
+import { useLists } from "../hooks";
 
 const AddListModal = () => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const { closeModal } = useModalsStore();
   const { handleSubmitList } = useLists();
-  const { handleKeyPress } = useKeyboard();
-
-  const handleEnteredTitle = (e) => {
-    setEnteredTitle(e.target.value);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleSubmitList(enteredTitle, setEnteredTitle);
   };
 
-  const onKeypressHandler = (e) => {
-    handleKeyPress(e, handleSubmit);
-  };
-
   return (
     <div>
       <CardWrapper>
-        <div className="addListModal">
-          <input
-            type="text"
-            placeholder="Enter list title..."
-            className="board-input"
-            autoFocus
-            name="list title"
+        <div className="add-modal">
+          <BoardInput
             value={enteredTitle}
-            onChange={handleEnteredTitle}
-            onKeyDown={onKeypressHandler}
+            onChange={(e) => setEnteredTitle(e.target.value)}
+            onSubmit={handleSubmit}
+            placeholder="Enter list title..."
+            name="listTitle"
           />
-          <div className="add-listModal_buttons">
+          <div className="button-container">
             <Button text="Add list" handleClick={handleSubmit} />
-            <div className="add-listModal_close">
+            <div className="close-button">
               <Close onClose={closeModal} />
             </div>
           </div>
