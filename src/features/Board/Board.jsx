@@ -1,4 +1,4 @@
-import { BoardHeader, BoardBody } from "./components";
+import { BoardHeader, BoardContainer } from "./components";
 import Backdrop from "@/components/Backdrop/Backdrop";
 import "./styles";
 
@@ -7,7 +7,7 @@ const Board = () => {
     <div className="board">
       <Backdrop />
       <BoardHeader />
-      <BoardBody />
+      <BoardContainer />
     </div>
   );
 };
