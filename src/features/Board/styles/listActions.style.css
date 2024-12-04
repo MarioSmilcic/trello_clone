@@ -3,32 +3,109 @@
   margin-top: 42px;
   z-index: 500;
   width: 17em;
-  border-radius: 8px;
-  padding: 8px;
+  border-radius: 12px;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  gap: 8px;
-  background: #282e32;
+  gap: 0.75rem;
+  background: rgba(40, 46, 50, 0.95);
   color: #9fadbc;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: dropDown 0.25s ease-out forwards;
+  transform-origin: top center;
 }
 
 .listActions-header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  font-weight: 500;
-}
-.listActions-close {
-  display: flex;
-  position: relative;
-  left: 70px;
-  top: 3px;
-  padding: 4px;
-  border-radius: 8px;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 0.5rem;
 }
 
-.listActions-close:hover {
-  cursor: pointer;
-  background: #3c474f;
+.listActions-header p {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #fff;
+  margin: 0;
+}
+
+/* Adjust close-button when it's in the header */
+.listActions-header .close-button {
+  position: static;
+  margin-left: 8px;
+  background: rgba(60, 71, 79, 0.5);
+}
+
+.listActions-header .close-button:hover {
+  background: rgba(60, 71, 79, 0.8);
+}
+
+.listActions button {
+  width: 100%;
+  text-align: left;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.listActions button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(4px);
+}
+
+.listActions button:active {
+  transform: translateX(2px);
+}
+
+/* Different button styles based on action type */
+.listActions button[data-action="add"] {
+  color: #579dff;
+}
+
+.listActions button[data-action="edit"] {
+  color: #f59e0b;
+}
+
+.listActions button[data-action="delete"] {
+  color: #ef4444;
+}
+
+@keyframes dropDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scaleY(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .listActions {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 0;
+    width: 90%;
+    max-width: 320px;
+    animation: mobileDropDown 0.25s ease-out forwards;
+  }
+
+  @keyframes mobileDropDown {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -60%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
 }

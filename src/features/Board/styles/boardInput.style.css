@@ -1,0 +1,39 @@
+.board-input,
+.board-textarea {
+  width: 100%;
+  background: #22272b;
+  border: 0.5px solid #738496;
+  border-radius: 4px;
+  color: #8c9caa;
+  font-family: inherit;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.board-input {
+  height: 2.5em;
+  padding: 0 1em;
+}
+
+.board-textarea {
+  padding: 8px;
+  resize: vertical;
+}
+
+.board-input:hover,
+.board-textarea:hover {
+  border-color: #99c8ff;
+  background: #282e32;
+}
+
+.board-input:focus,
+.board-textarea:focus {
+  outline: none;
+  border-color: #579dff;
+  background: #22272b;
+}
+
+.board-input::placeholder,
+.board-textarea::placeholder {
+  color: #b5c2cf;
+  font-size: 14px;
+}
