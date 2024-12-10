@@ -72,9 +72,6 @@ a:hover:after {
   opacity: 1;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
-/* .nav__logo--hidden {
-  opacity: 0;
-} */
 
 @media (max-width: 768px) {
   .links {
@@ -82,5 +79,8 @@ a:hover:after {
   }
   .hamburger {
     display: flex;
+  }
+  .nav-button {
+    display: none;
   }
 }
