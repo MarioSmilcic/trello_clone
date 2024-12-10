@@ -1,19 +1,20 @@
 import "./navModal.style.css";
 import { Link } from "react-router-dom";
-import { navigationLinks } from "@/data/app-data";
+import AuthButton from "@/components/AuthButton/AuthButton";
 
-const NavModal = ({ showModal, onNavModal }) => {
+const NavModal = ({ showModal, onNavModal, links }) => {
   return (
     <div
       className={`navModal ${showModal && "navModal__visible"}`}
       onClick={onNavModal}
     >
       <div className="navModal__links">
-        {navigationLinks.map(({ id, path, label }) => (
-          <Link key={id} to={{ pathname: path }}>
+        {links.map(({ id, path, label }) => (
+          <Link key={id} to={path}>
             {label}
           </Link>
         ))}
+        <AuthButton variant="secondary" />
       </div>
     </div>
   );

@@ -11,3 +11,5 @@ export { default as XCircle } from "./XCircle";
 export { default as AlertCircle } from "./AlertCircle";
 export { default as InfoIcon } from "./InfoIcon";
 export { default as CloseIcon } from "./CloseIcon";
+export { default as UserIcon } from "./UserIcon";
+export { default as LogoutIcon } from "./LogoutIcon";

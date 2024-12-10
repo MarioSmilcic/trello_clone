@@ -1,0 +1,96 @@
+.auth-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.auth-email {
+  color: #05b6a1;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  background: rgba(5, 182, 161, 0.1);
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* max-width: 200px; */
+  max-width: 130px;
+}
+
+.auth-button {
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-button svg {
+  transition: transform 0.3s ease;
+}
+
+.auth-button:hover svg {
+  transform: scale(1.1);
+}
+
+.auth-button--primary {
+  background: #05b6a1;
+  color: white;
+  /* min-width: 120px; */
+}
+
+.auth-button--primary:hover {
+  background: #84fab0;
+  transform: translateY(-2px);
+}
+
+.auth-button--secondary {
+  background: transparent;
+  border: 2px solid #05b6a1;
+  color: #05b6a1;
+  padding: 0.75rem 1.5rem;
+  justify-content: center;
+  max-width: 300px;
+}
+
+.auth-button--secondary:hover {
+  background: rgba(5, 182, 161, 0.1);
+  transform: translateY(-2px);
+}
+
+.auth-button:active {
+  transform: translateY(0);
+}
+
+.auth-button__text {
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .auth-button {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .auth-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .auth-email {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    max-width: 300px;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+}
