@@ -7,14 +7,25 @@ export const navigationLinks = [
   { id: 4, path: "/contact", label: "Contact", authRequired: false },
 ];
 
+// export const lists_data = [
+//   {
+//     id: nanoid(),
+//     title: "List1",
+//     cards: [
+//       { id: nanoid(), card: "Card 1" },
+//       { id: nanoid(), card: "Card 2" },
+//       { id: nanoid(), card: "Card 3" },
+//     ],
+//   },
+// ];
 export const lists_data = [
   {
     id: nanoid(),
-    title: "List1",
+    title: "Welcome List",
     cards: [
-      { id: nanoid(), card: "Card 1" },
-      { id: nanoid(), card: "Card 2" },
-      { id: nanoid(), card: "Card 3" },
+      { id: nanoid(), card: "Welcome to TrelloClone! 👋" },
+      { id: nanoid(), card: "Drag cards to reorder them ↕️" },
+      { id: nanoid(), card: "Create new lists for your tasks ➕" },
     ],
   },
 ];
