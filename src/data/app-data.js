@@ -1,33 +1,8 @@
-import { nanoid } from "nanoid";
-
 export const navigationLinks = [
   { id: 1, path: "/", label: "Home", authRequired: false },
   { id: 2, path: "/board", label: "Board", authRequired: true },
   { id: 3, path: "/about", label: "About", authRequired: false },
   { id: 4, path: "/contact", label: "Contact", authRequired: false },
-];
-
-// export const lists_data = [
-//   {
-//     id: nanoid(),
-//     title: "List1",
-//     cards: [
-//       { id: nanoid(), card: "Card 1" },
-//       { id: nanoid(), card: "Card 2" },
-//       { id: nanoid(), card: "Card 3" },
-//     ],
-//   },
-// ];
-export const lists_data = [
-  {
-    id: nanoid(),
-    title: "Welcome List",
-    cards: [
-      { id: nanoid(), card: "Welcome to TrelloClone! 👋" },
-      { id: nanoid(), card: "Drag cards to reorder them ↕️" },
-      { id: nanoid(), card: "Create new lists for your tasks ➕" },
-    ],
-  },
 ];
 
 export const technologies = [
