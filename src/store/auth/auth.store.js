@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../../../firebase-config";
+import { createUserAndWelcomeList } from "@/api/helpers/createUserAndWelcomeList";
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -27,7 +28,17 @@ export const useAuthStore = create((set) => ({
   signUp: async (email, password) => {
     try {
       set({ loading: true, error: null });
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      // Create the user doc + welcome lists subcollection
+      await createUserAndWelcomeList(user);
+
+      set({ loading: false });
     } catch (error) {
       const errorMessage =
         error.code === "auth/email-already-in-use"
