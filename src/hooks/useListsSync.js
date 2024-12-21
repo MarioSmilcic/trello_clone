@@ -6,14 +6,23 @@ import { listsService } from "@/services/lists.service";
 export const useListsSync = () => {
   const userId = useAuthStore((state) => state.user?.uid);
   const updateLists = useListstore((state) => state.updateLists);
+  const clearLists = useListstore((state) => state.clearLists);
   const lists = useListstore((state) => state.lists);
   const { fetchLists, syncLists } = listsService;
+
+  useEffect(() => {
+    if (!userId) {
+      clearLists();
+    }
+  }, [userId, clearLists]);
 
   // Initial fetch
   useEffect(() => {
     const fetchInitialLists = async () => {
       try {
         if (userId) {
+          clearLists(); // Clear lists before fetching new ones
+
           const lists = await fetchLists(userId);
           updateLists(lists);
         }

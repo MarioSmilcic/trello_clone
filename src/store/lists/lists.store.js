@@ -5,6 +5,8 @@ export const useListstore = create((set) => ({
 
   updateLists: (newLists) => set({ lists: newLists }),
 
+  clearLists: () => set({ lists: [] }),
+
   addList: (newList) =>
     set((state) => ({
       lists: [...state.lists, newList],

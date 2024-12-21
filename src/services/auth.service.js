@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../../firebase-config";
+import { useListstore } from "@/store/lists/lists.store";
 
 export const authService = {
   initializeAuthListener: (set) => {
@@ -46,6 +47,8 @@ export const authService = {
 
   signOut: async () => {
     try {
+      useListstore.getState().clearLists();
+
       await signOut(auth);
     } catch (error) {
       throw "Failed to sign out";
