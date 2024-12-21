@@ -14,11 +14,18 @@
 }
 
 .card {
-  display: flex;
+  display: block;
   align-items: center;
   color: #b0bbc8;
   padding: 8px;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+  transition: max-width 0.2s ease;
+}
+
+.card-outer:hover .card {
+  max-width: 70%;
 }
 
 .card-dragging {

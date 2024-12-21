@@ -1,12 +1,6 @@
 import { create } from "zustand";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { auth } from "../../../firebase-config";
-import { createUserAndWelcomeList } from "@/api/helpers/createUserAndWelcomeList";
+import { authService } from "@/services/auth.service";
+import { usersService } from "@/services/users.service";
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -15,58 +9,37 @@ export const useAuthStore = create((set) => ({
   authInitialized: false,
 
   initializeAuthListener: () => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      set({
-        user,
-        loading: false,
-        authInitialized: true,
-      });
-    });
-    return unsubscribe;
+    return authService.initializeAuthListener(set);
   },
 
   signUp: async (email, password) => {
     try {
       set({ loading: true, error: null });
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-
-      // Create the user doc + welcome lists subcollection
-      await createUserAndWelcomeList(user);
-
+      const user = await authService.signUp(email, password);
+      await usersService.createUserAndWelcomeList(user);
       set({ loading: false });
     } catch (error) {
-      const errorMessage =
-        error.code === "auth/email-already-in-use"
-          ? "This email is already registered"
-          : "Failed to create account";
-
-      set({ error: errorMessage, loading: false });
-      throw errorMessage;
+      set({ error, loading: false });
+      throw error;
     }
   },
 
   signIn: async (email, password) => {
     try {
       set({ loading: true, error: null });
-      await signInWithEmailAndPassword(auth, email, password);
+      await authService.signIn(email, password);
     } catch (error) {
-      const errorMessage = "Invalid email or password";
-      set({ error: errorMessage, loading: false });
-      throw errorMessage;
+      set({ error, loading: false });
+      throw error;
     }
   },
 
   signOut: async () => {
     try {
       set({ loading: true, error: null });
-      await signOut(auth);
+      await authService.signOut();
     } catch (error) {
-      set({ error: "Failed to sign out", loading: false });
+      set({ error, loading: false });
       throw error;
     }
   },
