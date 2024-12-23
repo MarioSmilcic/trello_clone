@@ -1,6 +1,11 @@
 import { create } from "zustand";
-import { authService } from "@/services/auth.service";
-import { usersService } from "@/services/users.service";
+import {
+  initializeAuthListener,
+  signUp,
+  signIn,
+  signOutUser,
+} from "@/services/auth.service";
+import { createUserAndWelcomeList } from "@/services/users.service";
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -9,14 +14,14 @@ export const useAuthStore = create((set) => ({
   authInitialized: false,
 
   initializeAuthListener: () => {
-    return authService.initializeAuthListener(set);
+    return initializeAuthListener(set);
   },
 
   signUp: async (email, password) => {
     try {
       set({ loading: true, error: null });
-      const user = await authService.signUp(email, password);
-      await usersService.createUserAndWelcomeList(user);
+      const user = await signUp(email, password);
+      await createUserAndWelcomeList(user);
       set({ loading: false });
     } catch (error) {
       set({ error, loading: false });
@@ -27,7 +32,7 @@ export const useAuthStore = create((set) => ({
   signIn: async (email, password) => {
     try {
       set({ loading: true, error: null });
-      await authService.signIn(email, password);
+      await signIn(email, password);
     } catch (error) {
       set({ error, loading: false });
       throw error;
@@ -37,7 +42,7 @@ export const useAuthStore = create((set) => ({
   signOut: async () => {
     try {
       set({ loading: true, error: null });
-      await authService.signOut();
+      await signOutUser();
     } catch (error) {
       set({ error, loading: false });
       throw error;

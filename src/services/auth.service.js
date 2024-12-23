@@ -4,54 +4,55 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { auth } from "../../firebase-config";
+import { auth } from "./firebase-config";
 import { useListstore } from "@/store/lists/lists.store";
 
-export const authService = {
-  initializeAuthListener: (set) => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      set({
-        user,
-        loading: false,
-        authInitialized: true,
-      });
+export const getUserId = () => auth.currentUser?.uid || null;
+
+export const initializeAuthListener = (set) => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    set({
+      user,
+      loading: false,
+      authInitialized: true,
     });
-    return unsubscribe;
-  },
+  });
+  return unsubscribe;
+};
 
-  signUp: async (email, password) => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      return userCredential.user;
-    } catch (error) {
-      const errorMessage =
-        error.code === "auth/email-already-in-use"
-          ? "This email is already registered"
-          : "Failed to create account";
+export const signUp = async (email, password) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    return userCredential.user;
+  } catch (error) {
+    const errorMessage =
+      error.code === "auth/email-already-in-use"
+        ? "This email is already registered"
+        : "Failed to create account";
+    throw errorMessage;
+  }
+};
 
-      throw errorMessage;
-    }
-  },
+export const signIn = async (email, password) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    throw "Invalid email or password";
+  }
+};
 
-  signIn: async (email, password) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      throw "Invalid email or password";
-    }
-  },
+export const signOutUser = async () => {
+  try {
+    // Clear the lists from the store before signing out
+    const { clearLists } = useListstore.getState();
+    clearLists();
 
-  signOut: async () => {
-    try {
-      useListstore.getState().clearLists();
-
-      await signOut(auth);
-    } catch (error) {
-      throw "Failed to sign out";
-    }
-  },
+    await signOut(auth);
+  } catch (error) {
+    throw "Failed to sign out";
+  }
 };

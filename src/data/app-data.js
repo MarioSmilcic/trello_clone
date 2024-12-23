@@ -16,11 +16,12 @@ export const technologies = [
   },
   {
     id: 2,
-    category: "State Management",
+    category: "State Management & Authentication",
     items: [
+      { name: "Zustand", description: "Simple and scalable state management" },
       {
-        name: "Zustand",
-        description: "Simple and scalable state management",
+        name: "Firebase",
+        description: "Authentication and real-time database",
       },
     ],
   },

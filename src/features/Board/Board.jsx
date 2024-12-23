@@ -1,23 +1,28 @@
 import { useState, useEffect } from "react";
-
+import { useListstore } from "@/store/lists/lists.store";
 import { BoardHeader, BoardContainer } from "./components";
 import Backdrop from "@/components/Backdrop/Backdrop";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import "./styles";
-import { useListsSync } from "@/hooks/useListsSync";
-import { useListstore } from "@/store/lists/lists.store";
 
 const Board = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const lists = useListstore((state) => state.lists);
-  useListsSync();
+  const fetchLists = useListstore((state) => state.fetchLists);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Set loading to false once lists are loaded
-    setIsLoading(false);
-  }, [lists]);
+    const initializeLists = async () => {
+      if (lists.length === 0) {
+        await fetchLists(); // Wait for fetchLists to complete
+      }
+      setIsLoading(false); // Set loading to false after fetching lists
+    };
+
+    initializeLists();
+  }, [lists, fetchLists]);
 
   if (isLoading) {
-    return <p>loading...</p>;
+    return <LoadingSpinner />;
   }
   return (
     <div className="board">

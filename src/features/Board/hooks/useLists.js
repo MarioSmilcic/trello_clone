@@ -1,14 +1,12 @@
 import { useListstore } from "@/store/lists/lists.store";
 import { useModalsStore } from "@/store/modals/modals.store";
 import { useAuthStore } from "@/store/auth/auth.store";
-import { listsService } from "@/services/lists.service";
+import { generateListId } from "@/services/lists.service";
 
 export const useLists = () => {
   const { addList, removeList, updateListTitle } = useListstore();
   const { closeModal } = useModalsStore();
   const userId = useAuthStore((state) => state.user?.uid);
-
-  const { generateListId } = listsService;
 
   const handleSubmitList = (enteredTitle, setEnteredTitle) => {
     if (enteredTitle.trim().length === 0) {
