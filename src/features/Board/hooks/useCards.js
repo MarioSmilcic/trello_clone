@@ -1,7 +1,7 @@
 import { useListstore } from "@/store/lists/lists.store";
 import { useModalsStore } from "@/store/modals/modals.store";
 import { useAuthStore } from "@/store/auth/auth.store";
-import { generateCardId } from "@/services/lists.service";
+import { generateCardId } from "@/services/helpers/id-generators";
 
 export const useCards = () => {
   const { addCard, updateCard, removeCard } = useListstore();
