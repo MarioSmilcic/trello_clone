@@ -1,10 +1,12 @@
-import { useListstore } from "../../../store/lists/lists.store";
-import { useModalsStore } from "../../../store/modals/modals.store";
-import { nanoid } from "nanoid";
+import { useListstore } from "@/store/lists/lists.store";
+import { useModalsStore } from "@/store/modals/modals.store";
+import { useAuthStore } from "@/store/auth/auth.store";
+import { generateCardId } from "@/services/lists.service";
 
 export const useCards = () => {
   const { addCard, updateCard, removeCard } = useListstore();
   const { closeModal } = useModalsStore();
+  const userId = useAuthStore((state) => state.user?.uid);
 
   const handleSubmitCard = (enteredCard, listId, setEnteredCard) => {
     if (enteredCard.trim().length === 0) {
@@ -13,8 +15,8 @@ export const useCards = () => {
     }
 
     const newCard = {
+      id: generateCardId(userId, listId),
       card: enteredCard,
-      id: nanoid(),
     };
 
     addCard(listId, newCard);

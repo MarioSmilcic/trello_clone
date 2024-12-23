@@ -40,13 +40,11 @@ export const useDragDrop = () => {
       const targetList = newLists.find((list) => list.id === overListId);
 
       if (activeListId === overListId) {
-        // Moving within the same list
         const reorderedCards = [...sourceList.cards];
         const [movedCard] = reorderedCards.splice(activeIndex, 1);
         reorderedCards.splice(overIndex, 0, movedCard);
         sourceList.cards = reorderedCards;
       } else {
-        // Moving between lists
         const [movedCard] = sourceList.cards.splice(activeIndex, 1);
         targetList.cards.splice(overIndex, 0, movedCard);
       }
