@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { fetchLists, syncLists, removeList } from "@/services/lists.service";
-import { getUserId } from "@/services/auth.service";
+import { getUserId } from "@/services/helpers/firebase-utils";
 
 export const useListstore = create((set, get) => {
   return {

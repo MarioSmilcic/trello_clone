@@ -1,4 +1,4 @@
-import { generateCardId, generateListId } from "./id-generators";
+import { generateCardId, generateListId } from "./firebase-utils";
 
 export const getWelcomeCards = (userId, listId) => [
   {
