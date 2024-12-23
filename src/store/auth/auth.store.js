@@ -1,11 +1,11 @@
 import { create } from "zustand";
 import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { auth } from "../../../firebase-config";
+  initializeAuthListener,
+  signUp,
+  signIn,
+  signOutUser,
+} from "@/services/auth.service";
+import { createUserAndWelcomeList } from "@/services/users.service";
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -14,48 +14,37 @@ export const useAuthStore = create((set) => ({
   authInitialized: false,
 
   initializeAuthListener: () => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      set({
-        user,
-        loading: false,
-        authInitialized: true,
-      });
-    });
-    return unsubscribe;
+    return initializeAuthListener(set);
   },
 
   signUp: async (email, password) => {
     try {
       set({ loading: true, error: null });
-      await createUserWithEmailAndPassword(auth, email, password);
+      const user = await signUp(email, password);
+      await createUserAndWelcomeList(user);
+      set({ loading: false });
     } catch (error) {
-      const errorMessage =
-        error.code === "auth/email-already-in-use"
-          ? "This email is already registered"
-          : "Failed to create account";
-
-      set({ error: errorMessage, loading: false });
-      throw errorMessage;
+      set({ error, loading: false });
+      throw error;
     }
   },
 
   signIn: async (email, password) => {
     try {
       set({ loading: true, error: null });
-      await signInWithEmailAndPassword(auth, email, password);
+      await signIn(email, password);
     } catch (error) {
-      const errorMessage = "Invalid email or password";
-      set({ error: errorMessage, loading: false });
-      throw errorMessage;
+      set({ error, loading: false });
+      throw error;
     }
   },
 
   signOut: async () => {
     try {
       set({ loading: true, error: null });
-      await signOut(auth);
+      await signOutUser();
     } catch (error) {
-      set({ error: "Failed to sign out", loading: false });
+      set({ error, loading: false });
       throw error;
     }
   },

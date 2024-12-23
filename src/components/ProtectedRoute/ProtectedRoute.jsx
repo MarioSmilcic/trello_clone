@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "@/store/auth/auth.store";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import "./protectedRoute.style.css";
 
 const ProtectedRoute = ({ children }) => {
@@ -14,11 +15,7 @@ const ProtectedRoute = ({ children }) => {
   }, [user, loading, navigate]);
 
   if (loading) {
-    return (
-      <div className="protected-route__loading">
-        <div className="protected-route__spinner"></div>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   return user ? children : null;
