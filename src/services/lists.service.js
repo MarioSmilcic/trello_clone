@@ -1,17 +1,8 @@
-import { db } from "./firebase-config";
-import {
-  collection,
-  doc,
-  getDocs,
-  setDoc,
-  query,
-  orderBy,
-  deleteDoc,
-} from "firebase/firestore";
+import { getDocs, setDoc, query, orderBy, deleteDoc } from "firebase/firestore";
+import { createListsRef, createListRef } from "./helpers/firebase-utils";
 
-// Export fetchLists
 export const fetchLists = async (userId) => {
-  const listsRef = collection(db, "users", userId, "lists");
+  const listsRef = createListsRef(userId);
   const listsQuery = query(listsRef, orderBy("position"));
   const snapshot = await getDocs(listsQuery);
 
@@ -21,12 +12,9 @@ export const fetchLists = async (userId) => {
   }));
 };
 
-// Export syncLists
 export const syncLists = async (userId, lists) => {
-  const listsRef = collection(db, "users", userId, "lists");
-
   const operations = lists.map((list, index) =>
-    setDoc(doc(listsRef, list.id), {
+    setDoc(createListRef(userId, list.id), {
       ...list,
       position: index,
     })
@@ -37,19 +25,9 @@ export const syncLists = async (userId, lists) => {
 
 export const removeList = async (userId, listId) => {
   try {
-    const listDocRef = doc(db, "users", userId, "lists", listId);
-    await deleteDoc(listDocRef); // Remove the list from Firebase
+    const listDocRef = createListRef(userId, listId);
+    await deleteDoc(listDocRef);
   } catch (error) {
     throw new Error("Failed to remove list: " + error.message);
   }
-};
-
-// Export generateCardId
-export const generateCardId = (userId, listId) => {
-  return doc(collection(db, "users", userId, "lists", listId, "cards")).id;
-};
-
-// Export generateListId
-export const generateListId = (userId) => {
-  return doc(collection(db, "users", userId, "lists")).id;
 };

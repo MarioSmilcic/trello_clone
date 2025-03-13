@@ -1,7 +1,7 @@
 import { useListstore } from "@/store/lists/lists.store";
 import { useModalsStore } from "@/store/modals/modals.store";
 import { useAuthStore } from "@/store/auth/auth.store";
-import { generateListId } from "@/services/lists.service";
+import { generateListId } from "@/services/helpers/firebase-utils";
 
 export const useLists = () => {
   const { addList, removeList, updateListTitle } = useListstore();

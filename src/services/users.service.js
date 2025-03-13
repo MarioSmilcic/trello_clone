@@ -1,45 +1,18 @@
-import { db } from "./firebase-config";
-import { doc, setDoc, collection } from "firebase/firestore";
+import { setDoc } from "firebase/firestore";
+import { createUserRef, createListRef } from "./helpers/firebase-utils";
+import { getWelcomeList } from "./helpers/welcome-data";
 
 export const createUserAndWelcomeList = async (user) => {
   // Create the user document
-  const userDocRef = doc(db, "users", user.uid);
+  const userDocRef = createUserRef(user.uid);
   await setDoc(userDocRef, {
     email: user.email,
   });
 
-  // Get reference to the lists subcollection and create list reference
-  const listsRef = collection(db, "users", user.uid, "lists");
-  const welcomeListRef = doc(listsRef);
-  const listId = welcomeListRef.id;
+  // Get welcome list with all cards and IDs configured
+  const welcomeList = getWelcomeList(user.uid);
 
-  // Create cards collection reference for generating card IDs
-  const cardsCollectionRef = collection(db, "users", user.uid, "lists");
-
-  const welcomeCards = [
-    {
-      id: doc(cardsCollectionRef).id,
-      card: "Welcome to TrelloClone! 👋",
-      listId,
-    },
-    {
-      id: doc(cardsCollectionRef).id,
-      card: "Drag cards to reorder them ↕️",
-      listId,
-    },
-    {
-      id: doc(cardsCollectionRef).id,
-      card: "Create new lists for your tasks ➕",
-      listId,
-    },
-  ];
-
-  // Add welcome list with its own ID included
-  await setDoc(welcomeListRef, {
-    id: listId,
-    title: "Welcome List",
-    cards: welcomeCards,
-    position: 0,
-    userId: user.uid,
-  });
+  // Add welcome list to Firebase
+  const welcomeListRef = createListRef(user.uid, welcomeList.id);
+  await setDoc(welcomeListRef, welcomeList);
 };
